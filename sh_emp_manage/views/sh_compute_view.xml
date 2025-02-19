@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+
+<!-- view -->
+
+      <!-- list -->
+
+      <record model="ir.ui.view" id="sh_compute_list">
+            <field name="name">compute.list.view</field>
+            <field name="model">sh.compute</field>
+            <field name="arch" type="xml">
+            <list>
+                <field name="amount"/>
+                <field name="total_amount"/>
+
+                <field name="total"/>
+
+            </list>    
+            </field>
+        </record>
+
+     <!-- form view -->
+
+     <record model="ir.ui.view" id="sh_compute_form">
+            <field name="name">compute.list.view</field>
+            <field name="model">sh.compute</field>
+            <field name="arch" type="xml">
+            <form>
+              <sheet>
+              <group>
+                <field name="amount" required="1"/>
+                <field name="total_amount"/>
+
+                <field name="dob"/>
+                <field name="age"/>
+
+                <field name="meter"/>
+                <field name="km"/>
+
+                <field name="quantity"/>
+                <field name="price"/>
+                </group>
+              </sheet>
+            </form>    
+            </field>
+        </record>
+
+
+        <!-- karban view -->
+
+
+
+
+        <!-- search view -->
+
+
+
+<!-- actions -->
+
+    <record id="sh_compute_action" model="ir.actions.act_window">
+        <field name="name">Compute.action</field>
+        <field name="res_model">sh.compute</field>
+        <field name="view_mode">list,form,kanban</field>
+    </record>
+
+
+
+   
+
+<!-- manu -->
+
+    <menuitem
+        name="Compute"
+        id="compute_menu"
+        parent="sh_emp_manage.emp_manage_menu"
+        sequence="5"
+        action="sh_compute_action"
+    />    
+
+</odoo>

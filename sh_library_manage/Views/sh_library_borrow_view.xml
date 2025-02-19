@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+
+<!-- view -->
+
+      <!-- list -->
+
+        <record model="ir.ui.view" id="sh_borrow_list">
+            <field name="name">borrow list view</field>
+            <field name="model">sh.library.borrow</field>
+            <field name="arch" type="xml">
+                <list>
+                        <field name="name"/>
+                        <field name="book_ids" widget="many2many_tags"/> 
+                        <field name="borrow_date"/>
+                        <field name="return_date"/>
+                        
+                </list>    
+            </field>
+        </record>
+
+     <!-- form view -->
+
+        <record model="ir.ui.view" id="sh_borrow_form">
+            <field name="name">borrow form view</field>
+            <field name="model">sh.library.borrow</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="borrow_book" string="Borrow" type="object" invisible="check==True or status=='Return'"/>
+                        <button name="return_book" string="Return" type="object" invisible="check == False or status=='Return'"/>
+                        <field name="status" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                    
+                        <group>
+                            <field name="borrow_no" readonly="1"/>
+                            <field name="name" required="1"/>
+                            <field name="book_ids" readonly="status=='Borrowed'"/> 
+                            <field name="borrow_date"/>
+                            <field name="return_date"/>
+                            
+                        
+                        </group>
+                    </sheet>
+                </form>    
+            </field>
+        </record>
+
+<!-- actions -->
+
+    <record id="sh_borrow_action" model="ir.actions.act_window">
+        <field name="name">Borrow list</field>
+        <field name="res_model">sh.library.borrow</field>
+        <field name="view_mode">list,form,kanban</field>
+        <field name="help" type="html">
+          <p class="o_view_nocontent_smiling_face">
+            No Book found. Let's create one!
+          </p><p>
+            You must define a Book for everything you sell or purchase,
+            whether it's a storable Book, a consumable or a service.
+          </p>
+        </field>
+    </record>
+
+<!-- manu -->
+
+        <menuitem
+            name="Borrow"
+            id="borrow_menu"
+            sequence="4"
+            action="sh_borrow_action"
+            parent="sh_library_manage.library_menu"
+        />
+</odoo>

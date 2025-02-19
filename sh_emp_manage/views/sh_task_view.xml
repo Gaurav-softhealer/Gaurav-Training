@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+
+<!-- view -->
+
+      <!-- list -->
+
+      <record model="ir.ui.view" id="sh_task_list">
+            <field name="name">task.list.view</field>
+            <field name="model">sh.task</field>
+            <field name="arch" type="xml">
+            <list>
+
+                <field name="user_id"/>
+
+            </list>    
+            </field>
+        </record>
+
+     <!-- form view -->
+
+     <record model="ir.ui.view" id="sh_task_form">
+            <field name="name">task.list.view</field>
+            <field name="model">sh.task</field>
+            <field name="arch" type="xml">
+            <form>
+              <sheet>
+              <group>
+
+
+                <field name="user_id"/>
+                <field name="name"/>
+                <field name="answer"/>
+                
+              
+                </group>
+              </sheet>
+            </form>    
+            </field>
+        </record>
+
+
+        <!-- karban view -->
+
+
+
+
+        <!-- search view -->
+
+
+
+<!-- actions -->
+
+    <record id="sh_task_action" model="ir.actions.act_window">
+        <field name="name">Task.action</field>
+        <field name="res_model">sh.task</field>
+        <field name="view_mode">list,form,kanban</field>
+    </record>
+
+
+
+   
+
+<!-- manu -->
+
+    <menuitem
+        name="Task"
+        id="task_menu"
+        parent="sh_emp_manage.emp_manage_menu"
+        sequence="6"
+        action="sh_task_action"
+    />    
+
+</odoo>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+
+<!-- view -->
+
+      <!-- list -->
+
+      <record model="ir.ui.view" id="sh_orm_employee_list">
+            <field name="name">Orm employee list view</field>
+            <field name="model">sh.orm.employee</field>
+            <field name="arch" type="xml">
+            <list>
+             
+                <field name="name" />
+                <field name="mobile"/>
+              
+
+
+            </list>    
+            </field>
+        </record>
+
+     <!-- form view -->
+
+     <record model="ir.ui.view" id="sh_orm_employee_form">
+            <field name="name">orm employee form view</field>
+            <field name="model">sh.orm.employee</field>
+            <field name="arch" type="xml">
+            <form>
+            <header>
+              <field name="statusbar" widget="statusbar" />
+            </header>
+              <sheet>
+              <group>
+                <field name="name"/>
+                <field name="cat_ids"/>
+                <field name="ref" readonly="1"/>
+                <field name="mobile" widget="phone"/>
+                <field name="salary"/>
+                </group>
+              </sheet>
+            </form>    
+            </field>
+        </record>
+
+
+        <!-- karban view -->
+
+
+
+
+        <!-- search view -->
+
+
+
+<!-- actions -->
+
+
+
+    <record id="sh_orm_employee_action" model="ir.actions.act_window">
+        <field name="name">ORM employee list</field>
+        <field name="res_model">sh.orm.employee</field>
+        <field name="view_mode">list,form,kanban</field>
+    </record>
+
+
+
+   
+
+<!-- manu -->
+
+
+
+</odoo>

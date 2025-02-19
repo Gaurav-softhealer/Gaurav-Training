@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+
+<!-- list view -->
+
+    <record id="student_list" model="ir.ui.view">
+        <field name="name">student.list</field>
+        <field name="model">sh.student</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="photo" widget="image" options="{'size':[50,50]}"/>
+                <field name="name"/>
+                <field name="dob" />
+                <field name="age" />
+            </list>
+        </field>
+    </record>
+
+<!-- form view -->
+
+    <record id="student_form" model="ir.ui.view">
+        <field name="name">student.form</field>
+        <field name="model">sh.student</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                       <group>             
+                          <field name="eno" readonly="1"/>
+                          <field name="name" required="1"/>
+                        </group>  
+                        <group>
+                            <field name="photo" widget="image" options="{'size':[80,100]}" nolabel="1"/>                       
+                        </group> 
+                        <group> 
+                            <field name="dob" />
+                            <field name="age" />
+                            <field name="dep_id" />
+                            <field name="sem_id" />
+
+                        </group>
+                    </group>
+                </sheet>
+            </form>    
+        </field>
+    </record>
+
+<!-- action -->
+    <record id="student_action" model="ir.actions.act_window">
+        <field name="name">student</field>
+        <field name="res_model">sh.student</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+          <p class="o_view_nocontent_smiling_face">
+            No product found. Let's create one!
+          </p><p>
+            You must define a product for everything you sell or purchase,
+            whether it's a storable product, a consumable or a service.
+          </p>
+        </field>
+    </record>
+  
+</odoo>

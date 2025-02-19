@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+
+   
+ <menuitem 
+        name="Hospital"
+        id="hospital_menu"
+        sequence="6"
+        parent="sh_emp_manage.emp_manage_menu"
+        />
+    
+
+        <menuitem
+            name="Doctor"
+            id="doctor_menu"
+            sequence="1"
+            action="sh_doc_action"
+            parent="sh_emp_manage.hospital_menu"
+        />   
+
+        <menuitem
+            name="Patient"
+            id="patient_menu"
+            sequence="2"
+            action="sh_patient_action"
+            parent="sh_emp_manage.hospital_menu"
+        /> 
+
+        <menuitem
+            name="Diagnosis"
+            id="diagnosis_menu"
+            sequence="3"
+            action="sh_diagnosis_action"
+            parent="sh_emp_manage.hospital_menu"
+        /> 
+    
+        <!-- <menuitem
+            name="AgeCategory"
+            id="age_category_menu"
+            sequence="4"
+            action="sh_age_category_action"
+            parent="sh_emp_manage.hospital_menu"
+        /> -->
+
+   
+
+</odoo>

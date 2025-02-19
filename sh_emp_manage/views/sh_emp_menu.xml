@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+
+<menuitem 
+    name="Employee Manage" 
+    id="emp_manage_menu" 
+    sequence="1" 
+    action="sh_emp_action1" 
+
+    />
+
+ <menuitem 
+        name="Employee Config"
+        id="emp_config_menu"
+        sequence="1"
+        parent="sh_emp_manage.emp_manage_menu"
+        />
+    
+
+        <menuitem
+            name="Employee"
+            id="employee_menu"
+            sequence="1"
+            action="sh_emp_action1"
+            parent="sh_emp_manage.emp_config_menu"
+        />   
+
+        <menuitem
+            name="Job"
+            id="job_menu"
+            sequence="2"
+            action="sh_emp_action2"
+            parent="sh_emp_manage.emp_config_menu"
+        /> 
+
+        <menuitem
+            name="Department"
+            id="department_menu"
+            sequence="3"
+            action="sh_emp_action6"
+            parent="sh_emp_manage.emp_config_menu"
+        /> 
+
+        <menuitem
+            name="Category"
+            id="emp_category_menu"
+            sequence="4"
+            action="sh_emp_action4"
+            parent="sh_emp_manage.emp_config_menu"
+        />
+
+</odoo>

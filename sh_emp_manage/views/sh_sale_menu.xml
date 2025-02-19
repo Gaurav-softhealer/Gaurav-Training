@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+
+   
+ <menuitem 
+        name="Sale"
+        id="sale_menu"
+        sequence="6"
+        parent="sh_emp_manage.emp_manage_menu"
+        />
+    
+
+        <menuitem
+            name="Partner"
+            id="partner_menu"
+            sequence="1"
+            action="sh_partner_action"
+            parent="sh_emp_manage.sale_menu"
+        />   
+
+        <menuitem
+            name="Product"
+            id="product_menu"
+            sequence="2"
+            action="sh_product_action"
+            parent="sh_emp_manage.sale_menu"
+        /> 
+
+        <menuitem
+            name="Account Tax"
+            id="account_tax_menu"
+            sequence="3"
+            action="sh_account_action"
+            parent="sh_emp_manage.sale_menu"
+        /> 
+
+        <menuitem
+            name="Sale Order"
+            id="sale_order_menu"
+            sequence="4"
+            action="sh_sale_order_action"
+            parent="sh_emp_manage.sale_menu"
+        />
+
+        <!-- <menuitem
+            name="Sale orderline"
+            id="sale_orderline_menu"
+            sequence="5"
+            action="sh_sale_order_line_action"
+            parent="sh_emp_manage.sale_menu"
+        /> -->
+    
+
+   
+
+</odoo>

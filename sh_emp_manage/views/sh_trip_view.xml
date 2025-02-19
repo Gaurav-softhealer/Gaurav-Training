@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+
+<!-- view -->
+
+      <!-- list -->
+
+      <record model="ir.ui.view" id="sh_trip_list">
+            <field name="name">trip.list.view</field>
+            <field name="model">sh.trip</field>
+            <field name="arch" type="xml">
+            <list>
+
+                <field name="user_name"/>
+                <field name="image" widget="image" options="{'size':[50,50]}"/>
+
+            </list>    
+            </field>
+        </record>
+
+     <!-- form view -->
+
+     <record model="ir.ui.view" id="sh_trip_form">
+            <field name="name">trip.list.view</field>
+            <field name="model">sh.trip</field>
+            <field name="arch" type="xml">
+            <form>
+              <sheet>
+              <group>
+                
+
+                <field name="user_name"/>
+                <field name="image" widget="image" options="{'size':[50,50]}"/>
+                <!-- <field name="file_img" widget="image"/> -->
+              
+                </group>
+              </sheet>
+            </form>    
+            </field>
+        </record>
+
+
+        <!-- karban view -->
+
+
+
+
+        <!-- search view -->
+
+
+
+<!-- actions -->
+
+    <record id="sh_trip_action" model="ir.actions.act_window">
+        <field name="name">Trip.action</field>
+        <field name="res_model">sh.trip</field>
+        <field name="view_mode">list,form,kanban</field>
+    </record>
+
+
+
+   
+
+<!-- manu -->
+
+    <menuitem
+        name="Trip"
+        id="trip_menu"
+        parent="sh_emp_manage.emp_manage_menu"
+        sequence="6"
+        action="sh_trip_action"
+    />    
+
+</odoo>
