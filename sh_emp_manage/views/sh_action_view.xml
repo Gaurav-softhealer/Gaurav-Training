@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+
+<!-- view -->
+
+      <!-- list -->
+
+      <record model="ir.ui.view" id="sh_action_list">
+            <field name="name">action.list.view</field>
+            <field name="model">sh.action</field>
+            <field name="arch" type="xml">
+            <list>
+
+                <field name="name"/>
+
+
+            </list>    
+            </field>
+        </record>
+
+     <!-- form view -->
+
+     <record model="ir.ui.view" id="sh_action_form">
+            <field name="name">action.list.view</field>
+            <field name="model">sh.action</field>
+            <field name="arch" type="xml">
+            <form>
+
+            <header>
+                <button name="accept_button" type="object" string="Accept"/>
+                <button name="reject_button" type="object" string="Reject"/>
+            </header>
+              <sheet>
+              <group>
+                
+
+                <field name="name"/>
+
+              
+                </group>
+              </sheet>
+            </form>    
+            </field>
+        </record>
+
+
+        <!-- karban view -->
+
+
+
+
+        <!-- search view -->
+
+
+
+<!-- actions -->
+
+    <record id="sh_action_action" model="ir.actions.act_window">
+        <field name="name">Action.action</field>
+        <field name="res_model">sh.action</field>
+        <field name="view_mode">list,form,kanban</field>
+    </record>
+
+
+
+   
+
+<!-- manu -->
+
+    <menuitem
+        name="Action"
+        id="action_menu"
+        parent="sh_emp_manage.emp_manage_menu"
+        sequence="7"
+        action="sh_action_action"
+    />    
+
+</odoo>

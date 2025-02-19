@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+
+
+
+ <menuitem 
+        name="ORM"
+        id="orm_menu"
+        sequence="1"
+        parent="sh_emp_manage.emp_manage_menu"
+        />
+    
+
+        <menuitem
+            name="Create"
+            id="orm_create_menu"
+            sequence="1"
+            action="sh_orm_create_action"
+            parent="sh_emp_manage.orm_menu"
+        />   
+
+          <menuitem
+            name="Employee"
+            id="orm_employee_menu"
+            sequence="2"
+            action="sh_orm_employee_action"
+            parent="sh_emp_manage.orm_menu"
+        /> 
+
+        <menuitem
+            name="Category"
+            id="orm_category_menu"
+            sequence="3"
+            action="sh_orm_category_action"
+            parent="sh_emp_manage.orm_menu"
+        /> 
+
+        
+
+</odoo>

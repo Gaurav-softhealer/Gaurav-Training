@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+
+<!-- view -->
+
+      <!-- list -->
+
+      <record model="ir.ui.view" id="sh_inheritance_list">
+            <field name="name">trip.list.view</field>
+            <field name="model">sh.library.book</field>
+            <field name="inherit_id" ref="sh_library_manage.sh_book_list"/>
+            <field name="arch" type="xml">
+                <!-- <field name="name" position="before">
+                    <field name="game"/>
+                </field> -->
+                <xpath expr="//field[@name='name']" position="before">
+                    <field name="game"/>
+                </xpath>
+
+
+            </field>
+        </record>
+
+     <!-- form view -->
+
+     <!-- <record model="ir.ui.view" id="sh_inheritance_form">
+            <field name="name">inheritance.list.view</field>
+            <field name="model">sh.library.book</field>
+
+            <field name="arch" type="xml">
+            <form>
+              <sheet>
+              <group>
+                
+
+               
+
+              
+                </group>
+              </sheet>
+            </form>    
+            </field>
+        </record> -->
+
+
+        <!-- karban view -->
+
+
+
+
+        <!-- search view -->
+
+
+
+<!-- actions -->
+
+    <record id="sh_inheritance_action" model="ir.actions.act_window">
+        <field name="name">inheritance.action</field>
+        <field name="res_model">sh.library.book</field>
+        <field name="view_mode">list,form,kanban</field>
+    </record>
+
+
+
+   
+
+<!-- manu -->
+
+    <menuitem
+        name="Inheritance"
+        id="inheritance_menu"
+        parent="sh_emp_manage.emp_manage_menu"
+        sequence="9"
+        action="sh_inheritance_action"
+    />    
+
+</odoo>

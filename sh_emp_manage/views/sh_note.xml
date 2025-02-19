@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+
+<!-- view -->
+
+      <!-- list -->
+<!-- 
+      <record model="ir.ui.view" id="sh_note_list">
+            <field name="name">note.list.view</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.sale_order_tree"/>
+            <field name="arch" type="xml">
+                <field name="state" position="after">
+                    <field name="note"/>
+                </field>
+
+
+            </field>
+        </record> -->
+                <!-- <xpath expr="//field[@name='name']" position="before">
+                    <field name="game"/>
+                </xpath> -->
+
+     <!-- form view -->
+
+     <record model="ir.ui.view" id="sh_note_form">
+            <field name="name">note.list.view</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+
+                <field name="payment_term_id" position="after">
+                    <field name="note" />
+                    <field name="note" />
+                    <field name="note" />
+                </field>
+                    <field name="note" />
+
+                <xpath expr="//div[2]" position="after">
+
+                </xpath>
+
+            </field>
+        </record>
+
+
+        <!-- karban view -->
+
+
+
+
+        <!-- search view -->
+
+
+
+<!-- actions -->
+
+    <record id="sh_note_action" model="ir.actions.act_window">
+        <field name="name">note.action</field>
+        <field name="res_model">sale.order</field>
+        <field name="view_mode">list,form,kanban</field>
+    </record>
+
+
+
+   
+
+<!-- manu -->
+
+    <menuitem
+        name="Note"
+        id="note_menu"
+        parent="sh_emp_manage.emp_manage_menu"
+        sequence="10"
+        action="sh_note_action"
+    />    
+
+</odoo>
+
+
+
+<!-- view_order_form -->

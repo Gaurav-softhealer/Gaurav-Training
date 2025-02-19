@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+
+<!-- view -->
+
+      <!-- list -->
+
+        <record model="ir.ui.view" id="sh_category_list">
+            <field name="name">category list view</field>
+            <field name="model">sh.library.category</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="name"/>
+                    <field name="book_ids" widget="many2many_tags"/>
+                        
+                </list>    
+            </field>
+        </record>
+
+     <!-- form view -->
+
+        <record model="ir.ui.view" id="sh_category_form">
+            <field name="name">category form view</field>
+            <field name="model">sh.library.category</field>
+            <field name="arch" type="xml">
+                <form>
+                <sheet>
+                
+                    <group>
+                        <field name="name" required="1"/>
+                        <field name="cat_description"/> 
+                        <field name="count"/>
+                        <field name="book_ids" >
+                        <list editable="bottom">
+                            <field name="name" />
+                        </list>
+                    </field> 
+                    </group>
+                </sheet>
+                </form>    
+            </field>
+        </record>
+
+<!-- actions -->
+
+    <record id="sh_category_action" model="ir.actions.act_window">
+        <field name="name">Category list</field>
+        <field name="res_model">sh.library.category</field>
+        <field name="view_mode">list,form,kanban</field>
+        <field name="help" type="html">
+          <p class="o_view_nocontent_smiling_face">
+            No Book found. Let's create one!
+          </p><p>
+            You must define a Book for everything you sell or purchase,
+            whether it's a storable Book, a consumable or a service.
+          </p>
+        </field>
+    </record>
+
+<!-- manu -->
+
+        <menuitem
+            name="Category"
+            id="category_menu"
+            sequence="2"
+            action="sh_category_action"
+            parent="sh_library_manage.library_menu"
+        />
+</odoo>

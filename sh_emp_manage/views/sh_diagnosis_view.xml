@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+
+<!-- view -->
+
+      <!-- list -->
+
+      <record model="ir.ui.view" id="sh_diagnosis_list">
+            <field name="name">diagnosis list view</field>
+            <field name="model">sh.diagnosis</field>
+            <field name="arch" type="xml">
+            <list>
+             
+                <field name="name" />
+
+
+            </list>    
+            </field>
+        </record>
+
+     <!-- form view -->
+
+     <record model="ir.ui.view" id="sh_diagnosis_form">
+            <field name="name">diagnosis form view</field>
+            <field name="model">sh.diagnosis</field>
+            <field name="arch" type="xml">
+            <form>
+              <sheet>
+              <group>
+                <field name="name" required="1"/>
+                <field name="patient_ids" widget="many2many_tags"/>
+
+                </group>
+              </sheet>
+            </form>    
+            </field>
+        </record>
+
+
+        <!-- karban view -->
+
+
+
+
+        <!-- search view -->
+
+
+
+<!-- actions -->
+
+
+
+    <record id="sh_diagnosis_action" model="ir.actions.act_window">
+        <field name="name">Diagnosis list</field>
+        <field name="res_model">sh.diagnosis</field>
+        <field name="view_mode">list,form,kanban</field>
+    </record>
+
+
+
+   
+
+<!-- manu -->
+
+
+  
+
+</odoo>
