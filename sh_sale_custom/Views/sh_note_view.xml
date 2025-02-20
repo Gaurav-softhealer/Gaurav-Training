@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+
+<!-- view -->
+
+      <!-- list -->
+
+      <record model="ir.ui.view" id="sh_note_list">
+            <field name="name">note list view</field>
+            <field name="model">sh.note</field>
+            <field name="arch" type="xml">
+            <list>
+             
+                <field name="name" />
+            </list>    
+            </field>
+        </record>
+
+     <!-- form view -->
+
+     <record model="ir.ui.view" id="sh_note_form">
+            <field name="name">note form view</field>
+            <field name="model">sh.note</field>
+            <field name="arch" type="xml">
+            <form>
+              <sheet>
+              <group>
+                <field name="name" required="1"/>
+                </group>
+              </sheet>
+            </form>    
+            </field>
+        </record>
+
+
+        <!-- karban view -->
+
+
+
+
+        <!-- search view -->
+
+
+
+<!-- actions -->
+
+    <record id="sh_note_action" model="ir.actions.act_window">
+        <field name="name">Note list</field>
+        <field name="res_model">sh.note</field>
+        <field name="view_mode">list,form,kanban</field>
+    </record>
+
+<!-- manu -->
+
+    <menuitem
+        id="sh_custom_sale_menu"
+        name="Custom Sale"
+        sequence="2"
+        />
+
+    <menuitem 
+        id="sh_custom_sale_note_menu"
+        name="Note"
+        sequence="3"
+        action="sh_note_action"
+        parent="sale.menu_sale_config"
+    />
+
+</odoo>

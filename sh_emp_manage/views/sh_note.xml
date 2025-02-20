@@ -5,7 +5,7 @@
 <!-- view -->
 
       <!-- list -->
-<!-- 
+
       <record model="ir.ui.view" id="sh_note_list">
             <field name="name">note.list.view</field>
             <field name="model">sale.order</field>
@@ -17,7 +17,7 @@
 
 
             </field>
-        </record> -->
+        </record>
                 <!-- <xpath expr="//field[@name='name']" position="before">
                     <field name="game"/>
                 </xpath> -->
@@ -30,16 +30,12 @@
             <field name="inherit_id" ref="sale.view_order_form"/>
             <field name="arch" type="xml">
 
-                <field name="payment_term_id" position="after">
+                <field name="payment_term_id" position="before">
                     <field name="note" />
-                    <field name="note" />
-                    <field name="note" />
+  
+
                 </field>
-                    <field name="note" />
 
-                <xpath expr="//div[2]" position="after">
-
-                </xpath>
 
             </field>
         </record>
