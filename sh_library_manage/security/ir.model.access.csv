@@ -1,5 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-sh_library_manage.access_sh_library_book,access_sh_library_book,sh_library_manage.model_sh_library_book,base.group_user,1,1,1,1
-sh_library_manage.access_sh_library_category,access_sh_library_category,sh_library_manage.model_sh_library_category,base.group_user,1,1,1,1
-sh_library_manage.access_sh_library_member,access_sh_library_member,sh_library_manage.model_sh_library_member,base.group_user,1,1,1,1
-sh_library_manage.access_sh_library_borrow,access_sh_library_borrow,sh_library_manage.model_sh_library_borrow,base.group_user,1,1,1,1
