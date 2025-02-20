@@ -16,23 +16,19 @@ class Order(models.Model):
     
     @api.depends('order_line_ids')
     def _calculate_total_price(self):
+        total_amount=0
         for record in self:
-            total_amount=0
-            print("\n\n\n\n\n\n-------------->>>>>>",record.order_line_ids)
             for i in record.order_line_ids:
-                print("\n\n\n\n\n________________________>",i)
                 total_amount+=i.total
             record.total_amount=total_amount
                 
     @api.depends('order_line_ids')
     def _calculate_total_tax(self):
+        total_tax=0
         for record in self:
-            
-            total_tax=0
             for i in record.order_line_ids:
-                print("\n\n\n\n\n\n********&&&&&&&&&&&&&&&>>>>>>>>>",i.tax_ids)
                 for j in i.tax_ids:
-                    print("\n\n\n\n\n\n********************>>>>>>>>>",j)
                     total_tax+=j.tax
             record.total_tax=total_tax
+    
     

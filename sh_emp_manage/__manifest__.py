@@ -48,6 +48,7 @@ You could use this simplified accounting in case you work with an (external) acc
         'views/sh_orm_menu.xml',
         'views/sh_inheritance.xml',
         'views/sh_note.xml',
+
         
         
         

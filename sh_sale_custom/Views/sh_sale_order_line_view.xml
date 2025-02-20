@@ -31,13 +31,9 @@
                         <field name="note_ids" widget="many2many_tags"/>
                     </field> -->
                 <xpath expr="//list//field[@name='product_uom_qty']" position="after">
-                    <field name="note_ids"/>
+                    <field name="note_ids" widget="many2many_tag"/>
                 </xpath>
-
-
-   
+                
             </field>
         </record>
 </odoo>
-
-                <!-- <xpath expr="notebook/page[@name='order_lines']/field[@name='order_line']/form//field[@name='product_uom_category_id']" position="after"> -->

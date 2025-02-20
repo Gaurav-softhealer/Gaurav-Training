@@ -13,7 +13,7 @@
             <field name="arch" type="xml">
 
                     <field name="state" position="before">
-                        <field name="note_ids" />
+                        <field name="note_ids" widget="many2many_tags"/>
                     </field>
    
             </field>

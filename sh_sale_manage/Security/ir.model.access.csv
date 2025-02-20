@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+sh_sale_manage.access_sh_account_tax,access_sh_account_tax,sh_sale_manage.model_sh_account_tax,base.group_user,1,1,1,1
+sh_sale_manage.access_sh_product_product,access_sh_product_product,sh_sale_manage.model_sh_product_product,base.group_user,1,1,1,1
+sh_sale_manage.access_sh_sale_order,access_sh_sale_order,sh_sale_manage.model_sh_sale_order,base.group_user,1,1,1,1
+sh_sale_manage.access_sh_sale_order_line,access_sh_sale_order_line,sh_sale_manage.model_sh_sale_order_line,base.group_user,1,1,1,1
+

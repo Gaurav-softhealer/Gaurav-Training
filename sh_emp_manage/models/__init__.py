@@ -23,3 +23,5 @@ from . import sh_orm_category
 from . import sh_age_category
 from . import sh_inheritance
 from . import sh_note
+from . import sh_test_inherit
+from . import sh_test_inherit2
