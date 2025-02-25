@@ -12,6 +12,7 @@
             <field name="arch" type="xml">
             <list>
                 <field name="name" />
+                <field name="price"/>
             </list>    
             </field>
         </record>
@@ -26,6 +27,7 @@
               <sheet>
                 <group>
                   <field name="name" required="1"/>
+                  <field name="price"/>
                 </group>
               </sheet>
             </form>    

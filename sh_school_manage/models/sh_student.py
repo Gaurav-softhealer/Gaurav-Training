@@ -7,7 +7,7 @@ class Student(models.Model):
     
     name=fields.Char()
     eno=fields.Char("Reference", default=lambda self: _('New'),
-       copy=False, readonly=True, tracking=True)
+       copy=False, readonly=True)
     photo=fields.Binary()
     dob=fields.Date(string="Birthdate")
     age=fields.Integer(compute="_calculate_age")

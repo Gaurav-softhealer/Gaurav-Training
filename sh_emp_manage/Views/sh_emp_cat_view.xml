@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+
+<!-- view -->
+
+      <!-- list -->
+
+      <record model="ir.ui.view" id="sh_emp_cat_list_new">
+            <field name="name">Job list view2</field>
+            <field name="model">sh.emp.cat.new</field>
+            <field name="arch" type="xml">
+            <list>
+             
+                <field name="name" />
+                <field name="emp_ids" widget="many2many_tags"/>
+                
+                
+
+            </list>    
+            </field>
+        </record>
+
+     <!-- form view -->
+
+     <record model="ir.ui.view" id="sh_emp_cat_form_new">
+            <field name="name">Job list view2</field>
+            <field name="model">sh.emp.cat.new</field>
+            <field name="arch" type="xml">
+            <form>
+              <sheet>
+                <group>
+                  <field name="name" required="1"/>
+                  <field name="emp_ids" widget="many2many_tags"/>
+                </group>
+              </sheet>
+            </form>    
+            </field>
+        </record>
+
+
+        <!-- karban view -->
+
+
+
+
+        <!-- search view -->
+
+
+
+<!-- actions -->
+
+    <record id="sh_emp_cat_action_new" model="ir.actions.act_window">
+        <field name="name">Department list</field>
+        <field name="res_model">sh.emp.cat.new</field>
+        <field name="view_mode">list,form,kanban</field>
+        <field name="help" type="html">
+          <p class="o_view_nocontent_smiling_face">
+            No product found. Let's create one!
+          </p><p>
+            You must define a product for everything you sell or purchase,
+            whether it's a storable product, a consumable or a service.
+          </p>
+        </field>
+    </record>
+
+
+
+   
+
+<!-- manu -->
+
+      
+
+</odoo>

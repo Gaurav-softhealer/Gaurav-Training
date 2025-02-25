@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <menuitem
+        id="timesheet_menu"
+        name="Timesheet"
+        sequence="3"
+        action="timesheet_tag_action"/>
+
+        <menuitem
+        id="timesheet_tag_menu"
+        name="Tags"
+        sequence="1"
+        action="timesheet_tag_action"
+        parent="sh_timesheet_manage.timesheet_menu"/>
+
+        <menuitem
+        id="timesheet_task_menu"
+        name="Task"
+        sequence="2"
+        action="timesheet_task_action"
+        parent="sh_timesheet_manage.timesheet_menu"/>
+
+        <menuitem
+        id="timesheet_timesheet_menu"
+        name="Timesheet"
+        sequence="3"
+        action="timesheet_timesheet_action"
+        parent="sh_timesheet_manage.timesheet_menu"/>
+
+</odoo>

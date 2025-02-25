@@ -20,6 +20,7 @@ You could use this simplified accounting in case you work with an (external) acc
     
     'data':[
         'security/ir.model.access.csv',
+        'Views/sh_borrow_return.xml',
         'Views/sh_library_book_view.xml',
         'Views/sh_library_category_view.xml',
         'Views/sh_library_member_view.xml',

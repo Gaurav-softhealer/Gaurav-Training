@@ -5,3 +5,4 @@ class Product(models.Model):
     _description="this table is used to store product data"
     
     name=fields.Char()
+    price=fields.Integer()

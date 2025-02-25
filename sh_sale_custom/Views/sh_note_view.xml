@@ -53,11 +53,11 @@
 
 <!-- manu -->
 
-    <menuitem
+    <!-- <menuitem
         id="sh_custom_sale_menu"
         name="Custom Sale"
         sequence="2"
-        />
+        /> -->
 
     <menuitem 
         id="sh_custom_sale_note_menu"

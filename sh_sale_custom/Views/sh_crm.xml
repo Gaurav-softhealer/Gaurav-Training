@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+
+
+     <!-- form view -->
+
+     <record model="ir.ui.view" id="sh_text_crm_form">
+            <field name="name">sh_text_crm_form</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.crm_lead_view_form"></field>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='user_id']" position="after">
+                    <field name="text"/>
+                </xpath>
+
+                <xpath expr="//page[@name='lead']" position="after">
+                    <page name="name" string="Text data">
+                        <group>                           
+                            <field name="text" />
+                        </group>
+                    </page>
+                </xpath>
+
+                <!-- <xpath expr="//field[@name='user_id']" position="attributes">        
+                    <attribute name="invisible">type=='opportunity'</attribute>
+                </xpath> -->
+
+            </field>
+        </record>
+
+
+             <record model="ir.ui.view" id="sh_partner_form">
+                <field name="name">sh_partner_form</field>
+                <field name="model">res.partner</field>
+                <field name="inherit_id" ref="base.view_partner_form"></field>
+                <field name="arch" type="xml">
+
+                    <field name="name" position="after">
+                        <field name="partner"/>
+                    </field>
+                </field>
+            </record>
+
+</odoo>

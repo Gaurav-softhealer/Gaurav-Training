@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="sh_sale_warranty_form">
+        <field name="name">sh_sale_warranty_form</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"></field>
+        <field name="arch" type="xml">
+
+            <field name="payment_term_id" position="after">
+                        <field name="warranty"/>
+                        <field name="warranty_expiry"/>
+                        <!-- <field name="order_date"/> -->
+            </field>
+        </field>
+    </record>    
+
+         <record model="ir.ui.view" id="sh_sale_warranty_list">
+            <field name="name">sh_sale_warranty_list</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.sale_order_tree"/>
+            <field name="arch" type="xml">
+
+                    <field name="state" position="after">
+                        <field name="warranty"/>
+                    </field>
+   
+            </field>
+        </record>
+
+</odoo>

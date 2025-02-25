@@ -7,7 +7,7 @@ class Department(models.Model):
     
     name=fields.Char()
     dep_no=fields.Char("Reference", default=lambda self: _('New'),
-       copy=False, readonly=True, tracking=True)
+       copy=False, readonly=True)
     stu_ids=fields.One2many('sh.student','dep_id',string="student data")
     sub_ids=fields.Many2many('sh.school.subject',string="subjects")
     

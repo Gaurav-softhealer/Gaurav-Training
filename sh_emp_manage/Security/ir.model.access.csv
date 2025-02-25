@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+sh_emp_manage.access_sh_job_new,access_sh_job_new,sh_emp_manage.model_sh_job_new,base.group_user,1,1,1,1
+sh_emp_manage.access_sh_employee_new,access_sh_employee_new,sh_emp_manage.model_sh_employee_new,base.group_user,1,1,1,1
+sh_emp_manage.access_sh_job_new,access_sh_job_new,sh_emp_manage.model_sh_job_new,base.group_user,1,1,1,1
+sh_emp_manage.access_sh_department_new,access_sh_department_new,sh_emp_manage.model_sh_department_new,base.group_user,1,1,1,1
+sh_emp_manage.access_sh_emp_cat_new,access_sh_emp_cat_new,sh_emp_manage.model_sh_emp_cat_new,base.group_user,1,1,1,1

@@ -7,7 +7,7 @@ class Borrow(models.Model):
     _description="this model is used to store data about borrow of library management"
     
     name=fields.Many2one("sh.library.member",string="member")
-    borrow_no=fields.Char("Reference", default=lambda self: _('New'),copy=False, readonly=True, tracking=True)
+    borrow_no=fields.Char("Reference", default=lambda self: _('New'),copy=False, readonly=True)
     book_ids=fields.Many2many("sh.library.book",string="Books")
     # book_ids=fields.Many2many("sh.library.borrow",'book_ids',string="borrowed book")
     
@@ -79,3 +79,7 @@ class Borrow(models.Model):
                 record['borrow_no'] = self.env['ir.sequence'].next_by_code('library.borrow')
         return super(Borrow,self).create(val_list)
         
+        
+        
+
+                    

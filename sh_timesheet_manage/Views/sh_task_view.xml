@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+
+<!-- list view -->
+
+    <record id="timesheet_task_list" model="ir.ui.view">
+        <field name="name">timesheet_task_list</field>
+        <field name="model">sh.task</field>
+        <field name="arch" type="xml">
+            <list>
+
+                <field name="name"/>
+                <field name="amount"/>
+            </list>
+        </field>
+    </record>
+
+<!-- form view -->
+
+    <record id="timesheet_task_form" model="ir.ui.view">
+        <field name="name">student.timesheet_task_form</field>
+        <field name="model">sh.task</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                       <group>             
+                          <field name="name"/>
+                          <field name="amount" widget="float_time"/>
+
+
+                        </group>
+                    </group>
+                </sheet>
+            </form>    
+        </field>
+    </record>
+
+<!-- action -->
+    <record id="timesheet_task_action" model="ir.actions.act_window">
+        <field name="name">timesheet_task_action</field>
+        <field name="res_model">sh.task</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+          <p class="o_view_nocontent_smiling_face">
+            No product found. Let's create one!
+          </p><p>
+            You must define a product for everything you sell or purchase,
+            whether it's a storable product, a consumable or a service.
+          </p>
+        </field>
+    </record>
+  
+</odoo>
