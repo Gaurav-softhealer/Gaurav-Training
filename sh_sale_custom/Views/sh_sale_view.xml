@@ -2,9 +2,27 @@
 
 <odoo>
 
+
+
+<!-- <template id="action_report_saleorder">
+    <t t-call="web.html_container">
+        <t t-call="web.internal_layout">
+        <span t-field="doc.note_ids"></span>
+        </t>
+    </t>
+</template> -->
+
+
+
+
+
+
 <!-- view -->
 
       <!-- list -->
+
+
+
 
      <record model="ir.ui.view" id="sh_note_list_a">
             <field name="name">note form view</field>
@@ -27,7 +45,7 @@
             <field name="inherit_id" ref="sale.view_order_form"></field>
             <field name="arch" type="xml">
 
-                    <field name="payment_term_id" position="after">
+                    <field name="warranty_expiry" position="after">
                         <field name="note_ids" widget="many2many_tags"/>
                     </field>
 

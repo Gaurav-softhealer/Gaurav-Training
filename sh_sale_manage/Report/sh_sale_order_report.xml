@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="report_saleorder">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+
+                        <h2>Expense Report</h2>
+
+                                <span t-field="o.name"/><br></br>
+                                <span t-field="o.date"/><br></br>
+                                <span t-field="o.customer_id"/><br></br><br></br><br></br><br></br>
+
+                    <!-- <br></br> -->
+                        <table>
+                                <tr>
+                                    <th>Product</th>
+                                    <th>Quantity</th>
+                                    <th>Price</th>
+                                    <th>Taxs</th>
+                                    <th>Total</th>
+                                    <th>Exclude Tax</th>
+                                </tr>
+                            <t t-foreach="o.order_line_ids" t-as="i">   
+                                <tr>
+                                    <td class="p-2"><span t-field="i.product_id.name"/></td>
+                                    <td class="p-2"><span t-field="i.quantity"/></td>
+                                    <td class="p-2"><span t-field="i.price"/></td>
+                                    <td class="p-2">
+                                        <t t-foreach="i.tax_ids" t-as="j"> 
+                                            <span t-field="j.name"/>
+                                        <br></br>
+                                        </t> 
+                                    </td>
+                                    <td class="p-2"><span t-field="i.total"/></td>
+                                    <td class="p-2"><span t-field="i.exclude_tax"/></td>
+                                </tr>
+                            </t> 
+                        </table> <br></br><br></br>
+
+                        <p>Total Amount:<br></br><span t-field="o.total_amount"></span> </p>  
+                </t>
+            </t>
+        </t>
+    </template>
+    <record id="action_report_saleorder" model="ir.actions.report">
+        <field name="name">Report PDF</field>
+        <field name="model">sh.sale.order</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">sh_sale_manage.report_saleorder</field>
+        <field name="report_file">sh_sale_manage.report_saleorder</field>
+        <!-- <field name="print_report_name"></field> -->
+        <field name="binding_model_id" ref="model_sh_sale_order"/>
+        <field name="binding_type">report</field>
+    </record>
+
+</odoo>

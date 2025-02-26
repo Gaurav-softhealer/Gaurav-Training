@@ -28,7 +28,7 @@ class OrderWarranty(models.Model):
                     'warranty_period':res.warranty_period    
                 }
                 self.env['sh.sale.warranty'].create(vals_list)
-            res.warranty_expiry=res.warranty_ids.warranty_expiry_date
+            # res.warranty_expiry=res.warranty_ids.warranty_expiry_date
             return res 
 
     def write(self,vals):

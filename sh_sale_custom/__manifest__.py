@@ -19,6 +19,7 @@
         'Views/sh_note_view.xml',
         # 'Views/sh_sale_view.xml',
         # 'Views/sh_sale_order_line_view.xml',
+        'Report/sale_order_custom_report.xml',
         'Views/sh_crm.xml',
         'Views/sale_warranty.xml',
         'Views/sale_order_warranty.xml',

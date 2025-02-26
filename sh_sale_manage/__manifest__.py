@@ -19,6 +19,7 @@
         'Views/sh_res_partner_view.xml',
         'Views/sh_product_view.xml',
         'Views/sh_account_tax_view.xml',
+        'Report/sh_sale_order_report.xml',
         'Views/sh_sale_order_view.xml',
         'Views/sh_sale_menu.xml',
 
