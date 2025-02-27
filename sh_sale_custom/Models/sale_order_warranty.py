@@ -37,8 +37,8 @@ class OrderWarranty(models.Model):
         # print(f"\n\n\n\t--------------> 37 ",self)  
             res=super(OrderWarranty,self).write(vals)   
             ans=self.env['sh.sale.warranty'].search([('sale_order_id','=',self.id)])
-            print("##########################",ans.read())
-            print("***********************",vals['date_order'])
+            # print("##########################",ans.read())
+            # print("***********************",vals['date_order'])
             if ans.order_date!=vals['date_order']:
             # if vals['date_order']!=self.date_order:
                 vals_list = {

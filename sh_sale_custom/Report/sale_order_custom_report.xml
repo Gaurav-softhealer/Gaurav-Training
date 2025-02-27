@@ -7,6 +7,10 @@
                         <span t-field="doc.warranty"></span>
                     </xpath>
 
+                    <xpath expr="//th[@name='th_priceunit']" position="after">
+                        <th name="th_warranty" class="text-end text-nowrap">Warranty</th>
+                    </xpath>
+
     </template>
 
 </odoo>

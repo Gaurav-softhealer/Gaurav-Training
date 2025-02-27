@@ -27,7 +27,8 @@
                     <group>
                        <group>             
                           
-                            <!-- <field name="book_ids" /> -->
+                            <!-- <field name="book_ref_ids" /> -->
+                            <field name="name" widget="many2many_tags"/>
 
                         </group>
                     </group>
