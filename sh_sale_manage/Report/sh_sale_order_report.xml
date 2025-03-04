@@ -8,20 +8,21 @@
     <field name="page_height">175</field>
     <field name="page_width">175</field>
     <field name="orientation">Portrait</field>
-    <field name="margin_top">3</field>
-    <field name="margin_bottom">3</field>
-    <field name="margin_left">3</field>
-    <field name="margin_right">3</field>
-    <field name="header_line" eval="False"/>
-    <field name="header_spacing">3</field>
-    <field name="dpi">80</field>
+    <field name="margin_top">35</field>
+    <field name="margin_bottom">10</field>
+    <field name="margin_left">8</field>
+    <field name="margin_right">8</field>
+    <!-- <field name="header_line" eval="False"/> -->
+    <field name="header_spacing">30</field>
+    <field name="dpi">90</field>
 </record>
 
 
     <template id="report_saleorder">
-        <t t-call="web.html_container">
+        <!-- <t t-call="web.html_container">
             <t t-foreach="docs" t-as="o">
-                <t t-call="web.external_layout">
+                <t t-call="web.external_layout"> -->
+                   <span t-esc="o.moj()"/>
 
                         <h2>Expense Report</h2>
 
@@ -30,7 +31,7 @@
                                 <span t-field="o.customer_id"/><br></br><br></br><br></br><br></br>
 
                     <!-- <br></br> -->
-                        <table>
+                        <table class="my_table">
                                 <tr>
                                     <th>Product</th>
                                     <th>Quantity</th>
@@ -41,7 +42,7 @@
                                 </tr>
                             <t t-foreach="o.order_line_ids" t-as="i">   
                                 <tr>
-                                    <td class="p-2"><span t-field="i.product_id.name"/></td>
+                                    <td class="p-2"><span t-field="i.product_id"/></td>
                                     <td class="p-2"><span t-field="i.quantity"/></td>
                                     <td class="p-2"><span t-field="i.price"/></td>
                                     <td class="p-2">
@@ -56,17 +57,58 @@
                             </t> 
                         </table> <br></br><br></br>
 
-                        <p>Total Amount:<br></br><span t-field="o.total_amount"></span> </p>  
-                </t>
+                        <p>Total Amount:<br></br><span t-field ="o.total_amount"></span> </p>  
+                <!-- </t>
             </t>
+        </t> -->
+    </template>
+
+        <template id="report_saleorder_2">
+        <!-- <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout"> -->
+                    <p>kjvnefvdnvgjkjjkfnsdkjbhrnvkjevneskjfnj</p>
+                <!-- </t>
+            </t>
+        </t> -->
+    </template>
+
+    <template id="sh_sale_report_saleorder">
+            <t t-call="web.html_container">
+            <!-- <p><t t-esc="docs"></t></p> -->
+            <t t-foreach="docs" t-as="o">
+                <!-- <p><t t-esc="o"></t></p> -->
+                <t t-call="web.external_layout">
+
+                <t t-if="len(o.order_line_ids)>3">
+                    <t t-call="sh_sale_manage.report_saleorder"/>
+                    
+                </t>
+
+
+
+                <t t-elif="len(o.order_line_ids) &lt;= 3">
+                    <t t-call="sh_sale_manage.report_saleorder_2"/>
+                </t>
+
+                <t t-else="">
+                    <p></p>
+                </t>
+
+
+
+                
+        </t>
+        </t>
         </t>
     </template>
+
     <record id="action_report_saleorder" model="ir.actions.report">
         <field name="name">Report PDF</field>
         <field name="model">sh.sale.order</field>
-        <field name="report_type">qweb-pdf</field>
-        <field name="report_name">sh_sale_manage.report_saleorder</field>
-        <field name="report_file">sh_sale_manage.report_saleorder</field>
+        <field name="report_type">qweb-html</field>
+        <field name="report_name">sh_sale_manage.sh_sale_report_saleorder</field>
+        <field name="report_file">sh_sale_manage.sh_sale_report_saleorder</field>
         <!-- <field name="print_report_name"></field> -->
         <field name="binding_model_id" ref="model_sh_sale_order"/>
         <field name="binding_type">report</field>

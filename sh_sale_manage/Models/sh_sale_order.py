@@ -31,4 +31,5 @@ class Order(models.Model):
                     total_tax+=j.tax
             record.total_tax=total_tax
     
-    
+    def moj(self):
+        return "sdfghjgdfghj" 

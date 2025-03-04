@@ -25,6 +25,23 @@
 
         
     ],
+    
+    'assets': {
+        'web.assets_backend': [
+
+        ],
+        'web.assets_frontend': [
+
+        ],
+        'web.report_assets_common': [
+            'static/src/css/report_edit.css',
+        ],
+        'web.report_assets_pdf': [
+            'sh_sale_manage/static/src/css/report_edit.css',
+
+        ],
+    },
+    
     'application':True,
     'installable': True,
     'license': 'LGPL-3',

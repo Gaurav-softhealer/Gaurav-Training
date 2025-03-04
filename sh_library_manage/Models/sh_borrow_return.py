@@ -1,4 +1,5 @@
 from odoo import fields,models
+from datetime import datetime
 
 class BorrowReturn(models.TransientModel):
     _name="sh.borrow.return"
@@ -10,7 +11,12 @@ class BorrowReturn(models.TransientModel):
         active_model=self.env.context.get('active_model')
         print("#################################################",self.env.context)
         ans=self.env[active_model].browse(active_id)
-        return ans.book_ids
+        print("***********************",ans)
+        
+        final=self.env['sh.library.book'].search([('id','in',ans.book_ids.ids)])
+        print("+++++++++++++++++++++++++++",final)
+        return final
+        # return ans.book_ids
     
     name=fields.Many2many('sh.library.book',default=get_all_data)
     # def default_get(self, fields):
@@ -34,11 +40,16 @@ class BorrowReturn(models.TransientModel):
         for i in ans.book_ids:
             print("####################",i.name)
             print("########################",i.book_quantity)
-            i.book_quantity-=1
+            i.book_quantity+=1
             print("####################",i.name)
             print("########################",i.book_quantity)
         
         print("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&")
+        
+        ans.status='Return'
+        ans.return_date=datetime.today()
+        
+        
         # active_id=self.env.context.get('active_ids')
         # active_model=self.env.context.get('active_model')
         

@@ -21,6 +21,7 @@ class Order(models.Model):
     def _find_price(self):
         self.price=self.product_id.price
     
+
     
     @api.depends('quantity','price','tax_ids')
     def _calculate_total(self):
