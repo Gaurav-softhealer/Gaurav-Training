@@ -28,12 +28,22 @@
             <field name="model">sh.library.borrow</field>
             <field name="arch" type="xml">
                 <form>
+
                     <header>
                         <button name="borrow_book" string="Borrow" type="object" invisible="check==True or status=='Return'"/>
                         <button name="%(borrow_return)d" string="Return" type="action" invisible="check == False or status=='Return'"/>
                         <field name="status" widget="statusbar"/>
                     </header>
                     <sheet>
+                            <widget name="web_ribbon" text="Returned"
+                                bg_color="text-bg-success"
+                                invisible="status != 'Return'"
+                                tooltip="This entry has been generated through the Invoicing app, before installing Accounting. It has been disabled by the 'Invoicing Switch Threshold Date' setting so that it does not impact your accounting."/>
+
+                                <widget name="web_ribbon" text="Partially"
+                                bg_color="text-bg-danger"
+                                invisible=""
+                                tooltip="This entry has been generated through the Invoicing app, before installing Accounting. It has been disabled by the 'Invoicing Switch Threshold Date' setting so that it does not impact your accounting."/>
                     
                         <group>
                             <field name="borrow_no" readonly="1"/>
@@ -45,6 +55,7 @@
                         
                         </group>
                     </sheet>
+                    <chatter/>
                 </form>    
             </field>
         </record>

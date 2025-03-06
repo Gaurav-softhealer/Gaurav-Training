@@ -19,16 +19,7 @@ class BorrowReturn(models.TransientModel):
         # return ans.book_ids
     
     name=fields.Many2many('sh.library.book',default=get_all_data)
-    # def default_get(self, fields):
-    #     res=super().default_get(fields)
-    #     ans=self.get_all_data()
-    #     res.update({ans.book_ids.name})
-        # print("------------------------------------>",ans.book_ids)
-        
-        # try with for loop on ans.book_ids
-        # for i in ans.book_ids:
-        #     self.lst.append(i.name)
-        # print("###################3",self.lst)
+ 
     
     def return_book(self):
         
@@ -46,19 +37,8 @@ class BorrowReturn(models.TransientModel):
         
         print("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&")
         
-        ans.status='Return'
-        ans.return_date=datetime.today()
-        
-        
-        # active_id=self.env.context.get('active_ids')
-        # active_model=self.env.context.get('active_model')
-        
-        # ans=self.env[active_model].browse(active_id)
-        # print("------------------------------------>",ans.book_ids)
-        
-        # # try with for loop on ans.book_ids
-        # for i in ans.book_ids:
-        #     self.lst.append(i.name)
-        # print("###################3",self.lst)
-        #     # self.book_ref_ids=i.name
+        if len(self.name)==len(ans.book_ids):
+            ans.status='Return'
+            ans.return_date=datetime.today()
+
 

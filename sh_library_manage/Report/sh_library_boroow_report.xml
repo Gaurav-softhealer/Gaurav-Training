@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="sh_library_report_book_borrow">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                <t t-if="o.status=='Return'">
+                    
+                
+                    <span t-field="o.borrow_no"/><br></br>
+                    <span    t-field="o.name"/><br></br><br></br>
+                    <table>
+                        <tr>
+                            <th>Book ref</th>
+                            <!-- <th>Image</th> -->
+                            <th>Name</th>
+                        </tr>
+                       
+                        <t t-foreach="o.book_ids" t-as="i">
+                            <tr>
+                                <td class="p-3"><span t-field="i.book_ref"></span></td>
+                                <!-- <td><span t-field="i.book_image"></span></td> -->
+                                <td class="p-3"><span t-field="i.name"></span></td>
+                            </tr>
+                        </t>
+                        
+                    </table><br></br><br></br><br></br>
+
+                    <label>Borrow Date: </label><span t-field="o.borrow_date"/><br></br>
+                    <label>Return Date: </label><span t-field="o.return_date"></span>
+                </t>
+                </t>       
+            </t>
+        </t>        
+    </template>
+
+
+
+    <record id="action_sh_library_manage" model="ir.actions.report">
+        <field name="name">Report PDF</field>
+        <field name="model">sh.library.borrow</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">sh_library_manage.sh_library_report_book_borrow</field>
+        <field name="report_file">sh_library_manage.sh_library_report_book_borrow</field>
+        <field name="print_report_name">"%s"%(object.name.name)+'\'s Report'</field>
+        <field name="binding_model_id" ref="model_sh_library_borrow"/>
+        <field name="binding_type">report</field>
+        <!-- <field name="paperformat_id" ref="paperformat_frenchcheck"></field> -->
+    </record>
+
+</odoo>

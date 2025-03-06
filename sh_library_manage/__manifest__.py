@@ -14,11 +14,12 @@ You could use this simplified accounting in case you work with an (external) acc
     """,
     'category': 'Library/Library',
     'website': 'https://www.odoo.com/app/library',
-    'depends': ['base_setup', 'web'],
+    'depends': ['base_setup', 'web','mail'],
     
     'icon':'/sh_library_manage/static/description/library.png',
     
     'data':[
+        # 'security/library_security.xml',
         'security/ir.model.access.csv',
         'Views/sh_borrow_return.xml',
         'Views/sh_library_book_view.xml',
@@ -26,6 +27,7 @@ You could use this simplified accounting in case you work with an (external) acc
         'Views/sh_library_member_view.xml',
         'Views/sh_library_borrow_view.xml',
         'Views/my_sequence.xml',
+        'Report/sh_library_boroow_report.xml',
     ],
     
      

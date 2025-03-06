@@ -27,10 +27,13 @@ class Timesheet(models.Model):
         ('reject','Reject')
     ],default='draft')
     
-    rejection_reason=fields.Text()
+    project_id=fields.Many2one('sh.project',string="project")
     task_ids=fields.One2many("sh.task",'timesheet_id',string="Tasks")
     
     total_amount=fields.Integer(compute="_calculate_total_amount")
+    rejection_reason=fields.Char(string="Reason")
+    rejected_by=fields.Many2one('res.users',string="Rejected by")
+    rejection_time=fields.Datetime()
     
     @api.depends('task_ids')
     def _calculate_total_amount(self):
@@ -64,3 +67,5 @@ class Timesheet(models.Model):
     def task_smart(self):
         print("############################### smart button called")
             
+    # def company_check(self):
+    #     print("$$$$$$$$$$$$$$$$$$$$$$$$$$$",self.env.user.company_id.name)

@@ -78,7 +78,7 @@
             <!-- <p><t t-esc="docs"></t></p> -->
             <t t-foreach="docs" t-as="o">
                 <!-- <p><t t-esc="o"></t></p> -->
-                <t t-call="web.external_layout">
+                <!-- <t t-call="web.external_layout"> -->
 
                 <t t-if="len(o.order_line_ids)>3">
                     <t t-call="sh_sale_manage.report_saleorder"/>
@@ -98,7 +98,7 @@
 
 
                 
-        </t>
+        <!-- </t> -->
         </t>
         </t>
     </template>
@@ -106,10 +106,10 @@
     <record id="action_report_saleorder" model="ir.actions.report">
         <field name="name">Report PDF</field>
         <field name="model">sh.sale.order</field>
-        <field name="report_type">qweb-html</field>
+        <field name="report_type">qweb-pdf</field>
         <field name="report_name">sh_sale_manage.sh_sale_report_saleorder</field>
         <field name="report_file">sh_sale_manage.sh_sale_report_saleorder</field>
-        <!-- <field name="print_report_name"></field> -->
+        <field name="print_report_name">"Report -%s"%(object.customer_id.name)+'  tfkjngkjenkvnkjnkjn'</field>
         <field name="binding_model_id" ref="model_sh_sale_order"/>
         <field name="binding_type">report</field>
         <field name="paperformat_id" ref="paperformat_frenchcheck"></field>

@@ -22,6 +22,13 @@
         parent="sh_timesheet_manage.timesheet_menu"/>
 
         <menuitem
+        id="timesheet_project_menu"
+        name="Project"
+        sequence="3"
+        action="timesheet_project_action"
+        parent="sh_timesheet_manage.timesheet_menu"/>
+
+        <menuitem
         id="timesheet_timesheet_menu"
         name="Timesheet"
         sequence="3"

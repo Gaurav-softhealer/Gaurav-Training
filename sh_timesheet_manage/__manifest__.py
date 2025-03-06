@@ -15,11 +15,13 @@
     'depends': ['base_setup','web','mail'],
     
     'data': [
+        'Security/timesheet_security.xml',
         'Security/ir.model.access.csv',
         'Views/sh_tag_view.xml',
         'Views/sh_task_view.xml',
         'Views/sh_rejection_reason.xml',
         'Views/sh_timesheet_view.xml',
+        'Views/sh_project_view.xml',
         'Views/timesheet_menus.xml'
 
     ],

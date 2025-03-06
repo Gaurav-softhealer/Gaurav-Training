@@ -5,6 +5,7 @@ from datetime import datetime
 class Borrow(models.Model):
     _name="sh.library.borrow"
     _description="this model is used to store data about borrow of library management"
+    _inherit=['mail.thread']
     
     name=fields.Many2one("sh.library.member",string="member")
     borrow_no=fields.Char("Reference", default=lambda self: _('New'),copy=False, readonly=True)

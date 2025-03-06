@@ -1,4 +1,5 @@
 from odoo import models,fields
+from datetime import datetime
 
 class Tag(models.TransientModel):
     _name="sh.rejection.reason"
@@ -15,6 +16,8 @@ class Tag(models.TransientModel):
         print("###############",rec)
         
         rec.rejection_reason=self.name
+        rec.rejected_by=self.env.uid
+        rec.rejection_time=datetime.today()
         rec.state='reject'
 
     
