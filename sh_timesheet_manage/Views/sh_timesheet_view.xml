@@ -18,7 +18,7 @@
                 <field name="tag_ids" widget="many2many_tags"/>
                 <field name="task_ids" widget="many2many_tags"/>
                 <field name="total_amount"/>
-                <field name="state"/>
+                <field name="state" decoration-warning="state=='draft'" decoration-danger="state=='reject'" decoration-success="state=='approved'" decoration-primary="state=='submitted'"/>
                
             </list>
         </field>
@@ -33,7 +33,7 @@
             <form>
 
             <header>
-            <!-- <button name="company_check" type="object" string="Company Check"></button> -->
+            <!-- <button name="check_form" type="object" string="Company Check"></button> -->
                 <button name="submit_manager" type="object" string="Submit to Manager" invisible="state != 'draft'"></button>
                 <button name="approve_data" type="object" string="Approve" invisible="state != 'submitted'" groups="sh_timesheet_manage.sh_timesheet_security_group_management"></button>
                 <button name="%(reject_data)d" type="action" string="Reject" invisible="state != 'submitted'" groups="sh_timesheet_manage.sh_timesheet_security_group_management"></button>
@@ -60,10 +60,13 @@
                           <field name="user_id"/>
                           <field name="description"/>
                           <field name="date"/>
+                          <field name="company_id"/>
                           <field name="hours" widget="float_time"/>
                           <field name="tag_ids" widget="many2many_tags"/>
                           <field name="task_ids"/>
                           <field name="total_amount"/>
+
+                          <field name="all_ids"/>
                         </group>
                     </group>
                     <notebook>

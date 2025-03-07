@@ -35,6 +35,14 @@ class Timesheet(models.Model):
     rejected_by=fields.Many2one('res.users',string="Rejected by")
     rejection_time=fields.Datetime()
     
+    all_ids=fields.Reference([
+        ("sh.tag",'Tag'),
+        ('sh.task','Task'),
+        ('sh.timesheet','Timesheet')
+    ])
+    
+    company_id=fields.Many2one('res.company')
+    
     @api.depends('task_ids')
     def _calculate_total_amount(self):
         for record in self:
@@ -52,6 +60,7 @@ class Timesheet(models.Model):
         print("@@@@@@@@@@@@@@@@@@@@",res)
         res['user_id']=self.env.uid
         res['date']=datetime.today()
+        res['company_id']=self.env.user.company_id
         return res
     
     def submit_manager(self):
@@ -69,3 +78,13 @@ class Timesheet(models.Model):
             
     # def company_check(self):
     #     print("$$$$$$$$$$$$$$$$$$$$$$$$$$$",self.env.user.company_id.name)
+    
+    # def check_form(self):
+        
+    #     return {
+    #         'type': 'ir.actions.act_window',
+    #         'name': 'Name of window',
+    #         'view_mode': 'form',
+    #         'res_model': 'sh.task',
+    #         'res_id':3
+    #     }

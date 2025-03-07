@@ -20,7 +20,7 @@
         <record id="sh_timesheet_security_employee_own" model="ir.rule">
             <field name="name">Change his own info</field>
             <field name="model_id" ref="model_sh_timesheet"/>
-            <field name="domain_force">[('user_id', '=', user.id)]</field>
+            <field name="domain_force">[('user_id', '=', user.id),('company_id', 'in', company_ids)]</field>
             <field name="groups" eval="[(4,ref('sh_timesheet_manage.sh_timesheet_security_group_employee'))]"/>
         </record>
 
@@ -35,7 +35,7 @@
         <record id="sh_timesheet_security_management_own" model="ir.rule">
             <field name="name">Change all info</field>
             <field name="model_id" ref="model_sh_timesheet"/>
-            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="domain_force">[(1, '=', 1),('company_id', 'in', company_ids)]</field>
             <field name="groups" eval="[(4,ref('sh_timesheet_manage.sh_timesheet_security_group_management'))]"/>
         </record>
 
