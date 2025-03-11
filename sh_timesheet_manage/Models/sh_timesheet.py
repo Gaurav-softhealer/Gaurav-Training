@@ -6,7 +6,8 @@ class Timesheet(models.Model):
     _inherit = ['mail.thread']
     _description="this model is used to store information about the timesheet"
     
-    name=fields.Char(required=True)
+    # name=fields.Many2one('sh.timesheet.employee',required=True)
+    name=fields.Many2one('sh.timesheet.employee',string="Employee Name")
     
     # def _current_user(self):
     #      return self.env.uid
@@ -42,6 +43,8 @@ class Timesheet(models.Model):
     ])
     
     company_id=fields.Many2one('res.company')
+    
+    manager_id=fields.Many2one('res.users')
     
     @api.depends('task_ids')
     def _calculate_total_amount(self):
@@ -88,3 +91,16 @@ class Timesheet(models.Model):
     #         'res_model': 'sh.task',
     #         'res_id':3
     #     }
+    
+    # @api.model_create_multi
+    # def create(self,val_list):
+    #     for record in val_list:
+    #         res=super(Timesheet,self).create(val_list)
+    #         # result=self.env['sh.timesheet.employee'].search([('name','=',res.name)])
+    #         # print("++++++++++++++++++++++++++",result)
+    #         print("***************",res.hours)
+    #         vals={
+    #             'hours':res.hours,
+    #         }
+    #         self.env['sh.timesheet.employee'].create(vals)
+    #         return res   

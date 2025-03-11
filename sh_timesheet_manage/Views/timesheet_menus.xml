@@ -31,8 +31,22 @@
         <menuitem
         id="timesheet_timesheet_menu"
         name="Timesheet"
-        sequence="3"
+        sequence="4"
         action="timesheet_timesheet_action"
+        parent="sh_timesheet_manage.timesheet_menu"/>
+
+        <menuitem
+        id="timesheet_attendence_menu"
+        name="Attendence"
+        sequence="5"
+        action="sh_timesheet_attendence_action"
+        parent="sh_timesheet_manage.timesheet_menu"/>
+
+        <menuitem
+        id="timesheet_employee_menu"
+        name="Employee"
+        sequence="6"
+        action="timesheet_employee_action"
         parent="sh_timesheet_manage.timesheet_menu"/>
 
 </odoo>

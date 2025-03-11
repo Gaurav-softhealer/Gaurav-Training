@@ -42,6 +42,7 @@ class Borrow(models.Model):
     
     
     def borrow_book(self):
+        print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
         not_available_books=[]
         if len(self.book_ids) < 4:
             print(self.check)

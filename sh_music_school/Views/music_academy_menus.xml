@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <menuitem
+        id="music_academy_menu"
+        name="Music Academy"
+        sequence="10"/>
+
+    <menuitem
+        id="music_configuaration_menu"
+        name="Configuration"
+        sequence="20"
+        parent="sh_music_school.music_academy_menu"/>
+
+    <menuitem
+        id="music_academy_student_menu"
+        name="Student"
+        sequence="10"
+        action="music_student_action"
+        parent="sh_music_school.music_academy_menu"/>
+
+    <menuitem
+        id="music_academy_equipment_menu"
+        name="Equipment"
+        sequence="11"
+        action="music_equipment_action"
+        parent="sh_music_school.music_configuaration_menu"/>
+
+        <menuitem
+        id="music_academy_lesson_menu"
+        name="Lesson"
+        sequence="12"
+        action="music_lesson_action"
+        parent="sh_music_school.music_academy_menu"/>
+
+        <menuitem
+        id="music_academy_teacher_menu"
+        name="Teacher"
+        sequence="13"
+        action="music_teacher_action"
+        parent="sh_music_school.music_configuaration_menu"/>
+
+        <menuitem
+        id="music_academy_service_menu"
+        name="Service"
+        sequence="12"
+        action="music_service_action"
+        parent="sh_music_school.music_configuaration_menu"/>
+
+        <menuitem
+        id="music_academy_instrument_menu"
+        name="Instrument"
+        sequence="13"
+        action="music_instrument_action"
+        parent="sh_music_school.music_configuaration_menu"/>
+
+        <menuitem
+        id="music_academy_classes_menu"
+        name="Classes"
+        sequence="12"
+        action="music_classes_action"
+        parent="sh_music_school.music_academy_menu"/>
+</odoo>

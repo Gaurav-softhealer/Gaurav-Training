@@ -40,10 +40,10 @@
                                 invisible="status != 'Return'"
                                 tooltip="This entry has been generated through the Invoicing app, before installing Accounting. It has been disabled by the 'Invoicing Switch Threshold Date' setting so that it does not impact your accounting."/>
 
-                                <widget name="web_ribbon" text="Partially"
+                                <!-- <widget name="web_ribbon" text="Partially"
                                 bg_color="text-bg-danger"
-                                invisible=""
-                                tooltip="This entry has been generated through the Invoicing app, before installing Accounting. It has been disabled by the 'Invoicing Switch Threshold Date' setting so that it does not impact your accounting."/>
+                                invisible="False"
+                                tooltip="This entry has been generated through the Invoicing app, before installing Accounting. It has been disabled by the 'Invoicing Switch Threshold Date' setting so that it does not impact your accounting."/> -->
                     
                         <group>
                             <field name="borrow_no" readonly="1"/>

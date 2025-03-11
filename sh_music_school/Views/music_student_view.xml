@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="music_student_action" model="ir.actions.act_window">
+        <field name="name">Student</field>
+        <field name="res_model">music.student</field>
+        <field name="view_mode">list,form</field>
+
+    </record>
+</odoo>

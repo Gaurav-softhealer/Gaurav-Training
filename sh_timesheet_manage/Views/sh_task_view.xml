@@ -39,7 +39,7 @@
 
 <!-- action -->
     <record id="timesheet_task_action" model="ir.actions.act_window">
-        <field name="name">timesheet_task_action</field>
+        <field name="name">Task</field>
         <field name="res_model">sh.task</field>
         <field name="view_mode">list,form</field>
         <field name="help" type="html">

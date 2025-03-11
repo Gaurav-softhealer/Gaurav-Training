@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+sh_timesheet_manage.access_music_student,access_music_student,sh_music_school.model_music_student,base.group_user,1,1,1,1
+sh_timesheet_manage.access_music_equipment,access_music_equipment,sh_music_school.model_music_equipment,base.group_user,1,1,1,1
+sh_timesheet_manage.access_music_lesson,access_music_lesson,sh_music_school.model_music_lesson,base.group_user,1,1,1,1
+sh_timesheet_manage.access_music_teacher,access_music_teacher,sh_music_school.model_music_teacher,base.group_user,1,1,1,1
+sh_timesheet_manage.access_music_service,access_music_service,sh_music_school.model_music_service,base.group_user,1,1,1,1
+sh_timesheet_manage.access_music_instrument,access_music_instrument,sh_music_school.model_music_instrument,base.group_user,1,1,1,1
+sh_timesheet_manage.access_music_classes,access_music_classes,sh_music_school.model_music_classes,base.group_user,1,1,1,1

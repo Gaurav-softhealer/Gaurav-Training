@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="sh_timesheet_attendence_action" model="ir.actions.act_window">
+        <field name="name">sh_timesheet_attendence_action</field>
+        <field name="res_model">sh.attendence</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

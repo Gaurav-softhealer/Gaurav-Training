@@ -22,6 +22,8 @@
         'Views/sh_rejection_reason.xml',
         'Views/sh_timesheet_view.xml',
         'Views/sh_project_view.xml',
+        'Views/sh_attendence_view.xml',
+        'Views/sh_timesheet_emp_view.xml',
         'Views/timesheet_menus.xml'
 
     ],
