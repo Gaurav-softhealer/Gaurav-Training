@@ -34,7 +34,9 @@
             <form>
 
             <header>
-            <!-- <button name="check_form" type="object" string="Company Check"></button> -->
+            <button name="check_form" type="object" string="Company Check"></button>
+            <button name="check_form2" type="object" string="Company Check2"></button>
+
                 <button name="submit_manager" type="object" string="Submit to Manager" invisible="state != 'draft'"></button>
                 <button name="approve_data" type="object" string="Approve" invisible="state != 'submitted'" groups="sh_timesheet_manage.sh_timesheet_security_group_management"></button>
                 <button name="%(reject_data)d" type="action" string="Reject" invisible="state != 'submitted'" groups="sh_timesheet_manage.sh_timesheet_security_group_management"></button>
@@ -57,7 +59,7 @@
                     </div>
                     <group>
                        <group>             
-                          <field name="name"/>
+                          <field name="name" context = "{'year':2025}"/>
                           <field name="user_id"/>
                           <field name="description"/>
                           <field name="date"/>
@@ -69,6 +71,7 @@
                           <field name="total_amount"/>
 
                           <field name="all_ids"/>
+                          <field name="cron_count" />
                         </group>
                     </group>
                     <notebook>

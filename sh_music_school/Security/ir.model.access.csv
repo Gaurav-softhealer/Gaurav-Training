@@ -6,3 +6,4 @@ sh_timesheet_manage.access_music_teacher,access_music_teacher,sh_music_school.mo
 sh_timesheet_manage.access_music_service,access_music_service,sh_music_school.model_music_service,base.group_user,1,1,1,1
 sh_timesheet_manage.access_music_instrument,access_music_instrument,sh_music_school.model_music_instrument,base.group_user,1,1,1,1
 sh_timesheet_manage.access_music_classes,access_music_classes,sh_music_school.model_music_classes,base.group_user,1,1,1,1
+sh_timesheet_manage.access_music_classes_lesson_line,access_music_classes_lesson_line,sh_music_school.model_music_classes_lesson_line,base.group_user,1,1,1,1

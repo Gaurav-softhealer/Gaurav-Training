@@ -5,3 +5,4 @@ from . import music_instrument
 from . import music_teacher
 from . import music_service
 from . import music_classes
+from . import classes_lesson_line

@@ -1,0 +1,27 @@
+<!-- <?xml version="1.0" encoding="utf-8"?> -->
+<odoo>
+    <!-- Inherit Sale Order Form -->
+    <record id="module_name_view_name" model="ir.ui.view">
+        <field name="name">module_view_name</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form" />
+        <field name="arch" type="xml">
+            <!-- Apply Dynamic Domain -->
+            <field name="sale_order_template_id" position="attributes">
+                <attribute name="domain">quotation_template_domain</attribute>
+            </field>
+        </field>
+    </record>
+
+    <!-- Inherit Sale Order Template Form -->
+    <record id="user_quatation_form_view_name" model="ir.ui.view">
+        <field name="name">module_view_name</field>
+        <field name="model">sale.order.template</field>
+        <field name="inherit_id" ref="sale_management.sale_order_template_view_form" />
+        <field name="arch" type="xml">
+            <field name="journal_id" position="after">
+                <field name="partner_ids" widget="many2many_tags"/>
+            </field>
+        </field>
+    </record>
+</odoo>

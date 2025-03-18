@@ -57,17 +57,13 @@ class Timesheet(models.Model):
     
     
     def default_get(self,fields):
-        print("###############",self)
-        print("****************",fields)
         res=super(Timesheet,self).default_get(fields)
-        print("@@@@@@@@@@@@@@@@@@@@",res)
-        res['user_id']=self.env.uid
+        # res['user_id']=self.env.uid
         res['date']=datetime.today()
         res['company_id']=self.env.user.company_id
         return res
     
     def submit_manager(self):
-        print("######## method called")
         self.state='submitted'
         
     def approve_data(self):
@@ -82,15 +78,24 @@ class Timesheet(models.Model):
     # def company_check(self):
     #     print("$$$$$$$$$$$$$$$$$$$$$$$$$$$",self.env.user.company_id.name)
     
-    # def check_form(self):
+    year=fields.Integer()
+    
+    def check_form(self):
+        print(f"\n\n\n\t--------------> 82 ",self.env.context)
         
-    #     return {
-    #         'type': 'ir.actions.act_window',
-    #         'name': 'Name of window',
-    #         'view_mode': 'form',
-    #         'res_model': 'sh.task',
-    #         'res_id':3
-    #     }
+        # year=self.env.context.get
+        
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Name of window',
+            'view_mode': 'form',
+            'res_model': 'sh.task',
+            'res_id':3,
+           
+        }
+        
+    def check_form2(self):
+        print(f"\n\n\n\t--------------> 98 ",self.env.context)
     
     # @api.model_create_multi
     # def create(self,val_list):
@@ -104,3 +109,33 @@ class Timesheet(models.Model):
     #         }
     #         self.env['sh.timesheet.employee'].create(vals)
     #         return res   
+    
+    cron_count=fields.Integer()
+    # def action_date(self):
+    #     print(f"\n\n\n\t-------------->  ","cron called")
+    #     new=self.cron_count+1
+    #     self.cron_count=new
+    #     print("####################",new)
+        
+    #     # print(f"*****************",cron_count+=1)
+    #     # self.cron_count+=1
+    #     # print("*******************","cron called")
+        
+    @api.model
+    def action_date(self):
+        """Updates the number_field with a new random value and updates timestamp"""
+        print(f"\n\n\n\t--------------> 122 ",self)
+        print(f"\n\n\n\t-------------->  ","cron called")
+        records = self.search([])
+        for record in self:
+            new_value = record.cron_count + 1  # Increment number every execution
+            record.write({
+                'cron_count': new_value,
+                # 'last_updated': datetime.utcnow() + timedelta(hours=5, minutes=30)  # Adjust for IST
+            })
+        
+    def action_date2(self):
+        print(f"\n\n\n\t--------------> 133 ","second cron called")
+        
+    def action_date3(self):
+        print(f"\n\n\n\t--------------> 133 ","third cron called")

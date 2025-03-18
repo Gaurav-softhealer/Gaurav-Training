@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+sh_demo_data.access_demo_profile,access_demo_profile,sh_demo_data.model_demo_profile,base.group_user,1,1,1,1

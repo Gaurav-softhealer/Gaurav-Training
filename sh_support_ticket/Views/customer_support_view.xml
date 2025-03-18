@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+
+<!-- list -->
+    <record id="sh_developer_view_list" model="ir.ui.view">
+        <field name="name">sh_developer.view.list</field>
+        <field name="model">customer.support</field>
+       <field name="arch" type="xml">
+            <list string="">
+                <field name="name" />
+            </list>
+        </field>
+    </record>
+
+<!-- form -->
+    <record id="sh_developer_view_form" model="ir.ui.view">
+        <field name="name">sh.develper.view.form</field>
+        <field name="model">customer.support</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button" name="open_ticket_form" type="object" icon="fa-book">
+                                
+                                <div>
+                                <div class="o_stat_info">
+                                    <span class="o_stat_text">
+                                        Timesheet
+                                    </span>
+                                </div>
+                           
+                               </div>                           
+                        </button>
+                    </div>
+                    <group>
+                        <field name="name" />
+                        <field name="ticket_ids" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    
+
+    <record id="sh_developer_action" model="ir.actions.act_window">
+        <field name="name">sh_developer</field>
+        <field name="res_model">customer.support</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem
+        id="sh_support_ticket_menu"
+        name="Support Ticket"
+        sequence="10"/>
+
+    <menuitem
+        id="sh_developer_menu"
+        name="Developer"
+        sequence="10"
+        parent="sh_support_ticket.sh_support_ticket_menu"
+        action="sh_developer_action"/>
+</odoo>

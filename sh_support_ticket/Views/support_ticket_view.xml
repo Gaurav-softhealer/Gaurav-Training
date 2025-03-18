@@ -1,0 +1,152 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+
+<!-- list -->
+    <record id="support_ticket_view_list" model="ir.ui.view">
+        <field name="name">support_ticket.view.list</field>
+        <field name="model">support.ticket</field>
+        <field name="arch" type="xml">
+            <list string="" >
+                <field name="name" />
+                <field name="developer_id" />
+                <field name="description" />
+                <field name="status" decoration-success="status == 'close'" decoration-danger="status == 'draft'" widget="badge"/>
+                <field name="priority" widget="priority" />
+            </list>
+        </field>
+    </record>
+
+
+<!-- form -->
+    <record id="support_ticket_view_form1" model="ir.ui.view">
+        <field name="name">support_ticket.view.form</field>
+        <field name="model">support.ticket</field>
+        <field name="arch" type="xml">
+            <form>
+
+                <header>
+                    <button name="%(ticket_done_reason)d" type="action" string="Done" invisible="status not in ['draft','active']"></button>
+                    <button name="close_ticket" type="object" string="Close" invisible="status!='resolve'"></button>
+                    <field name="status" widget="statusbar" />
+
+                </header>
+                <sheet>
+
+                    <group>
+                    <!-- <field name="ref" /> -->
+                        <field name="name" />
+                        <field name="description" />
+                        <field name="developer_id" />
+                        <field name="issue_date" />
+                        <field name="support_leader_id" />
+                        <field name="priority" widget="priority" />
+                        <field name="hours" widget="float_time" />
+                        <field name="summary" />
+                        <field name="resolve_date" />
+                    </group>
+                </sheet>
+                
+                <chatter></chatter>
+            </form>
+
+        </field>
+    </record>
+
+    <!-- search view -->
+
+        <record id="support_ticket_search_view" model="ir.ui.view">
+        <field name="name">support_ticket_search_view</field>
+        <field name="model">support.ticket</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+
+                <filter name="high_priority" string="High Priority" domain="[('priority', '=', 'high')]"/>
+             
+            </search>
+        </field>
+    </record>
+
+    <!-- kanban -->
+
+    
+   <record id="support_ticket_view_kanban" model="ir.ui.view">
+    <field name="name">support_ticket.view.kanban</field>
+    <field name="model">support.ticket</field>
+    
+
+    <field name="arch" type="xml">
+       <kanban class="o_kanban_mobile" default_group_by="status">
+       <progressbar field="status" colors='{"close": "success", "resolve" : "primary", "draft": "warning"}'/>
+                <templates>
+                    <t t-name="card">
+                        <field name="status" invisible="1" />
+                        <!-- <field name="ref" /> -->
+                        <field name="name" />
+                        <field name="description" />
+                        <field name="developer_id" />
+                        <field name="issue_date" />
+                        <field name="priority" widget="priority"/>
+                    </t>
+                </templates>
+            </kanban>
+    </field>
+   </record>
+
+    <!-- pivot -->
+
+    <record id="view_support_ticket_pivot" model="ir.ui.view">
+        <field name="name">support.ticket.pivot</field>
+        <field name="model">support.ticket</field>
+        <field name="arch" type="xml">
+            <pivot string="Support Tickets Analysis">
+                <field name="developer_id" type="row"/>
+                <field name="status" type="col"/>
+            </pivot>
+        </field>
+    </record>
+
+
+    <!-- calender -->
+
+    <record id="support_ticket_view_calendar" model="ir.ui.view">
+        <field name="name">support_ticket.view.calendar</field>
+        <field name="model">support.ticket</field>
+        <field name="arch" type="xml">
+            <calendar string="" date_start="issue_date" color="developer_id" mode="month">
+                <field name="name" />
+                <field name="description" />
+            </calendar>
+        </field>
+    </record>
+
+    <!-- activity -->
+
+    <record id="support_ticket_view_activity" model="ir.ui.view">
+        <field name="name">support_ticket.view.activity</field>
+        <field name="model">support.ticket</field>
+        <field name="arch" type="xml">
+            <activity string="">
+                <templates>
+                    <div t-name="activity-box">
+                        <field name="name" />
+                    </div>
+                </templates>
+            </activity>
+        </field>
+    </record>
+
+    <record id="support_ticket_action" model="ir.actions.act_window">
+        <field name="name">Support Ticket</field>
+        <field name="res_model">support.ticket</field>
+        <field name="view_mode">list,form,kanban,search,pivot,calendar,activity</field>
+    </record>
+
+    <menuitem
+        id="support_ticket_menu"
+        name="Ticket"
+        sequence="11"
+        parent="sh_support_ticket.sh_support_ticket_menu"
+        action="support_ticket_action" />
+
+</odoo>

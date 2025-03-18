@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="ticket_done_reason_view_form" model="ir.ui.view">
+        <field name="name">ticket_done_reason.view.form</field>
+        <field name="model">ticket.done.reason</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                    <group>
+                        <field name="name" />
+                        <field name="developer_id" />
+                        <field name="support_leader_id" />
+                        <field name="summary" />
+                        <field name="resolve_date" />
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="resolve_ticket" string="Resolve" type="object" class="btn-primary" data-hotkey="q"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel" data-hotkey="x"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="ticket_done_reason" model="ir.actions.act_window">
+        <field name="name">Ticket Done Reason</field>
+        <field name="res_model">ticket.done.reason</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

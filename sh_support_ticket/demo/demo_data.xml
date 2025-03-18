@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+        <data noupdate="1">
+        <!--Support Ticket-->
+        <record id="support_ticket_demo1" model="support.ticket">
+            <field name="name">Ticket 1</field>
+        </record>
+    </data>
+</odoo>

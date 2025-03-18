@@ -17,6 +17,7 @@
     'data': [
         'Security/timesheet_security.xml',
         'Security/ir.model.access.csv',
+        # 'Views/sh_timesheet_cron.xml',
         'Views/sh_tag_view.xml',
         'Views/sh_task_view.xml',
         'Views/sh_rejection_reason.xml',

@@ -1,5 +1,6 @@
 from odoo import models,fields,api
 from datetime import datetime
+from odoo.exceptions import UserError, ValidationError
 
 class Member(models.Model):
     _name="sh.library.member"
@@ -26,6 +27,8 @@ class Member(models.Model):
                     record.age=0     
             else:
                 record.age=0 
+                
+
                 
     # book_ids=fields.Many2many('sh.library.book',string="borrow books")  
     borrowed_books=fields.One2many("sh.library.borrow",'name',string="borrowed book")

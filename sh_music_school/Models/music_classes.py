@@ -1,4 +1,7 @@
 from odoo import fields, models, api
+from datetime import datetime,timedelta
+from odoo.exceptions import UserError, ValidationError
+
 
 class Classes(models.Model):
     _name = "music.classes"
@@ -21,6 +24,8 @@ class Classes(models.Model):
     ])
     
     temp=fields.Integer(compute="_find_lesson_time")
+    
+    classes_lesson_line_ids=fields.One2many('music.classes.lesson.line','classes_id')
 
     @api.depends('lesson_id')
     def _compute_lesson_duration(self):
@@ -37,21 +42,36 @@ class Classes(models.Model):
                 record.service_id=False
                 record.available_space=0
                 record.student_ids=False
-                
-
-
 
     @api.depends('repeats')
     def _find_lesson_time(self):
         for record in self:
             if record.repeats:
-                if record.repeats=='daily':
-                    print("--------------->",record.date_from)
-                    # for i in range(3):
+                    date_format = "%Y-%m-%d"
+                    # print("@@@@@@@@@@@@",str(record.date_from))
+                    
+                    a = datetime.strptime(str(record.date_from), date_format)
+                    b = datetime.strptime(str(record.date_to), date_format)
+                    
+                    delta = b - a
+                    
+                    if record.repeats=='daily':
+                        # print("--------------->",record.date_from)
+                        # for i in range(3):
+
+                        # print("###################",delta.days)
+                        # print(record.date_from+timedelta(days=5))
+                        for i in range(delta.days+1,):
+                            print(record.date_from+timedelta(days=i))
+                        record.temp=10
                         
-                    record.temp=10
-                else:
-                    record.temp=20
+                    
+                    else:
+                        for i in range(0,delta.days+1,7):
+                            print(record.date_from+timedelta(days=i))
+                        record.temp=20
             else:
                 record.temp=0
-                
+
+
+    
