@@ -18,9 +18,9 @@ class Ticket(models.TransientModel):
         
         ans=self.env[active_model].browse(active_id)
         
-        res['name']=ans.name
-        res['developer_id']=ans.developer_id
-        res['support_leader_id']=ans.support_leader_id
+        # res['name']=ans.name
+        # res['developer_id']=ans.developer_id
+        # res['support_leader_id']=ans.support_leader_id
 
         return res
     

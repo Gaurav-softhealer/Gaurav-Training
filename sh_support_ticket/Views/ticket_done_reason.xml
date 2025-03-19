@@ -7,9 +7,9 @@
             <form string="">
                 <sheet>
                     <group>
-                        <field name="name" />
+                        <!-- <field name="name" />
                         <field name="developer_id" />
-                        <field name="support_leader_id" />
+                        <field name="support_leader_id" /> -->
                         <field name="summary" />
                         <field name="resolve_date" />
                     </group>

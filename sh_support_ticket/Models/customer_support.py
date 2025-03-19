@@ -27,3 +27,25 @@ class CustomerSupport(models.Model):
             'domain': [('id', '=', self.ticket_ids.ids)],  
            
         }
+        
+        
+    class Invoice(models.Model):
+        _inherit="account.move"
+    
+        data=fields.Char()
+        def open_support_ticket(self):
+            print(f"\n\n\n\t--------------> 92 ","my function called")
+            return{
+                'type': 'ir.actions.act_window',
+                'name': 'Name of window',
+                'view_mode': 'form',
+                'res_model': 'support.ticket',
+                'target':'new',
+                'context':{
+                    'default_name':self.name,
+                    'default_developer_id':self.partner_id.id
+                }
+                # 'res_id':3,
+            }
+        
+        

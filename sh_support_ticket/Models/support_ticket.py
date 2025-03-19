@@ -1,14 +1,16 @@
 from odoo import fields,models,api,_
 from datetime import datetime,timedelta
+from odoo.exceptions import UserError, ValidationError
 
 class Ticket(models.Model):
     _name="support.ticket"
     _description="this models is used to manage the tickets"
     _inherit=['mail.thread','mail.activity.mixin']
     
-    # ref=fields.Char("Reference", default=lambda self: _('New'),copy=False, readonly=True)
-    name=fields.Char("Name", default=lambda self: _('New'),copy=False, readonly=True)
-    developer_id=fields.Many2one('res.users',string="Developer")
+    ref=fields.Char("Reference", default=lambda self: _('New'),copy=False, readonly=True)
+    name=fields.Char()
+    developer_id=fields.Many2one('res.partner',string="Developer")
+    # dev_id=fields.Many2one('res.partner')
     description=fields.Char()
     status=fields.Selection([
         ('draft','Draft'),
@@ -68,11 +70,23 @@ class Ticket(models.Model):
     @api.model_create_multi
     def create(self,vals_list):
             for vals in vals_list:
-                if vals.get('name', _('New')) == _('New'):
-                    vals['name'] = self.env['ir.sequence'].next_by_code('ticket.ticket')
+                if vals.get('ref', _('New')) == _('New'):
+                    vals['ref'] = self.env['ir.sequence'].next_by_code('ticket.ticket')
             return super().create(vals_list)
     
     @api.constrains('developer_id')
     def _check_assigned_developer(self):
-        ...
+        ans=self.env['support.ticket'].search([('developer_id','=',self.developer_id.id),('status','=','active'),("id","!=",self.id)])
+        if ans:
+            raise ValidationError('Developer already assigned')
+            
+        # if len(ans)>1:
+        # print(f"\n\n\n\t--------------> 82 ",len(ans))
+        #     raise ValidationError('Developer already assigned')
+       
+       
+    def open_invoice_form(self):
+        print(f"\n\n\n\t--------------> 88 ","invoice button called")
 
+
+    

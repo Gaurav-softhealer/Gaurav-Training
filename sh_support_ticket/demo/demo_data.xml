@@ -4,6 +4,11 @@
         <!--Support Ticket-->
         <record id="support_ticket_demo1" model="support.ticket">
             <field name="name">Ticket 1</field>
+            <field name="description" >this ticket for testing purpose</field>
+            <!-- <field name="developer_id">2</field> -->
+            <!-- <field name="issue_date" ></field> -->
+            <field name="priority">high</field>
+            <!-- <field name="hours" >20</field> -->
         </record>
     </data>
 </odoo>
