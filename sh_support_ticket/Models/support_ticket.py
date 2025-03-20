@@ -7,9 +7,22 @@ class Ticket(models.Model):
     _description="this models is used to manage the tickets"
     _inherit=['mail.thread','mail.activity.mixin']
     
+    def get_only_dev_domain(self):
+        users_list = []
+        rec_users = self.env["res.users"].search([])
+        for rec in rec_users:
+            # users_list.append(rec.id)
+            # print(f"\n\n\n\t--------------> 15 ",rec.id)
+            if rec.has_group("sh_support_ticket.support_ticket_group_developer"):
+                users_list.append(rec.id)
+        # print("\n\n\n\n",users_list)
+        return [('id','in',users_list)]
+        # return [(1,'=',1)]
+
+    
     ref=fields.Char("Reference", default=lambda self: _('New'),copy=False, readonly=True)
-    name=fields.Char()
-    developer_id=fields.Many2one('res.partner',string="Developer")
+    name=fields.Many2one('account.move',string="Invoice")
+    developer_id=fields.Many2one('res.users',string="Developer",domain=get_only_dev_domain)
     # dev_id=fields.Many2one('res.partner')
     description=fields.Char()
     status=fields.Selection([
@@ -36,6 +49,8 @@ class Ticket(models.Model):
     issue_date=fields.Datetime(default=datetime.now())
     resolve_date=fields.Datetime()
     
+    customer_id=fields.Many2one('res.partner')
+    
     def default_get(self,fields):
         res=super(Ticket,self).default_get(fields)
         res['priority']='low'
@@ -56,6 +71,17 @@ class Ticket(models.Model):
     def close_ticket(self):
         self.status='close'
         
+    def close_ticket_wizard(self):
+        print(f"\n\n\n\t--------------> 62 ",)
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Resolve Ticket Wizard',
+            'view_mode': 'form',
+            'res_model': 'ticket.done.reason',
+            'target': 'new',
+        }
+
+        
     def cron_ticket_close(self):
         print(f"\n\n\n\t--------------> 52 ","cron callled")
         print(f"\n\n\n\t--------------> 53 ",self)
@@ -72,7 +98,15 @@ class Ticket(models.Model):
             for vals in vals_list:
                 if vals.get('ref', _('New')) == _('New'):
                     vals['ref'] = self.env['ir.sequence'].next_by_code('ticket.ticket')
-            return super().create(vals_list)
+            res= super().create(vals_list)
+            
+            rec_customer_support =self.env["customer.support"].search([('name','=',res.customer_id.id)])
+            if rec_customer_support:
+                    rec_customer_support.write({"ticket_ids": [(4,res.id,0)]})
+            else:
+                self.env["customer.support"].create([{'name':res.customer_id.id,'ticket_ids': [(4,res.id,0)]}])
+            return res
+            
     
     @api.constrains('developer_id')
     def _check_assigned_developer(self):
@@ -87,6 +121,13 @@ class Ticket(models.Model):
        
     def open_invoice_form(self):
         print(f"\n\n\n\t--------------> 88 ","invoice button called")
-
-
+        return{
+            'type': 'ir.actions.act_window',
+            'name': 'Invoice Ticket',
+            'view_mode': 'form',
+            'res_model': 'account.move',
+            'res_id':self.name.id,
+            # 'target': 'new',
+        }
+        
     

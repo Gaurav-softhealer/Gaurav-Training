@@ -35,6 +35,13 @@
         </record>
 
         <!-- rules -->
+        <!-- <record id="support_ticket_customer_own" model="ir.rule">
+            <field name="name">Change his own info</field>
+            <field name="model_id" ref="model_support_ticket"/>
+            <field name="domain_force">[('customer_id', '=', user.partner_id.id)]</field>
+            <field name="groups" eval="[(4,ref('sh_support_ticket.support_ticket_group_customer'))]"/>
+        </record> -->
+        
 
         <record id="support_ticket_developer_own" model="ir.rule">
             <field name="name">Change his own info</field>

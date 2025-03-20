@@ -12,7 +12,7 @@
                     This module contains all the common features of support Ticket Management.
                 """,
     'website': 'https://www.odoo.com/app/Ticket',           
-    'depends': ['base_setup','web','mail','account'],
+    'depends': ['base_setup','web','mail','account','contacts'],
     
     'demo':[
         'demo/demo_data.xml',
@@ -22,7 +22,7 @@
         'Security/support_ticket_security.xml',
         'Security/ir.model.access.csv',
     
-        # 'Views/ticket_action_server.xml',
+        'Views/ticket_action_server.xml',
         'Views/ticket_done_reason.xml',
         'Views/customer_support_view.xml',
         'Views/support_ticket_view.xml',

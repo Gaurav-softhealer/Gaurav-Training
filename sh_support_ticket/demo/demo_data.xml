@@ -2,13 +2,90 @@
 <odoo>
         <data noupdate="1">
         <!--Support Ticket-->
-        <record id="support_ticket_demo1" model="support.ticket">
-            <field name="name">Ticket 1</field>
-            <field name="description" >this ticket for testing purpose</field>
-            <!-- <field name="developer_id">2</field> -->
-            <!-- <field name="issue_date" ></field> -->
-            <field name="priority">high</field>
-            <!-- <field name="hours" >20</field> -->
+
+        <record id="support_ticket_users1" model="res.users">
+            <field name="name">developer1</field>
+            <field name="login">developer1</field>
         </record>
+
+        <record id="support_ticket_users2" model="res.users">
+            <field name="name">developer2</field>
+            <field name="login">developer2</field>
+        </record>
+
+        <record id="support_ticket_customer1" model="res.users">
+            <field name="name">customer1</field>
+            <field name="login">customer1</field>
+        </record>
+
+        <record id="support_ticket_customer2" model="res.users">
+            <field name="name">customer2</field>
+            <field name="login">customer2</field>
+        </record>
+
+        <record id="support_ticket_customer3" model="res.users">
+            <field name="name">customer3</field>
+            <field name="login">customer3</field>
+        </record>
+
+        <record id="support_ticket_customer4" model="res.partner">
+            <field name="name">customer4</field>
+            
+        </record>
+
+        <record id="support_ticket_customer5" model="res.partner">
+            <field name="name">customer5</field>
+           
+        </record>
+
+         <record id="support_ticket_data1" model="support.ticket">
+            <field name="name">1</field>
+            <field name="customer_id">10</field>
+            <field name="description">need some change</field>
+           
+        </record>
+
+        <record id="support_ticket_data2" model="support.ticket">
+            <field name="name">2</field>
+            <field name="customer_id">11</field>
+            <field name="description">need changes in design</field>
+        </record>
+
+
+
+
+<!-- 
+    <record id="demo_account_move_10" model="account.move">
+        <field name="name">demo/001</field>
+    </record> -->
+
+    <!-- <record id="demo_account_move_20" model="account.move">
+        <field name="name">demo/002</field>
+    </record> -->
+
+
+       
+
+        <!-- <record id="support_ticket_invoice1" model="account.move">
+            <field name="name" >aaaaaaaaaa</field>
+            <field name="partner_id" ref="sh_support_ticket.support_ticket_customer4"></field>
+            
+        </record> -->
+
+        
+
+
+
+
+        <!-- <record id="support_ticket_demo1" model="support.ticket">
+            
+            <field name="description" >this ticket for testing purpose</field>
+          
+            <field name="priority">high</field>
+            
+        </record> -->
+
+
+
     </data>
 </odoo>

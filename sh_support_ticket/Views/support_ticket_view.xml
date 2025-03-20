@@ -10,9 +10,13 @@
         <header>
             <button name="%(ticket_done_reason)d" type="action" string="Done" ></button>
         </header>
+                <field name="ref"/>
                 <field name="name" />
-                <field name="developer_id" />
+                <field name="customer_id" />
                 <field name="description" />
+                <field name="developer_id" />
+                <!-- <field name="description" /> -->
+                <field name="issue_date" />
                 <field name="status" decoration-success="status == 'close'" decoration-danger="status == 'draft'" widget="badge"/>
                 <field name="priority" widget="priority" />
             </list>
@@ -28,7 +32,7 @@
             <form>
 
                 <header>
-                    <button name="%(ticket_done_reason)d" type="action" string="Done" invisible="status not in ['draft','active']"></button>
+                    <button name="%(ticket_done_reason)d" type="action" string="Done" invisible="status not in ['active']"></button>
                     <button name="close_ticket" type="object" string="Close" invisible="status!='resolve'" groups="sh_support_ticket.sh_timesheet_security_group_suppport_leader"></button>
                     <field name="status" widget="statusbar" />
 
@@ -52,15 +56,16 @@
                     <widget name="web_ribbon" text="Closed"
                                 bg_color="text-bg-success"
                                 invisible="status != 'close'"
-                                tooltip="This entry has been generated through the Invoicing app, before installing Accounting. It has been disabled by the 'Invoicing Switch Threshold Date' setting so that it does not impact your accounting."/>
+                                tooltip="for which record are closed"/>
 
                     <widget name="web_ribbon" text="Resolved"
                                 bg_color="text-bg-warning"
                                 invisible="status != 'resolve'"
-                                tooltip="This entry has been generated through the Invoicing app, before installing Accounting. It has been disabled by the 'Invoicing Switch Threshold Date' setting so that it does not impact your accounting."/>
+                                tooltip="for record which are resolved"/>
                     <group>
-                    <!-- <field name="ref" /> -->
+                    <field name="ref" />
                         <field name="name" />
+                        <field name="customer_id" />
                         <field name="description" />
                         <field name="developer_id" groups="sh_support_ticket.sh_timesheet_security_group_suppport_leader"/>
                         <!-- <field name="dev_id" /> -->
@@ -78,6 +83,7 @@
 
         </field>
     </record>
+    
 
     <!-- search view -->
 

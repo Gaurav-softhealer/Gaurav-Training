@@ -8,6 +8,7 @@
        <field name="arch" type="xml">
             <list string="">
                 <field name="name" />
+                <field name="ticket_ids" widget="many2many_tags"/>
             </list>
         </field>
     </record>
@@ -25,9 +26,10 @@
                                 <div>
                                 <div class="o_stat_info">
                                     <span class="o_stat_text">
-                                        Timesheet
+                                        Tickets
                                     </span>
                                 </div>
+                                <div><field name="total_record"/></div>
                            
                                </div>                           
                         </button>
@@ -49,8 +51,8 @@
             <field name="model">account.move</field>
             <field name="inherit_id" ref="account.view_move_form" />
             <field name="arch" type="xml">
-               <xpath expr="//button[@name='action_post']" position="after">
-                    <button  name="open_support_ticket"  type="object" string="Done" ></button>
+               <xpath expr="//button[@name='button_draft']" position="after">
+                    <button  name="open_support_ticket"  type="object" string="Create Support Ticket" invisible="state!='posted'"></button>
                </xpath>
 
 
@@ -59,7 +61,7 @@
    
 
     <record id="sh_developer_action" model="ir.actions.act_window">
-        <field name="name">sh_developer</field>
+        <field name="name">customer Ticket</field>
         <field name="res_model">customer.support</field>
         <field name="view_mode">list,form</field>
     </record>
@@ -71,7 +73,7 @@
 
     <menuitem
         id="sh_developer_menu"
-        name="Developer"
+        name="Customer"
         sequence="10"
         parent="sh_support_ticket.sh_support_ticket_menu"
         action="sh_developer_action"/>
