@@ -32,9 +32,19 @@ class Student(models.Model):
     @api.model_create_multi
     def create(self,vals_list):
             for vals in vals_list:
+                print(f"\n\n\n\t--------------> 35 ",vals)
+                
+                ans=self.env['sh.school.department'].search([('id','=',self.dep_id.id)])
+                print(f"\n\n\n\t--------------> 38 ",ans)
                 dep=self.env['sh.school.department'].browse(vals['dep_id'])
-                if vals.get('eno', _('New')) == _('New'):
-                    vals['eno'] = f"{dep.dep_no}{(self.env['ir.sequence'].next_by_code('student.student'))}"
+                    
+                if vals['dep_id']==1:
+                    if vals.get('eno', _('New')) == _('New'):
+                        vals['eno'] = f"{dep.dep_no}{(self.env['ir.sequence'].next_by_code('student.student'))}"
+                    
+                elif vals['dep_id']==2:
+                    if vals.get('eno', _('New')) == _('New'):
+                        vals['eno'] = f"{dep.dep_no}{(self.env['ir.sequence'].next_by_code('student.student2'))}"
             return super().create(vals_list)
        
 

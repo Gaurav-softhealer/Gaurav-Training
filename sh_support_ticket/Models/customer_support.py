@@ -13,6 +13,7 @@ class CustomerSupport(models.Model):
     #     return res
     
     ticket_ids=fields.One2many('support.ticket','customer_ticket_id')
+    total_record=fields.Integer(compute="count_record")
     
     def open_ticket_form(self):
         print(f"\n\n\n\t--------------> 10 ","smart button called")
@@ -27,7 +28,8 @@ class CustomerSupport(models.Model):
             'name': 'Name of window',
             'view_mode': 'form',
             'res_model': 'support.ticket',
-            'domain': [('id', '=', self.ticket_ids)],  
+            'res_id':self.ticket_ids.id,
+            # 'domain': [('id', '=', self.ticket_ids.id)],  
            
         }
         else:
@@ -40,10 +42,11 @@ class CustomerSupport(models.Model):
             
             }
             
-    total_record=fields.Integer(compute="count_record")
     
     @api.depends('ticket_ids')
     def count_record(self):
+        # self.read()
+        print(f"\n\n\n\t--------------> 49 ",self.read())
         for i in self:
             i.total_record=len(i.ticket_ids)
         print(f"\n\n\n\t--------------> 37 ",self.total_record)
