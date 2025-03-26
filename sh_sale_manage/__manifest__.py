@@ -12,7 +12,7 @@
                     This module contains all the common features of sale Management.
                 """,
     'website': 'https://www.odoo.com/app/sh_sale',           
-    'depends': ['base_setup','web',],
+    'depends': ['base_setup','web','sale','product'],
     
     'data': [
         'Security/ir.model.access.csv',
@@ -21,6 +21,7 @@
         'Views/sh_account_tax_view.xml',
         'Report/sh_sale_order_report.xml',
         'Views/sh_sale_order_view.xml',
+        'Views/sh_product_variant_view.xml',
         'Views/sh_sale_menu.xml',
 
         
