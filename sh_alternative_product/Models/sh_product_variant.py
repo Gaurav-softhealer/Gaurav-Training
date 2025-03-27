@@ -38,45 +38,7 @@ class ProductVariant(models.Model):
                         print(f"\n\n\n\t--------------> 39 ",result.id)
                         if record.id not in list and record.id != result.id:
                             result.write({'alternative_ids':[(4,record.id)]})
-                        
-                        # print(f"\n\n\n\t--------------> 33 ",record.id)
-                        # print(f"\n\n\n\t--------------> 34 ",result)
-                    #     ans=result.alternative_ids.id-result
-                    # print(f"\n\n\n\t--------------> 33 ",ans)
-                    # for j in ans:
-                    #     if j not in result.alternative_ids.ids:
-                    #         result.write({'alternative_ids':[(4,j.id)]})
-                    # print(f"\n\n\n\t--------------> 24 ",result.alternative_ids)
-                    
-                    
-                    # if self.id not in result.alternative_ids.ids:
-                    #     print(f"\n\n\n\t--------------> 31 ",self.id)
-                    #     result.write({'alternative_ids':[(4,self.id)]})
-                    # for record in self:
-                        # print(f"\n\n\n\t--------------> 24 ",record)
-                    # for alt in result.alternative_ids: 
-                    #     if self.id not in alt.alternative_ids.ids:
-                    #         alt.write({'alternative_ids':[(4,self.id)]})
-                            
-                    # for other in result.alternative_ids:
-                        
-                        # print(f"\n\n\n\t--------------> 29 ",alt)
-                        
-                        # for i in record.alternative_ids:
-                        #     list.append(i)
-                        # print(f"\n\n\n\t--------------> 34 ",list)
-                        
-                        
-                        # for j in list:
-                        #         if j not in alt.alternative_ids.ids:
-                        #             alt.write({'alternative_ids':[(4,j.id)]})
-                            
-                        # other=record.alternative_ids-alt
-                        # print(f"\n\n\n\t--------------> 33 ",record.alternative_ids-record.alternative_ids[0])
-                        # other=record.alternative_ids-self.id
-                        # for i in other:
-                        #     if other.id not in alt.alternative_ids.ids:
-                        #         alt.write({'alternative_ids':[(4,i.id)]})
+                       
                 elif i[0]==3:
 
                     print(f"\n\n\n\t--------------> 84 ","unlink callled")
@@ -96,42 +58,10 @@ class ProductVariant(models.Model):
                         for j in self.alternative_ids:
                             if result.id in j.alternative_ids.ids and j.id == result.id:
                                 result.write({'alternative_ids':[(3,result.id)]})
-                        # print(f"\n\n\n\t--------------> 99 ",result.alternative_ids)
-                        # for k in result.alternative_ids:
-                        #     if result.id in k.alternative_ids.ids and result.id == k.id:
-                        #         result.alternative_ids.write({'alternative_ids':[(3,result.id)]})
                         
-                    # result=self.env['product.product'].browse(i[1])
-                    # print(f"\n\n\n\t--------------> 27 ",result)
-        
-                    # for j in self.alternative_ids:
-                    #     list.append(j.id)
-                    # print(f"\n\n\n\t--------------> 90 ",list)
-                        # print("#############",record.alternative_ids)
-                        # for alt in record.alternative_ids:
-                            
-                        # if record.alternative_ids in record.id:
-                        #     alt.write({})
                     
         return res
 
-
-
-        # list=[]
-        # print(f"\n\n\n\t--------------> 17 ",vals['alternative_ids'])
-        # for val in vals['alternative_ids']:
-        #     list.append(val[1])
-        # print(f"\n\n\n\t--------------> 20 ",list)
-
-        # # for i in list:
-        # #     val_list={
-        # #         # 'alternative_ids':i,
-        # #         'name':"Gaurav",
-        # #     }
-            
-        # #     self.env['product.product'].write(val_list)
-    
-    
     
 class SaleOrderline(models.Model):
     _inherit='sale.order.line'
@@ -148,31 +78,4 @@ class SaleOrderline(models.Model):
             'res_model': 'alternate.wizard',
             'target': 'new',
         }
-        
-        
-        
- 
-        # if 'alternative_ids' in vals:
-        #     print(f"\n\n\n\t--------------> 17 ",vals['alternative_ids'])
-            
-        #     # for i in vals['alternative_ids']:
-        #     #     print(f"\n\n\n\t--------------> 16 ",i)
-        #     for record in self:
-        #         # print(f"\n\n\n\t--------------> 18 ",record)
-
-        #         # print(f"\n\n\n\t--------------> 20 ",alternate)
-                
-        #         for alt in record.alternative_ids:
-        #             # print(f"\n\n\n\t--------------> 22 ",alt)
-        #             if record.id not in alt.alternative_ids.ids:
-        #                 alt.write({'alternative_ids':[(4,record.id)]})
-                
-        #         # print(f"\n\n\n\t--------------> 26 ",alternate)   
-        #         # print(f"\n\n\n\t--------------> 27 ",alt)     
-        #         other=record.alternative_ids-alt
-        #         # print(f"\n\n\n\t--------------> 29 ",other)
-        #         for i in other:
-        #             if other.id not in alt.alternative_ids.ids:
-        #                 alt.write({'alternative_ids':[(4,i.id)]})
-
-        # return res 
+       

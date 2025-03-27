@@ -29,15 +29,7 @@ class AlternateWizard(models.TransientModel):
     internal_ref=fields.Many2one('product.product',default=default_get_data,readonly=True)
     replacing_product_id=fields.Many2one('product.product',string="Replacing Product")
     temp=fields.Char(compute="related_alternate")
-    
-    # @api.depends('internal_ref')
-    # def related_alternate(self):
-    #     print(f"\n\n\n\t--------------> 40 ","compute called")
-    #     for record in self:
-    #         if record.internal_ref:
-    #             result=self.env['product.product'].search([('id','=',record.internal_ref.id)])
-    #             print(f"\n\n\n\t--------------> 43 ",result)
-    
+
     
     @api.depends('internal_ref')
     def related_alternate(self):
@@ -57,10 +49,7 @@ class AlternateWizard(models.TransientModel):
     def alternate_product(self):
         active_id=self.env.context.get('active_ids')
         active_model=self.env.context.get('active_model')
-        
-        print(f"\n\n\n\t--------------> 16 ",active_id)
-        print(f"\n\n\n\t--------------> 17 ",active_model)
-        
+
         result=self.env[active_model].browse(active_id)
         print(f"\n\n\n\t--------------> 67 ",result.product_id.alternative_ids.ids)
         
@@ -74,9 +63,7 @@ class AlternateWizard(models.TransientModel):
           
         active_id=self.env.context.get('active_ids')
         active_model=self.env.context.get('active_model')
-        
-        print(f"\n\n\n\t--------------> 16 ",active_id)
-        print(f"\n\n\n\t--------------> 17 ",active_model)  
+ 
  
         result=self.env[active_model].browse(active_id)
         

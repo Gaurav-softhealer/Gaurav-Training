@@ -12,10 +12,7 @@
                         <field name="replacing_product_id" domain="temp"/>
                         <field name="temp" invisible="1"/>
                         <field name="alternate_products" readonly="1">
-                            <!-- <list editable="bottom">
-                                <field name="name" />
-                                <field name="alternative_ids" widget="many2many_tags"/>
-                            </list> -->
+
                         </field>   
                     </group>
                 </sheet>

@@ -12,7 +12,7 @@
                     This module contains all the common features alternative product.
                 """,
     'website': 'https://www.odoo.com/app/alternative',           
-    'depends': ['base_setup','web','sale','product'],
+    'depends': ['base_setup','web','sale_management','product'],
     
     'data': [
         
