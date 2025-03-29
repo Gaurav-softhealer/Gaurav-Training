@@ -24,11 +24,21 @@
                 <sheet>
                         <field name="name" placeholder="Name"/>
                     <group>
+                    <group>
                         <field name="delivery_order" />
+                        <field name="force_transfer" invisible="not delivery_order"/>
                         <field name="create_invoice" />
-                        <field name="validate_invoice" />
-                        <field name="register_payment" />
-                        <field name="send_email" />
+                        <field name="validate_invoice" invisible="not create_invoice"/>
+                        <field name="register_payment" invisible="not validate_invoice"/>
+                        <field name="send_email" invisible="not validate_invoice"/>
+                        
+                    </group>
+                    <group>
+                        <field name="sale_journal" invisible="not create_invoice"/>
+                        <field name="sh_payment_journal" invisible="not register_payment"/>
+                        <field name="payment_method" invisible="not create_invoice"/>
+                        <field name="company_id" />
+                    </group>
                     </group>
                 </sheet>
             </form>
