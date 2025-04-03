@@ -6,7 +6,7 @@
         <field name="inherit_id" ref="sale.view_order_form" />
         <field name="arch" type="xml">
             <xpath expr="//field[@name='partner_id']" position="after">
-                <field name="sh_work_id"/>
+                <field name="sh_work_id" groups="sh_sale_order_automatic_workflow.sh_sale_order_automatic_security_new"/>
                 <!-- <field name="sh_company_id" /> -->
             </xpath>
         </field>
@@ -18,7 +18,7 @@
         <field name="inherit_id" ref="base.view_partner_form" />
         <field name="arch" type="xml">
             <xpath expr="//field[@name='vat']" position="after">
-                <field name="workflow_id"/>
+                <field name="workflow_id" groups="sh_sale_order_automatic_workflow.sh_sale_order_automatic_security_new"/>
             </xpath>
         </field>
     </record>

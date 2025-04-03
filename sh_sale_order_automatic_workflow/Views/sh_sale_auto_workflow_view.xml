@@ -58,5 +58,6 @@
         sequence="100"
         parent="sale.menu_sale_config"
         action="sh_sale_auto_workflow_action"
+        groups="sh_sale_order_automatic_workflow.sh_sale_order_automatic_security_new"
     />
 </odoo>

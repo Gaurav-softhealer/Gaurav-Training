@@ -12,9 +12,10 @@
                     This module contains sale order automatic workflow.
                 """,
     'website': 'https://www.odoo.com/app/saleOrderAutomatic',           
-    'depends': ['base_setup','web','mail','sale'],
+    'depends': ['base_setup','web','mail','sale',],
     
     'data': [
+        'Security/sh_sale_order_automatic_security.xml',
         'Security/ir.model.access.csv',
         'Views/sh_sale_auto_workflow_view.xml',
         'Views/sh_sale_config_view.xml',

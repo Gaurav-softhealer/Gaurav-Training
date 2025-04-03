@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="calendar_meeting_inherit_form_view" model="ir.ui.view">
+        <field name="name">calendar_meeting_inherit_form_view</field>
+        <field name="model">calendar.event</field>
+        <field name="inherit_id" ref="calendar.view_calendar_event_form" />
+        <field name="arch" type="xml">
+
+        <xpath expr="//field[@name='event_tz']" position="after">
+
+                <field name="reason_update" invisible="flag==False"/>
+                
+            </xpath>
+
+            <xpath expr="//field[@name='alarm_ids']" position="after">
+
+                    <field name="project_id" />
+                    <field name="task_id" />
+                
+            </xpath>
+            <xpath expr="//page[@name='page_invitations']" position="after">
+                <page name="timesheets" string="Timesheets">
+                    <field name="timesheet_ids" />
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+        <record id="timesheet_meeting_inherit_form_view" model="ir.ui.view">
+        <field name="name">timesheet_meeting_inherit_form_view</field>
+        <field name="model">account.analytic.line</field>
+        <field name="inherit_id" ref="hr_timesheet.hr_timesheet_line_tree" />
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='employee_id']" position="after">
+
+                    <field name="attendees_ids" />
+                
+            </xpath>
+                <!-- <xpath expr="//page[@name='page_invitations']" position="after">
+                    <page name="timesheets" string="Timesheets">
+                        <field name="timesheet_ids" />
+                    </page>
+                </xpath> -->
+        </field>
+    </record>
+</odoo>

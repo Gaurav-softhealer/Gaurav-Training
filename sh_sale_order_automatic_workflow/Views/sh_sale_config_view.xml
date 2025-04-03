@@ -8,10 +8,10 @@
             <xpath expr="//block[@id='connectors_setting_container']" position="after">
                 <block title="Auto Sale Oder WorkFlow" id="auto_saleorder_config">
                     <setting id="auto_saleorder">
-                        <field name="data" />
+                        <field name="sh_sale_workflow" />
                     </setting>
-                    <setting id="auto_saleorder">
-                        <field name="sh_default_workflow"/>
+                    <setting id="auto_saleorder" groups="sh_sale_order_automatic_workflow.sh_sale_order_automatic_security_new">
+                        <field name="sh_default_workflow" />
                     </setting>
                 </block>
             </xpath>

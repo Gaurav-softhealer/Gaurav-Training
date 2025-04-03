@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data noupdate="1">
+    
+        <record id="sh_sale_order_automatic_security_new" model="res.groups">
+            <field name="name">Sale order automatic workflow new</field>
+            <!-- <field name="implied_ids" eval="[(4, ref('base.user_root'))]"/> -->
+        </record>
+
+    
+    </data>
+    
+</odoo>
