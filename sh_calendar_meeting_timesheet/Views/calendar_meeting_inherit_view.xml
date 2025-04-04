@@ -8,19 +8,29 @@
 
         <xpath expr="//field[@name='event_tz']" position="after">
 
-                <field name="reason_update" invisible="flag==False"/>
+                <field name="reason_update" invisible="flag==False" groups="sh_calendar_meeting_timesheet.sh_calendar_timesheet_groups"/>
                 
             </xpath>
 
             <xpath expr="//field[@name='alarm_ids']" position="after">
 
-                    <field name="project_id" />
-                    <field name="task_id" />
+                    <field name="project_id" groups="sh_calendar_meeting_timesheet.sh_calendar_timesheet_groups"/>
+                    <field name="task_id" groups="sh_calendar_meeting_timesheet.sh_calendar_timesheet_groups"/>
                 
             </xpath>
             <xpath expr="//page[@name='page_invitations']" position="after">
-                <page name="timesheets" string="Timesheets">
-                    <field name="timesheet_ids" />
+                <page name="timesheets" string="Timesheets"  invisible="create_date==False" groups="sh_calendar_meeting_timesheet.sh_calendar_timesheet_groups">
+                    <field name="timesheet_ids" readonly="1">
+                        <list>
+                            <field name="date" />
+                            <field name="partner_id" />
+                            <field name="project_id" />
+                            <field name="task_id" />
+                            <field name="name" />
+                            <field name="reason_updated" invisible="reason_updated==False" />
+                            <field name="unit_amount" />
+                        </list>
+                    </field>
                 </page>
             </xpath>
         </field>
@@ -34,14 +44,17 @@
 
             <xpath expr="//field[@name='employee_id']" position="after">
 
-                    <field name="attendees_ids" />
+                    <!-- <field name="attendees_ids" /> -->
+                    <field name="partner_id" />
                 
             </xpath>
-                <!-- <xpath expr="//page[@name='page_invitations']" position="after">
-                    <page name="timesheets" string="Timesheets">
-                        <field name="timesheet_ids" />
-                    </page>
-                </xpath> -->
+
+            <xpath expr="//field[@name='name']" position="after">
+
+                    <field name="reason_updated" />
+                
+            </xpath>
+
         </field>
     </record>
 </odoo>

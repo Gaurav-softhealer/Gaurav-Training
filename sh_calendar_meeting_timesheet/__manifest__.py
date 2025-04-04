@@ -16,7 +16,9 @@
     
     'data': [
         # 'Security/ir.model.access.csv',
+        'Security/sh_calendar_security.xml',
         'Views/calendar_meeting_inherit_view.xml',
+        'Views/sh_calendar_config_view.xml',
 
         
     ],
