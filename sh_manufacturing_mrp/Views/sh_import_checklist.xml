@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <!-- Form view -->
+    <record id="sh_mrp_checklist_import_export_form" model="ir.ui.view">
+        <field name="name">mrp checklist temp</field>
+        <field name="model">sh.import.export.checklist</field>
+        <field name="arch" type="xml">
+            <form >
+                <sheet>
+                    <group >
+                        <field name="name" required="1" widget="radio"></field>
+                        <field name="company_id"></field>
+                        <field name="file_name" invisible="1"/>
+                        <field name="file" filename="file_name"></field>
+                    </group>
+                </sheet>
+                <footer>
+                    <button string="Apply" class="btn-primary" type="object" name="checklist_import_export_apply"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel" data-hotkey="x" />
+                    <span class="fw-bold">Dowload sample</span>
+                    <button string="CSV File" class="btn-primary fa fa-download" type="object" name="checklist_export_csv"/>
+                    <button string="Excel File" class="btn-primary fa fa-download" type="object" name="checklist_export_excel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="sh_import_export_checklist_action" model="ir.actions.act_window">
+        <field name="name">Import Export checklist</field>
+        <field name="res_model">sh.import.export.checklist</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem
+        id="sh_checklist_import_menu"
+        name="sh_checklist_import_menu"
+        action="sh_import_export_checklist_action"
+        parent="mrp.menu_mrp_configuration"
+        sequence="10"/>
+</odoo>

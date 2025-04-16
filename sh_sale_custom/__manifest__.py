@@ -12,7 +12,7 @@
                     This module is used to manage cutom sale module.
                 """,
     'website': 'https://www.odoo.com/app/custom_sale',           
-    'depends': ['base_setup','web','sale','crm','contacts','sale_management'],
+    'depends': ['base_setup','web','sale','crm','contacts','sale_management','stock'],
     
     'data': [
         'Security/ir.model.access.csv',
@@ -24,6 +24,7 @@
         # 'Views/sale_warranty.xml',
         # 'Views/sale_order_warranty.xml',
         'Views/user_quatation_template_view.xml',
+        'Views/sh_inventory_view.xml',
 
 
         

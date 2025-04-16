@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="sh_quick_purchase_order_form_view" model="ir.ui.view">
+        <field name="name">sh_quick_purchase_order_form_view</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form" />
+        <field name="arch" type="xml">
+
+            <xpath expr="//group" position="after">
+                <group>
+                    <group groups="sh_quick_purchase.sh_quick_purchase_security">
+                        
+                        <group string="Search Vendor Wise Search:">
+                            <group>
+                                <field name="search_vendor" nolabel="1"/>            
+                            </group>
+                            <group>
+                                <field name="search_data" nolabel="1"/>
+                            </group>
+                        </group>
+                        <group string="Filter:">
+                            <field name="filter" nolabel="1"/>
+                        </group>
+                        <group>
+                            <button name="Load_product" string="Load Product" type="object" ></button>
+                            <button name="add_product" string="Add to Product" type="object"></button>
+                        </group>
+                    </group>
+                </group>
+            </xpath>
+
+            <xpath expr="//page[@name='purchase_delivery_invoice']" position="after">
+                <page name="Loaded_product_list" string="Loaded product List" groups="sh_quick_purchase.sh_quick_purchase_security">
+                    <button name="selected_line" string="Add Selected Lines" type="object"></button>
+                        <field name="sh_purchase_line_ids">
+                            <list editable="bottom">
+                                <field name="product_id" />
+                                <field name="description" />
+                                <field name="cost" />
+                                <field name="unit_price" />
+                                <field name="quantity" />
+                                <field name="on_hand" />
+                                <field name="forcast_qty" />
+                                <button name="sh_quick_buy" string="" type="object" icon="fa-cart-plus"></button>
+                                <field name="is_selected" />
+                            </list>
+                        </field> 
+                    
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -5,3 +5,4 @@ from . import sh_crm
 from . import sale_order_warranty
 from . import sale_warranty
 from . import user_quatation_template
+from . import sh_inventory

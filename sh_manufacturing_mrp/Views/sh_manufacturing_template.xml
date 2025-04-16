@@ -1,0 +1,84 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <!-- view -->
+
+      <!-- list -->
+
+        <record model="ir.ui.view" id="sh_manufacturing_template_list_view1">
+            <field name="name">sh_manufacturing_template_form_view</field>
+            <field name="model">sh.manufacturing.checklist.template</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="name"/>
+                    <field name="check_list_ids" widget="many2many_tags"/>
+                    <field name="company_id" />
+
+                </list>    
+            </field>
+        </record>
+
+
+      <!-- form -->
+
+              <record id="sh_manufacturing_template_form_view1" model="ir.ui.view">
+          <field name="name">sh_manufacturing_form_template_view</field>
+          <field name="model">sh.manufacturing.checklist.template</field>
+          <field name="arch" type="xml">
+            <form>
+              <group>
+                <field name="name" />
+                <field name="check_list_ids" widget="many2many_tags"/>
+                <field name="company_id" />
+              </group>
+            </form>
+          </field>
+        </record>
+
+            <!-- search view -->
+
+        <record id="sh_manufacturing_template_search_view" model="ir.ui.view">
+        <field name="name">sh_timesheet_search_teplate_view</field>
+        <field name="model">sh.manufacturing.checklist.template</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+
+                <!-- <filter name="filter_activated" string="Approved" domain="[('state', '=', 'approved')]"/>
+                <filter name="filter_deactivated" string="Rejected" domain="[('state', '=', 'reject')]"/> -->
+                <group expand="1" string="Group by">
+                    <filter string="Checklist Template" name="check_list_ids" context="{'group_by': 'check_list_ids'}"/>
+                </group>
+                <!-- <group expand="1" string="Favorites">
+                <filter name="favorites" string="Reject" domain="[('state', '=', 'reject')]"/>
+                </group> -->
+            </search>
+        </field>
+    </record>
+
+
+    <record id="sh_manufacturing_checklist_template_action" model="ir.actions.act_window">
+        <field name="name">sh_manufacturing_checklist_template_action</field>
+        <field name="res_model">sh.manufacturing.checklist.template</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+          <p class="o_view_nocontent_smiling_face">
+            No Book found. Let's create one!
+          </p><p>
+            You must define a Book for everything you sell or purchase,
+            whether it's a storable Book, a consumable or a service.
+          </p>
+        </field>
+    </record>
+
+<!-- manu -->
+
+        <menuitem
+            name="manufacturing custom checklist template"
+            id="sh_manufacturing_checklist_template_menu"
+            sequence="4"
+            action="sh_manufacturing_checklist_template_action"
+            parent="mrp.menu_mrp_configuration"
+        />
+
+
+</odoo>

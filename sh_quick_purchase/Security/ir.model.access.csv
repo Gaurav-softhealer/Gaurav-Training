@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+sh_quick_purchase.access_sh_quick_purchase_line,access_sh_quick_purchase_line,sh_quick_purchase.model_sh_quick_purchase_line,base.group_user,1,1,1,1
