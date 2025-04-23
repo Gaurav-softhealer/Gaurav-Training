@@ -1,0 +1,154 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <menuitem
+        id="sh_pharmacy_menu"
+        name="Pharmacy Manage"
+        sequence="10"/>
+
+        <!-- Doctor -->
+
+        <menuitem
+            id="pharmacy_doctor_menu"
+            name="Doctor"
+            action="sh_pharmacy_doctor_action"
+            parent="sh_pharmacy_mngt.sh_pharmacy_menu"
+            sequence="10"/>
+
+        <!-- Patient -->
+        <menuitem
+            id="pharmacy_patient_menu"
+            name="Patient"
+            action="sh_pharmacy_patient_action"
+            parent="sh_pharmacy_mngt.sh_pharmacy_menu"
+            sequence="10"/>
+        
+        <!-- Vendor -->
+        <menuitem
+            id="pharmacy_vendor_menu"
+            name="Vendor"
+            action="sh_pharmacy_vendor_action"
+            parent="sh_pharmacy_mngt.sh_pharmacy_menu"
+            sequence="10"/>
+
+        <!-- Report -->
+        <menuitem
+            id="pharmacy_report_menu"
+            name="Report"
+            action="sh_specialization_category_action"
+            parent="sh_pharmacy_mngt.sh_pharmacy_menu"
+            sequence="10"/>
+
+            
+                <menuitem
+                    id="pharmacy_report_patient_menu"
+                    name="Patient Wise"
+                    action="sh_specialization_category_action"
+                    parent="sh_pharmacy_mngt.pharmacy_report_menu"
+                    sequence="10"/>
+
+                <menuitem
+                    id="pharmacy_report_doctor_menu"
+                    name="Doctor Wise"
+                    action="sh_specialization_category_action"
+                    parent="sh_pharmacy_mngt.pharmacy_report_menu"
+                    sequence="10"/>
+                    
+                <menuitem
+                    id="pharmacy_report_medicine_menu"
+                    name="Medicine Wise"
+                    action="sh_specialization_category_action"
+                    parent="sh_pharmacy_mngt.pharmacy_report_menu"
+                    sequence="10"/>
+                    
+                <menuitem
+                    id="pharmacy_report_gender_menu"
+                    name="Gender Wise"
+                    action="sh_specialization_category_action"
+                    parent="sh_pharmacy_mngt.pharmacy_report_menu"
+                    sequence="10"/>
+                    
+                <menuitem
+                    id="pharmacy_report_diseases_menu"
+                    name="Diseases Wise"
+                    action="sh_specialization_category_action"
+                    parent="sh_pharmacy_mngt.pharmacy_report_menu"
+                    sequence="10"/>
+                    
+                <menuitem
+                    id="pharmacy_report_age_menu"
+                    name="Age Wise"
+                    action="sh_specialization_category_action"
+                    parent="sh_pharmacy_mngt.pharmacy_report_menu"
+                    sequence="10"/>
+
+        <!-- Configuration -->
+        <menuitem
+            id="pharmacy_configuration_menu"
+            name="Configuration"
+            action="sh_specialization_category_action"
+            parent="sh_pharmacy_mngt.sh_pharmacy_menu"
+            sequence="10"/>
+            
+
+            <menuitem
+                id="pharmacy_configuration_doctor_menu"
+                name="Doctor Settings"
+                parent="sh_pharmacy_mngt.pharmacy_configuration_menu"
+                sequence="10"/>
+
+                    <menuitem
+                        id="pharmacy_specialized_category_menu"
+                        name="Specialization Categories"
+                        action="sh_specialization_category_action"
+                        parent="sh_pharmacy_mngt.pharmacy_configuration_doctor_menu"
+                        sequence="10"/>
+
+                    <menuitem
+                        id="pharmacy_commission_type_menu"
+                        name="Commission Type"
+                        action="sh_commission_type_action"
+                        parent="sh_pharmacy_mngt.pharmacy_configuration_doctor_menu"
+                        sequence="10"/>
+
+
+            <menuitem
+                id="pharmacy_configuration_Product_menu"
+                name="Product Settings"
+                parent="sh_pharmacy_mngt.pharmacy_configuration_menu"
+                sequence="10"/>
+    
+                    <menuitem
+                        id="pharmacy_medicine_ingredients_menu"
+                        name="Medicine Ingredients"
+                        action="sh_medicine_ingredient_action"
+                        parent="sh_pharmacy_mngt.pharmacy_configuration_Product_menu"
+                        sequence="10"/>
+    
+                    <menuitem
+                        id="pharmacy_medicine_form_menu"
+                        name="Medicine Form"
+                        action="sh_medicine_form_action"
+                        parent="sh_pharmacy_mngt.pharmacy_configuration_Product_menu"
+                        sequence="10"/>
+
+            <menuitem
+                id="pharmacy_configuration_allergies_menu"
+                name="Allergies Setting"
+                parent="sh_pharmacy_mngt.pharmacy_configuration_menu"
+                sequence="10"/>
+        
+                    <menuitem
+                        id="pharmacy_medicine_allergies_menu"
+                        name="Allergies"
+                        action="sh_allergy_action"
+                        parent="sh_pharmacy_mngt.pharmacy_configuration_allergies_menu"
+                        sequence="10"/>
+        
+                    <menuitem
+                        id="pharmacy_medicine_allergies_type_menu"
+                        name="Allergies Type"
+                        action="sh_allergy_type_action"
+                        parent="sh_pharmacy_mngt.pharmacy_configuration_allergies_menu"
+                        sequence="10"/>
+            
+</odoo>

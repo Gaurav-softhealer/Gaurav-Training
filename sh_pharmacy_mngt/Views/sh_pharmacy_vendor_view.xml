@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- action -->
+
+    <record id="sh_pharmacy_vendor_action" model="ir.actions.act_window">
+        <field name="name">Vendor</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">kanban,list,form,activity</field>
+        <field name="domain">[('is_vendor','=',True)]</field>
+        <field name="context">{'default_is_vendor':True}</field>
+
+    </record>
+</odoo>

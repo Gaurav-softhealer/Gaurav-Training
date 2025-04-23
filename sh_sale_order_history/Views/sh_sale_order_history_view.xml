@@ -21,6 +21,7 @@
                                 <field name="state" decoration-warning="state == 'draft'"  decoration-success="state=='sale'" decoration-danger="state=='cancel'" decoration-primary="state=='sent'"/>
                                 <button name="reorder_button" type="object" icon="fa-retweet" groups="sh_sale_order_history.sh_sale_order_history_security"></button>
                                 <button name="View_button" type="object" icon="fa-eye"></button>
+                                
 
                             </list>
                         </field>

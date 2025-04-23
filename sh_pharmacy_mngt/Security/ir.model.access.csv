@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+sh_pharmacy_mngt.access_sh_allergy_type,access_sh_allergy_type,sh_pharmacy_mngt.model_sh_allergy_type,base.group_user,1,1,1,1
+sh_pharmacy_mngt.access_sh_allergy,access_sh_allergy,sh_pharmacy_mngt.model_sh_allergy,base.group_user,1,1,1,1
+sh_pharmacy_mngt.access_sh_medicine_form,access_sh_medicine_form,sh_pharmacy_mngt.model_sh_medicine_form,base.group_user,1,1,1,1
+sh_pharmacy_mngt.access_sh_medicine_ingredient,access_sh_medicine_ingredient,sh_pharmacy_mngt.model_sh_medicine_ingredient,base.group_user,1,1,1,1
+sh_pharmacy_mngt.access_sh_commission_type,access_sh_commission_type,sh_pharmacy_mngt.model_sh_commission_type,base.group_user,1,1,1,1
+sh_pharmacy_mngt.access_sh_specialization_category,access_sh_specialization_category,sh_pharmacy_mngt.model_sh_specialization_category,base.group_user,1,1,1,1
+sh_pharmacy_mngt.access_sh_doctor_commission,access_sh_doctor_commission,sh_pharmacy_mngt.model_sh_doctor_commission,base.group_user,1,1,1,1

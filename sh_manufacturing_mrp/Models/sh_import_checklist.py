@@ -174,3 +174,11 @@ class shMrpImportExportChecklist(models.TransientModel):
             'url': download_url,
             'target': 'self',
         }
+        
+
+# class ShContact(models.Model):
+#     _inherit="res.partner"
+    
+#     company_type = fields.Selection(string='Company Type',
+#         selection=[('person', 'Patient'), ('company', 'Doctor')],
+#         compute='_compute_company_type', inverse='_write_company_type')

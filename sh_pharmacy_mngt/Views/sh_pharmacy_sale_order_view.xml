@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- form view -->
+     
+    <record id="sh_pharmacy_sale_order_form_view" model="ir.ui.view">
+        <field name="name">Sale Order</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form" />
+        <field name="arch" type="xml">
+
+            <xpath expr="//button[@name='action_draft']" position="after">
+                <button name="split_sale_order" type="object" string="Split"></button>
+            </xpath>
+
+
+
+            <xpath expr="//field[@name='sale_order_template_id']" position="after">
+                <field name="sh_doctor_id" />
+                <field name="sh_prescription" />
+            </xpath>
+
+            
+            <xpath expr="//field[@name='payment_term_id']" position="after">
+                <field name="sh_mobile_no" />
+                <field name="sh_aadhar_card" />
+                <field name="sh_customer_allergy_ids" widget="many2many_tags"></field>
+            </xpath>
+            
+
+            <xpath expr="//field[@name='sh_doctor_id']" position="attributes">
+                <attribute name="required" >is_narcotics==True</attribute>
+            </xpath>
+            
+            <xpath expr="//field[@name='sh_prescription']" position="attributes">
+                <attribute name="required" >is_narcotics==True</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='sh_aadhar_card']" position="attributes">
+                <attribute name="required" >is_narcotics==True</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='sh_mobile_no']" position="attributes">
+                <attribute name="required" >is_narcotics==True</attribute>
+            </xpath>
+
+            <xpath expr="//page[@name='order_lines']//list//field[@name='sequence']" position="after">
+                <field name="is_selected" />
+            </xpath>
+            
+            <xpath expr="//page[@name='order_lines']//list//field[@name='product_template_id']" position="after">
+                <field name="sh_lot_no"/>
+                <field name="sh_expiration_date" />
+                 <!-- <field name="lot_id" /> -->
+            </xpath>
+
+
+        </field>
+    </record>
+
+
+
+
+
+   
+
+</odoo>

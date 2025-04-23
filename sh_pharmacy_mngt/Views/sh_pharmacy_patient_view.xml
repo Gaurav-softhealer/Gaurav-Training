@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- form view -->
+
+    <record id="sh_pharmacy_patient_form_view" model="ir.ui.view">
+        <field name="name">Patient</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form" />
+        <field name="arch" type="xml">
+
+
+            <xpath expr="//field[@name='vat']" position="after">
+
+                <field name="sh_aadhar_no" invisible="is_patient==False "/>
+                <field name="sh_date_of_birth" invisible="is_patient==False "/>
+                <field name="sh_age" invisible="is_patient==False "/>
+                <field name="sh_allergies_ids" widget="many2many_tags" invisible="is_patient==False "/>
+                <field name="sh_blood" invisible="is_patient==False "/>
+            </xpath>
+            
+        </field>
+    </record>
+
+
+    <!-- list view -->
+
+
+
+        <record id="sh_pharmacy_patient_list_view" model="ir.ui.view">
+            <field name="name">Patient</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_tree" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='user_id']" position="after">
+                    <field name="gender" />
+                    <field name="sh_blood" invisible="is_patient==False "/>
+                </xpath>
+            </field>
+        </record>
+
+
+
+        <record id="sh_pharmacy_patient_kanban_view" model="ir.ui.view">
+            <field name="name">Doctor</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.res_partner_kanban_view" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='display_name']" position="after">
+                    <br></br>
+                    <field name="gender" /><br></br>
+                    <field name="sh_blood" /><br></br>
+                   
+                </xpath>
+            </field>
+        </record>
+   
+
+    <!-- action -->
+
+    <record id="sh_pharmacy_patient_action" model="ir.actions.act_window">
+        <field name="name">patient</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">kanban,list,form,activity</field>
+        <field name="domain">[('is_patient','=',True)]</field>
+        <field name="context">{'default_is_patient':True}</field>
+
+    </record>
+</odoo>

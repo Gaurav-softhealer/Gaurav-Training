@@ -21,6 +21,7 @@
         'Views/sale_order_stage_view.xml',
         'Views/sh_sale_order_history_view.xml',
         'Views/sale_order_history_config_view.xml',
+        'Views/sh_template.xml',
 
     ],
     'application':True,

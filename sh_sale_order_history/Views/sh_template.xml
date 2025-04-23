@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="purchase_order_template" name="Purchase Orders List">
+        <!-- <t t-call="website.layout"> -->
+            <div class="oe_structure">
+                <div class="container">
+                    <h3>Purchase Orders</h3>
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>Order Reference</th>
+                                <th>Date</th>
+                                <th>Supplier</th>
+                                <th>Status</th>
+                                <th>Subtotal</th>
+                                <th>Taxes</th>
+                                <th>Total Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="records" t-as="order">
+                                <tr>
+                                    <td>
+                                        <t t-esc="order.name"/>
+                                    </td>
+                                    <!-- <td>
+                                        <t t-esc="order.date_order"/>
+                                    </td> -->
+                                    <td>
+                                        <t t-esc="order.partner_id.name"/>
+                                    </td>
+                                    <td>
+                                        <t t-esc="order.state"/>
+                                    </td>
+                                    <td>
+                                        <t t-esc="order.amount_untaxed"/>
+                                    </td>
+                                    <td>
+                                        <t t-esc="order.amount_tax"/>
+                                    </td>
+                                    <td>
+                                        <t t-esc="order.amount_total"/>
+                                    </td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        <!-- </t> -->
+    </template>
+</odoo>

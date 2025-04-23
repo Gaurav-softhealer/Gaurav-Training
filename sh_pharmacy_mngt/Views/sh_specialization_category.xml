@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="sh_specialization_category_action" model="ir.actions.act_window">
+        <field name="name">Specialization Categories</field>
+        <field name="res_model">sh.specialization.category</field>
+        <field name="view_mode">list,form</field>
+
+    </record>
+</odoo>

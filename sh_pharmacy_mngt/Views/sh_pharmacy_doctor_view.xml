@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- form view -->
+
+    <record id="sh_pharmacy_doctor_form_view" model="ir.ui.view">
+        <field name="name">Doctor</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form" />
+        <field name="arch" type="xml">
+
+              <xpath expr="//field[@name='company_type']" position="attributes">        
+                    <attribute name="invisible">is_doctor==True</attribute>
+                </xpath>
+
+            <xpath expr="//field[@name='category_id']" position="after">
+                <field name="gender" invisible="is_company==True"/>
+                <field name="specialization_ids" widget="many2many_tags" invisible="is_doctor==False or is_company==True "/>
+                <!-- <field name="commission_type_id" options="{'no_create':1}" invisible="is_doctor==False or is_company==True"/>
+                <field name="sh_amount" invisible="is_doctor==False or is_company==True or commission_type_id==False or commission_type_id.name=='By Amount'"/>
+                <field name="currency_id" invisible="is_doctor==False or is_company==True or commission_type_id==False or commission_type_id.name=='By Amount'"/>
+                <field name="commission_percent" invisible="is_doctor==False or is_company==True or commission_type_id==False or commission_type_id.name=='By Patient'" /> -->
+
+
+                <!-- <field name="sh_aadhar_no" invisible="is_doctor==True or is_company==True"/>
+                <field name="sh_date_of_birth" invisible="is_doctor==True or is_company==True"/>
+                <field name="sh_age" invisible="is_doctor==True or is_company==True"/>
+                <field name="sh_allergies_ids" widget="many2many_tags" invisible="is_doctor==True or is_company==True"/>
+                <field name="sh_blood" invisible="is_doctor==True or is_company==True"/> -->
+            </xpath>
+
+            <xpath expr="//field[@name='vat']" position="after">
+                <field name="doctor_commission_type" invisible="is_doctor==False or is_company==True"></field>
+                <!-- <field name="commission_type_id" options="{'no_create':1}" invisible="is_doctor==False or is_company==True"/> -->
+                <field name="sh_amount" invisible="is_doctor==False or is_company==True or doctor_commission_type==False or doctor_commission_type=='by_amount'"/>
+                <field name="currency_id" invisible="is_doctor==False or is_company==True or doctor_commission_type==False or doctor_commission_type=='by_amount'"/>
+                <field name="commission_percent" invisible="is_doctor==False or is_company==True or doctor_commission_type==False or doctor_commission_type=='by_patient'" />
+
+            </xpath>
+            <xpath expr="//page[@name='internal_notes']" position="after">
+                <page name="doctor_commission" string="Commissions" invisible="is_doctor==False">
+                    <field name="dr_commission_ids">
+                        <list editable="bottom">
+                            <field name="date"></field>
+                            <field name="sh_so_id"></field>
+                            <field name="patient_id"></field>
+                            <field name="sh_so_amount"></field>
+                            <field name="doctor_commission_type"></field>
+                            <field name="commission_rate"></field>
+                            <field name="dr_commission"></field>
+                        </list>
+                    </field>
+                    <field name="commission_total"></field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+
+    <!-- list view -->
+
+    <record id="sh_pharmacy_doctor_list_view" model="ir.ui.view">
+        <field name="name">Doctor</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='user_id']" position="after">
+                <field name="specialization_ids" widget="many2many_tags"/>
+                <field name="doctor_commission_type" invisible="is_doctor==False or is_company==True"/>
+                <field name="sh_amount" invisible="is_doctor==False or is_company==True or doctor_commission_type==False or doctor_commission_type=='by_amount'"/>
+                <field name="commission_percent" width="130" invisible="is_doctor==False or is_company==True or doctor_commission_type==False or doctor_commission_type=='by_patient'"/>
+            </xpath>
+        </field>
+    </record>
+
+
+
+    <record id="sh_pharmacy_doctor_kanban_view" model="ir.ui.view">
+        <field name="name">Doctor</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.res_partner_kanban_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='display_name']" position="after">
+                <field name="specialization_ids" widget="many2many_tags"/>
+                <field name="doctor_commission_type" invisible="is_doctor==False or is_company==True"/>
+               
+            </xpath>
+        </field>
+    </record>
+
+
+
+    <!-- action -->
+
+    <record id="sh_pharmacy_doctor_action" model="ir.actions.act_window">
+        <field name="name">Doctor</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">kanban,list,form,activity</field>
+        <field name="domain">[('is_doctor','=',True)]</field>
+        <field name="context">{'default_is_doctor':True}</field>
+
+    </record>
+
+
+
+<!--contact  search view -->
+
+      <record id="inherited_search_view" model="ir.ui.view">
+        <field name="name">Contact Search</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_res_partner_filter"/>
+        <field name="arch" type="xml">
+ 
+          <xpath expr="//filter[@name='inactive']" position="after">
+            <filter name="is_doctor" string="Doctor" domain="[('is_doctor','=',True)]"/>
+            <filter name="is_patient" string="Patient" domain="[('is_patient','=',True)]"/>
+            <filter name="is_vendor" string="Vendor" domain="[('is_vendor','=',True)]"/>
+          </xpath>
+        </field>
+      </record>
+   
+  
+</odoo>

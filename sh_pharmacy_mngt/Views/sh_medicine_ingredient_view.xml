@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="sh_medicine_ingredient_action" model="ir.actions.act_window">
+        <field name="name">Ingredient</field>
+        <field name="res_model">sh.medicine.ingredient</field>
+        <field name="view_mode">list,form</field>
+
+    </record>
+</odoo>
