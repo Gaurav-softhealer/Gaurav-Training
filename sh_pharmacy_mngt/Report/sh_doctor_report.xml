@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="sh_doctor_report">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <div style="border: 1px solid #ccc; padding: 25px; border-radius: 10px; font-family: 'Arial', sans-serif;">
+
+                    <!-- Header with doctor name and image -->
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+                        <div>
+                            <h1 style="margin: 0 0 10px 0; font-size: 28px; color: #4B4B4B;">Doctor Report</h1>
+                            <h3 style="margin: 0; font-size: 22px; color: #333;"><span t-field="o.name"/></h3>
+                        </div>
+                        <div>
+                            <img t-att-src="image_data_uri(o.image_1920)" style="height:150px; width:150px; border-radius: 10px; border: 1px solid #ddd;"/>
+                        </div>
+                    </div>
+
+                    <!-- Doctor Details -->
+                    <div style="margin-bottom: 30px;">
+                        <p style="font-size: 16px;"><strong>Commission Type:</strong> <span t-field="o.doctor_commission_type"/></p>
+                        <p style="font-size: 16px;"><strong>Specialization:</strong> <span t-field="o.specialization_ids"/></p>
+                    </div>
+
+                    <!-- Commission Table -->
+                    <h3 style="font-size: 20px; color: #444; margin-bottom: 10px;">Commission Details</h3>
+                    <table style="width:100%; border-collapse: collapse; font-size: 14px;">
+                        <thead>
+                            <tr style="background-color: #f2f2f2;">
+                                <th style="border: 1px solid #ddd; padding: 8px;">Date</th>
+                                <th style="border: 1px solid #ddd; padding: 8px;">Order No</th>
+                                <th style="border: 1px solid #ddd; padding: 8px;">Patient</th>
+                                <th style="border: 1px solid #ddd; padding: 8px;">Total</th>
+                                <th style="border: 1px solid #ddd; padding: 8px;">Commission Type</th>
+                                <th style="border: 1px solid #ddd; padding: 8px;">Rate (%)</th>
+                                <th style="border: 1px solid #ddd; padding: 8px;">Doctor Commission</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="o.dr_commission_ids" t-as="record">
+                                <tr>
+                                    <td style="border: 1px solid #ddd; padding: 8px;"><span t-field="record.date"/></td>
+                                    <td style="border: 1px solid #ddd; padding: 8px;"><span t-field="record.sh_so_id"/></td>
+                                    <td style="border: 1px solid #ddd; padding: 8px;"><span t-field="record.patient_id"/></td>
+                                    <td style="border: 1px solid #ddd; padding: 8px;"><span t-field="record.sh_so_amount"/></td>
+                                    <td style="border: 1px solid #ddd; padding: 8px;"><span t-field="record.doctor_commission_type"/></td>
+                                    <td style="border: 1px solid #ddd; padding: 8px;"><span t-field="record.commission_rate"/></td>
+                                    <td style="border: 1px solid #ddd; padding: 8px;"><span t-field="record.dr_commission"/></td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+
+                    <!-- Total Commission -->
+                    <div style="text-align: right; margin-top: 20px;">
+                        <p style="font-size: 16px;"><strong>Total Commission:</strong> <span t-field="o.commission_total"/></p>
+                    </div>
+                </div>
+            </t>
+        </t>
+    </template>
+
+    <record id="action_sh_pharmacy_doctor_report" model="ir.actions.report">
+        <field name="name">Doctor Report</field>
+        <field name="model">res.partner</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">sh_pharmacy_mngt.sh_doctor_report</field>
+        <field name="report_file">sh_pharmacy_mngt.sh_doctor_report</field>
+        <field name="print_report_name">"Doctor Report"</field>
+        <field name="binding_model_id" ref="model_res_partner"/>
+        <field name="binding_type">report</field>
+    </record>
+</odoo>

@@ -10,7 +10,9 @@
         <field name="arch" type="xml">
 
             <xpath expr="//button[@name='action_draft']" position="after">
+                <!-- <button name="%(sh_pharmacy_mngt.sh_split_pharmacy_sale_order_action)d" type="action" string="Split"></button> -->
                 <button name="split_sale_order" type="object" string="Split"></button>
+
             </xpath>
 
 

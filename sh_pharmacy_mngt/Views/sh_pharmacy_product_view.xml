@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+
+    <!-- product form view -->
+
     <record id="sh_pharmacy_product_form_view" model="ir.ui.view">
         <field name="name">Pharmacy product</field>
         <field name="model">product.template</field>
@@ -13,6 +16,23 @@
             <xpath expr="//field[@name='sh_product_form_id']" position="attributes">
                 <attribute name="required" >is_medicine_narcotics==True</attribute>
             </xpath>
+        </field>
+    </record>
+
+
+    <!-- product category form view -->
+
+    <record id="sh_pharmacy_product_category_form_view" model="ir.ui.view">
+        <field name="name">Pharmacy Category</field>
+        <field name="model">product.category</field>
+        <field name="inherit_id" ref="product.product_category_form_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='parent_id']" position="after">
+                <field name="is_medicine" />
+                
+            </xpath>
+
+            
         </field>
     </record>
 </odoo>

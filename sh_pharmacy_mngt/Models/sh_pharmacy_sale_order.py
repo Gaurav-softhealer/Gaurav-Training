@@ -13,8 +13,29 @@ class ShPharmacySale(models.Model):
     is_selected=fields.Boolean()
     is_narcotics=fields.Boolean()
     
+    is_splitted=fields.Boolean()
+    
     sh_customer_allergy_ids=fields.Many2many('sh.allergy',string="Customer Allergies")
 
+    
+    def default_get(self, fields):
+
+        active_ids = self.env.context.get('active_ids')
+        active_model = self.env.context.get('active_model')
+
+        # print(f"\n\n\n\t--------------> 26 active_model",active_model)
+        # records = self.env[active_model].browse(active_ids)
+        # print(f"\n\n\n\t--------------> 29 records",records)
+            # Debug print
+        if self.is_splitted:
+            print("\n\n\n\t--------------> 28 ", "splitted sale order")
+            # print(f"\n\n\n\t--------------> 33 self.env.context",self.env.context)
+
+            # self.partner_id=records.partner_id.id
+
+        res = super().default_get(fields)
+        return res
+        
     
     
     def action_confirm(self):
@@ -65,26 +86,66 @@ class ShPharmacySale(models.Model):
 
     
     
-    def split_sale_order(self):
-        print(f"\n\n\n\t--------------> 13 ","Split function called")
-        print(f"\n\n\n\t--------------> 69 self.order_line",self.order_line.read())
+    # def split_sale_order(self):
+    #     print(f"\n\n\n\t--------------> 13 ","Split function called")
+    #     print(f"\n\n\n\t--------------> 69 self.order_line",self.order_line.read())
 
-        order_lines_data = []
-        for record in self.order_line:
-            # if record.is_selected:
-                # order_lines_data.append((0, 0, {
-                #     'product_id': record.product_id.id,
-                    # 'product_uom_qty': record.product_uom_qty,
-                    # 'product_uom': record.product_uom.id, 
-                    # 'price_unit': record.price_unit,
-                    # 'name': record.name,
-                    # 'tax_id': [(6, 0, record.tax_id.ids)]
-                # }))
+    #     order_lines_data = []
+    #     for record in self.order_line:
+    #         if record.is_selected:
+    #             order_lines_data.append((0, 0, {
+    #                 'product_id': record.product_id.id,
+    #                 'product_uom_qty': record.product_uom_qty,
+    #                 'product_uom': record.product_uom.id, 
+    #                 'price_unit': record.price_unit,
+    #                 'name': record.name,
+    #                 # 'tax_id': [(6, 0, record.tax_id.ids)]
+    #             }))
                 
-                order_lines_data.append(record.product_id.id)
+    #             order_lines_data.append(record.product_id.id)
             
-        print(f"\n\n\n\t--------------> 26 order_lines_data",order_lines_data)
-        print(f"\n\n\n\t--------------> 85 record.product_id.id",record.product_id.id)
+    #         print(f"\n\n\n\t--------------> 85 record.product_id.id",record.product_id.id)
+    #     print(f"\n\n\n\t--------------> 26 order_lines_data",order_lines_data)
+    #     return {
+    #             'type': 'ir.actions.act_window',
+    #             'name': 'Split Sale Order',
+    #             'view_mode': 'form',
+    #             'res_model': 'sale.order',
+    #             'target': 'new',
+    #             'context': {
+    #                 'default_partner_id': self.partner_id.id,
+    #                 # 'default_order_line.ids':[(4,0,order_lines_data)],
+
+    #                 'default_order_line':order_lines_data
+                    
+                    
+                    
+    #                 # 'default_order_line': [{'product_id':record.product_id.id,'product_uom_qty': record.product_uom_qty,
+    #                 # 'product_uom': record.product_uom.id, 
+    #                 # 'price_unit': record.price_unit,
+       
+    #                 # }],
+    #             #     # 'default_state': 'draft',
+    #             #     # 'default_origin': self.name,
+    #             }
+    #         }
+    
+    
+    
+    
+    
+    def split_sale_order(self):
+        # print(f"\n\n\n\t--------------> 13 ","Split function called")
+        # print(f"\n\n\n\t--------------> 69 self.order_line",self.order_line.read())
+
+        # order_lines_data = []
+        # for record in self.order_line:
+        #     if record.is_selected:
+        #         order_lines_data.append(record.product_id.id)
+            
+        #         print(f"\n\n\n\t--------------> 85 record.product_id.id",record.product_id.id)
+        # print(f"\n\n\n\t--------------> 26 order_lines_data",order_lines_data)
+        self.is_splitted=True
         return {
                 'type': 'ir.actions.act_window',
                 'name': 'Split Sale Order',
@@ -92,16 +153,13 @@ class ShPharmacySale(models.Model):
                 'res_model': 'sale.order',
                 'target': 'new',
                 'context': {
-                    'default_partner_id': self.partner_id.id,
-                    'default_order_line': [{'product_id':record.product_id.id,'product_uom_qty': record.product_uom_qty,
-                    'product_uom': record.product_uom.id, 
-                    'price_unit': record.price_unit,
-       
-                    }],
-                #     # 'default_state': 'draft',
-                #     # 'default_origin': self.name,
+                    # 'default_partner_id': self.partner_id.id,
+                    # 'default_is_splitted':True,
+                    # 'default_order_line':order_lines_data
+
                 }
             }
+    
     
     
     

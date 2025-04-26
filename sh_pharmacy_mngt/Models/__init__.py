@@ -10,3 +10,4 @@ from . import sh_pharmacy_product
 from . import sh_pharmacy_sale_order
 from . import sh_pharmacy_vendor
 from . import sh_doctor_commission
+from . import sh_split_sale_order
