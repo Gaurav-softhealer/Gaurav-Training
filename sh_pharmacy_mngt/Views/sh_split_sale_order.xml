@@ -6,13 +6,29 @@
         <field name="arch" type="xml">
             <form string="">
                 <sheet>
-                    <group>
-                        <field name="sh_product_id" />
+                        <group>
+                            <field name="sh_partner_id" />
+                            <field name="sh_doctor_id" />
+                            <field name="sh_prescription" invisible="is_narcotics==False" required="is_narcotics==True"/>
+                            <field name="sh_mobile_no" invisible="is_narcotics==False" required="is_narcotics==True"/>
+                            <field name="sh_aadhar_card" invisible="is_narcotics==False" required="is_narcotics==True"/>
+                            
+                        </group>
+
+                    <!-- <group> -->
+                        <field name="sh_split_order_ids" >
+                            <list editable="bottom">
+                                <field name="product_id"/>
+                                <field name="product_qty" />
+                                <field name="price_unit" />
+                                <!-- <field name="tax_id" /> -->
+                            </list>
+                        </field>
   
-                    </group>
+                    <!-- </group> -->
                 </sheet>
                     <footer>
-                            <!-- <button name="replace_product" string="Replace" type="object" class="btn-primary" data-hotkey="q"/> -->
+                            <button name="split_sale_quantity" string="Save" type="object" class="btn-primary" data-hotkey="q"/>
                             <button string="Cancel" class="btn-secondary" special="cancel" data-hotkey="x" />
                     </footer>
             </form>

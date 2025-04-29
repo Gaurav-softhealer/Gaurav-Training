@@ -18,23 +18,23 @@ class ShPharmacySale(models.Model):
     sh_customer_allergy_ids=fields.Many2many('sh.allergy',string="Customer Allergies")
 
     
-    def default_get(self, fields):
+    # def default_get(self, fields):
 
-        active_ids = self.env.context.get('active_ids')
-        active_model = self.env.context.get('active_model')
+    #     active_ids = self.env.context.get('active_ids')
+    #     active_model = self.env.context.get('active_model')
 
-        # print(f"\n\n\n\t--------------> 26 active_model",active_model)
-        # records = self.env[active_model].browse(active_ids)
-        # print(f"\n\n\n\t--------------> 29 records",records)
-            # Debug print
-        if self.is_splitted:
-            print("\n\n\n\t--------------> 28 ", "splitted sale order")
-            # print(f"\n\n\n\t--------------> 33 self.env.context",self.env.context)
+    #     # print(f"\n\n\n\t--------------> 26 active_model",active_model)
+    #     # records = self.env[active_model].browse(active_ids)
+    #     # print(f"\n\n\n\t--------------> 29 records",records)
+    #         # Debug print
+    #     if self.is_splitted:
+    #         print("\n\n\n\t--------------> 28 ", "splitted sale order")
+    #         # print(f"\n\n\n\t--------------> 33 self.env.context",self.env.context)
 
-            # self.partner_id=records.partner_id.id
+    #         # self.partner_id=records.partner_id.id
 
-        res = super().default_get(fields)
-        return res
+    #     res = super().default_get(fields)
+    #     return res
         
     
     
@@ -179,7 +179,7 @@ class ShPharmacySale(models.Model):
     def check_narco(self):
         for record in self.order_line:
             print(f"\n\n\n\t--------------> 97 record.product_id.categ_id",record.product_id.categ_id.name)
-            if record.product_id.categ_id.name=='Narcotics':
+            if record.product_id.categ_id.is_narcotics:
                 self.is_narcotics=True
             else:
                 self.is_narcotics=False
@@ -205,19 +205,42 @@ class ShPharmacyOrderLine(models.Model):
     sh_lot_no=fields.Char(string="Lot No")
     sh_expiration_date=fields.Datetime()
     # lot_id = fields.Many2one('stock.production.lot', string='Lot/Serial Number', readonly=True)
-   
-    @api.onchange('product_id')
-    def check_lot(self):
-        for record in self:
-            print(f"\n\n\n\t--------------> 125 ",record.product_id.name)
-            lot = self.env['stock.move.line'].search([
-                    ('product_id', '=', record.product_id.id),
+    split_id=fields.Many2one('sh.split.sale.order')
+    lot_ids=fields.Many2many('stock.lot')
+    
+    # @api.onchange('product_id')
+    # def check_lot(self):
+    #     for record in self:
+    #         print(f"\n\n\n\t--------------> 125 ",record.product_id.name)
+    #         lot = self.env['stock.move.line'].search([
+    #                 ('product_id', '=', record.product_id.id),
                    
-                ],limit=1)
-            print(f"\n\n\n\t--------------> 149 lot",lot)
-            self.sh_lot_no=lot.lot_name
-            self.sh_expiration_date=lot.expiration_date
-            # self.lot_id=lot.id
+    #             ],limit=1)
+    #         print(f"\n\n\n\t--------------> 149 lot",lot)
+    #         self.sh_lot_no=lot.lot_name
+    #         self.sh_expiration_date=lot.expiration_date
+    #         # self.lot_id=lot.id
+    
+    
+    
+    @api.onchange('product_id')
+    def _onchange_product_id_set_lot_ids(self):
+        for record in self:
+            record.lot_ids = [(5, 0, 0)]  # Clear current selection
+
+            if record.product_id:
+
+                lots = self.env['stock.quant'].search([
+                    ('product_id', '=', record.product_id.id),
+                    ('lot_id', '!=', False),
+                    ('quantity', '>', 0) 
+                ])
+
+             
+                lot_set = lots.mapped('lot_id')
+                record.lot_ids = [(6, 0, lot_set.ids)]
+                # line.sh_expiration_date=
+
 
 
 

@@ -11,7 +11,7 @@
 
             <xpath expr="//button[@name='action_draft']" position="after">
                 <!-- <button name="%(sh_pharmacy_mngt.sh_split_pharmacy_sale_order_action)d" type="action" string="Split"></button> -->
-                <button name="split_sale_order" type="object" string="Split"></button>
+                <button name="%(sh_pharmacy_mngt.sh_split_pharmacy_sale_order_action)d" type="action" string="Split"></button>
 
             </xpath>
 
@@ -52,6 +52,7 @@
             
             <xpath expr="//page[@name='order_lines']//list//field[@name='product_template_id']" position="after">
                 <field name="sh_lot_no"/>
+                <field name="lot_ids" widget="many2many_tags"/>
                 <field name="sh_expiration_date" />
                  <!-- <field name="lot_id" /> -->
             </xpath>
