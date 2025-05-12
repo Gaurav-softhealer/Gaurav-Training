@@ -34,17 +34,21 @@ class ExpiryReport(models.TransientModel):
             expiry_record=self.env['stock.lot'].search([('expiration_date','>=',self.start),('expiration_date','<=',self.stop)])
         
         for record in expiry_record:
-            vals={
-                'product_id':record.product_id.id,
-                'lot_id':record.name,
-                'expiration_date':record.expiration_date,
-                'alert_date':record.alert_date,
-                'product_qty':record.product_qty,
-                'category_id':record.product_id.categ_id.id,
-                # 'remaining_days':record.alert_date,
-            }
+            # quantity_record=self.env['stock.quant'].search([('product_id', '=', record.product_id.id),('lot_id', '=', record.id),])
+            # print(f"\n\n\n\t--------------> 38 quantity_record",quantity_record)
+            # for i in quantity_record:
+                vals={
+                    'product_id':record.product_id.id,
+                    'lot_id':record.name,
+                    'expiration_date':record.expiration_date,
+                    'alert_date':record.alert_date,
+                    # 'product_qty':i.available_quantity,
+                    'product_qty':record.product_qty,
+                    'category_id':record.product_id.categ_id.id,
+                    # 'remaining_days':record.alert_date,
+                }
             
-            self.expiration_record_ids=[(0,0,vals)]
+                self.expiration_record_ids=[(0,0,vals)]
         
         return{
             'type': 'ir.actions.act_window',

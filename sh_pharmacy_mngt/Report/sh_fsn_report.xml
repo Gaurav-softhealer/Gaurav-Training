@@ -1,0 +1,95 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+
+    <template id="sh_fsn_report">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <div style="margin: 20px;">
+
+                    <h2 style="text-align: center; margin-bottom: 20px;">FSN Report</h2>
+                    
+                    
+                    <table style="width: 100%; border-collapse: collapse; font-size: 14px; border: 1px solid #000;">
+                        <thead>
+                            <tr style="background-color: #f2f2f2; text-align: left;">
+                                <th style="border: 1px solid #000; padding: 8px;">Product</th>
+                                <th style="border: 1px solid #000; padding: 8px;">Category</th>
+                                <th style="border: 1px solid #000; padding: 8px;">Quanity Sold</th>
+                                <th style="border: 1px solid #000; padding: 8px;">Sale Rate</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="o.fsn_records_ids" t-as="i"> 
+                                
+                                <tr>
+                                    <td style="border: 1px solid #000; padding: 8px;"><span t-field="i.product_id"/></td>
+                                    <td style="border: 1px solid #000; padding: 8px;"><span t-field="i.category_id"/></td>
+                                    <td style="border: 1px solid #000; padding: 8px;"><span t-field="i.qty_sold"/></td>
+                                    <td style="border: 1px solid #000; padding: 8px;"><span t-field="i.sale_rate"/></td>
+
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+            </t>
+        </t>
+    </template>
+    
+
+    <record id="fsn_export_pdf_report" model="ir.actions.report">
+        <field name="name">FSN Report</field>
+        <field name="model">sh.report.wizard</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">sh_pharmacy_mngt.sh_fsn_report</field>
+        <field name="report_file">sh_pharmacy_mngt.sh_fsn_report</field>
+        <field name="print_report_name">"FSN Report"</field>
+        <field name="binding_model_id" ref="model_sh_report_wizard"/>
+        <field name="binding_type">report</field>
+    </record>
+
+
+        <!-- Form view -->
+        <record id="sh_report_fsn_pharmacy_report" model="ir.ui.view">
+            <field name="name">sh.fsn.view.form.inherit</field>
+            <field name="model">sh.report.wizard</field>
+            <field name="inherit_id" ref="sh_pharmacy_mngt.report_wizard_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='patient_record_ids']" position="after">
+                    <sheet>
+                        <group>
+                            <field name="min_qty" />
+                        </group>
+                        <field name="fsn_records_ids" invisible='not is_fsn_report'>
+                            <list>
+                                <field name="product_id" />
+                                <field name="category_id" />
+                                <!-- <field name="stock_qty" /> -->
+                                <field name="qty_sold"/>
+                                <field name="sale_rate" />
+                    
+                            </list>
+                        </field>
+                       
+                    </sheet>
+                    <button name="load_fsn_record" string="Load FSN" type="object"  invisible='not is_fsn_report'/>
+                </xpath>
+    
+                <xpath expr="//button[@name='print_record_exel']" position="after">
+                    <button name="fsn_export_exel" type="object" string="Exel FSN" invisible='not is_fsn_report'></button>
+                    <button name="%(fsn_export_pdf_report)d" type="action" string="PDF FSN" invisible='not is_fsn_report'></button>
+                </xpath>
+            </field>
+        </record>
+
+
+    <!-- action -->
+    <record id="sh_fsn_action" model="ir.actions.act_window">
+        <field name="name">FSN Report</field>
+        <field name="res_model">sh.report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="context">{'default_is_fsn_report':True}</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

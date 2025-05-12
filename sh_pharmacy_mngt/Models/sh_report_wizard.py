@@ -34,11 +34,25 @@ class ReportWizard(models.TransientModel):
     is_patient_wise = fields.Boolean()
     patient_record_ids=fields.Many2many('sale.order')
     
+    sh_gender=fields.Selection([
+        ('male','Male'),
+        ('female','Female')
+    ],string="Gender")
+    
+    age=fields.Integer()
 
     def load_data(self,record_ids):
         print(f"\n\n\n\t--------------> 36 ","load data")
         if self.is_patient_wise:
-            patient_record=self.env['sale.order'].search([('partner_id','=',self.patient_id.id),('date_order','>=',self.start),('date_order','<=',self.stop)])
+            if self.age:
+                patient_record=self.env['sale.order'].search([('partner_id.sh_age','=',self.age),('date_order','>=',self.start),('date_order','<=',self.stop)])
+            if self.sh_gender:
+                patient_record=self.env['sale.order'].search([('partner_id.gender','=',self.sh_gender),('date_order','>=',self.start),('date_order','<=',self.stop)])
+            if self.patient_id:
+                patient_record=self.env['sale.order'].search([('partner_id','=',self.patient_id.id),('date_order','>=',self.start),('date_order','<=',self.stop)])
+            if not self.patient_id and not self.sh_gender and not self.age:
+                patient_record=self.env['sale.order'].search([('date_order','>=',self.start),('date_order','<=',self.stop)])
+                
             print(f"\n\n\n\t--------------> 38 patient_record",patient_record)
             record_ids=patient_record.ids
         self.patient_record_ids=[(6,0,record_ids)]
@@ -50,7 +64,19 @@ class ReportWizard(models.TransientModel):
             'res_id':self.id,
             'target':'new',
         }  
+    
+    @api.onchange('patient_id')
+    def change_patient(self):
+        self.sh_gender=self.patient_id.gender
         
+    # @api.onchange('sh_gender')
+    # def change_gender(self):
+    #     if self.sh_gender:
+    #         self.patient_domain="[('gender','=',"+str(self.sh_gender)+")]"
+    #     else:
+    #         self.patient_domain = "[(1,'=',1)]"
+    
+       
     def print_record_exel(self):
         print(f"\n\n\n\t--------------> 35 ","display records")
             

@@ -76,15 +76,15 @@
                     
                 <menuitem
                     id="pharmacy_report_gender_menu"
-                    name="Gender Wise"
-                    action="sh_specialization_category_action"
+                    name="Cash Drawer Report"
+                    action="sh_cash_drawer_action"
                     parent="sh_pharmacy_mngt.pharmacy_report_menu"
                     sequence="10"/>
                     
                 <menuitem
                     id="pharmacy_report_diseases_menu"
-                    name="Diseases Wise"
-                    action="sh_specialization_category_action"
+                    name="FSN Report"
+                    action="sh_fsn_action"
                     parent="sh_pharmacy_mngt.pharmacy_report_menu"
                     sequence="10"/>
                     

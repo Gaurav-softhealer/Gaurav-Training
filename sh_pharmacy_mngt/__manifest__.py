@@ -12,7 +12,7 @@
                     This module is used to manage bussiness of the  pharmacy.
                 """,
     'website': 'https://www.odoo.com/app/pharmacy',           
-    'depends': ['base_setup','web','sale','contacts','sale_management','stock'],
+    'depends': ['base_setup','web','sale','contacts','sale_management','stock','point_of_sale'],
     
     'icon':'/sh_pharmacy_mngt/static/description/pharmacy.png',
     
@@ -45,6 +45,8 @@
         'Report/sh_expiry_wise_report.xml',
         'Report/sh_commission_report.xml',
         'Report/sh_medicine_report.xml',
+        'Report/cash_drawer_report.xml',
+        'Report/sh_fsn_report.xml',
         'Views/sh_pharmacy_menu.xml',
 
 
