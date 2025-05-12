@@ -1,5 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <odoo>
+    <!-- wizard form view -->
     <record id="split_pharmacy_sale_order_wizard" model="ir.ui.view">
         <field name="name">Split Sale Order</field>
         <field name="model">sh.split.sale.order</field>
@@ -12,20 +13,17 @@
                             <field name="sh_prescription" invisible="is_narcotics==False" required="is_narcotics==True"/>
                             <field name="sh_mobile_no" invisible="is_narcotics==False" required="is_narcotics==True"/>
                             <field name="sh_aadhar_card" invisible="is_narcotics==False" required="is_narcotics==True"/>
-                            
                         </group>
-
-                    <!-- <group> -->
+                        
                         <field name="sh_split_order_ids" >
                             <list editable="bottom">
                                 <field name="product_id"/>
                                 <field name="product_qty" />
                                 <field name="price_unit" />
-                                <!-- <field name="tax_id" /> -->
+                                <field name="lot_ids" widget="many2many_tags"/>
                             </list>
                         </field>
-  
-                    <!-- </group> -->
+
                 </sheet>
                     <footer>
                             <button name="split_sale_quantity" string="Save" type="object" class="btn-primary" data-hotkey="q"/>
@@ -35,11 +33,11 @@
         </field>
     </record>
 
+    <!-- action -->
     <record id="sh_split_pharmacy_sale_order_action" model="ir.actions.act_window">
         <field name="name">Split Order</field>
         <field name="res_model">sh.split.sale.order</field>
         <field name="view_mode">form</field>
         <field name="target">new</field>
-
     </record>
 </odoo>

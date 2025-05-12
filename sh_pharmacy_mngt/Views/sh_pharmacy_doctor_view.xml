@@ -16,17 +16,6 @@
             <xpath expr="//field[@name='category_id']" position="after">
                 <field name="gender" invisible="is_company==True"/>
                 <field name="specialization_ids" widget="many2many_tags" invisible="is_doctor==False or is_company==True "/>
-                <!-- <field name="commission_type_id" options="{'no_create':1}" invisible="is_doctor==False or is_company==True"/>
-                <field name="sh_amount" invisible="is_doctor==False or is_company==True or commission_type_id==False or commission_type_id.name=='By Amount'"/>
-                <field name="currency_id" invisible="is_doctor==False or is_company==True or commission_type_id==False or commission_type_id.name=='By Amount'"/>
-                <field name="commission_percent" invisible="is_doctor==False or is_company==True or commission_type_id==False or commission_type_id.name=='By Patient'" /> -->
-
-
-                <!-- <field name="sh_aadhar_no" invisible="is_doctor==True or is_company==True"/>
-                <field name="sh_date_of_birth" invisible="is_doctor==True or is_company==True"/>
-                <field name="sh_age" invisible="is_doctor==True or is_company==True"/>
-                <field name="sh_allergies_ids" widget="many2many_tags" invisible="is_doctor==True or is_company==True"/>
-                <field name="sh_blood" invisible="is_doctor==True or is_company==True"/> -->
             </xpath>
 
             <xpath expr="//field[@name='vat']" position="after">
@@ -44,6 +33,7 @@
                             <field name="date"></field>
                             <field name="sh_so_id"></field>
                             <field name="patient_id"></field>
+                            <field name="sh_doctor_id" />
                             <field name="sh_so_amount"></field>
                             <field name="doctor_commission_type"></field>
                             <field name="commission_rate"></field>
@@ -74,7 +64,8 @@
     </record>
 
 
-
+    <!-- kanban view -->
+     
     <record id="sh_pharmacy_doctor_kanban_view" model="ir.ui.view">
         <field name="name">Doctor</field>
         <field name="model">res.partner</field>

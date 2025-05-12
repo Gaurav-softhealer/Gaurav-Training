@@ -1,5 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <odoo>
+    <!-- action -->
     <record id="sh_commission_type_action" model="ir.actions.act_window">
         <field name="name">Commission Type</field>
         <field name="res_model">sh.commission.type</field>

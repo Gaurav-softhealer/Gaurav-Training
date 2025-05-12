@@ -38,8 +38,14 @@
         'Views/sh_split_sale_order.xml',
         'Views/sh_pharmacy_sale_order_view.xml',
         'Views/sh_pharmacy_vendor_view.xml',
-        'Views/sh_pharmacy_menu.xml',
+        'Views/sh_report_wizard.xml',
         'Report/sh_doctor_report.xml',
+        'Report/sh_patient_wise_report.xml',
+        'Report/sh_doctor_wise_report.xml',
+        'Report/sh_expiry_wise_report.xml',
+        'Report/sh_commission_report.xml',
+        'Report/sh_medicine_report.xml',
+        'Views/sh_pharmacy_menu.xml',
 
 
         

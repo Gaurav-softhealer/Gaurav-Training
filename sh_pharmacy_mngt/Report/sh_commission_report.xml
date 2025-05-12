@@ -1,0 +1,105 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+
+    <template id="sh_commission_wise_report">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <div style="margin: 20px;">
+
+                    <h2 style="text-align: center; margin-bottom: 20px;">Commission Wise Report</h2>
+                    
+                    
+                    <table style="width: 100%; border-collapse: collapse; font-size: 14px; border: 1px solid #000;">
+                        <thead>
+                            <tr style="background-color: #f2f2f2; text-align: left;">
+                                <th style="border: 1px solid #000; padding: 8px;">Date</th>
+                                <th style="border: 1px solid #000; padding: 8px;">Order No</th>
+                                <th style="border: 1px solid #000; padding: 8px;">Patient</th>
+                                <th style="border: 1px solid #000; padding: 8px;">Doctor</th>
+                                <th style="border: 1px solid #000; padding: 8px;">Amount</th>
+                                <th style="border: 1px solid #000; padding: 8px;">Commission Type</th>
+                                <th style="border: 1px solid #000; padding: 8px;">Commission Rate</th>
+                                <th style="border: 1px solid #000; padding: 8px;">Commission Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="o.dr_commission_ids" t-as="i"> 
+                                <!-- <t-set="remaining_days" t-value="(i.alert_date.date() - datetime.date.today()).days"></t-set> -->
+                                <tr>
+                                    <td style="border: 1px solid #000; padding: 8px;"><span t-field="i.date"/></td>
+                                    <td style="border: 1px solid #000; padding: 8px;"><span t-field="i.sh_so_id"/></td>
+                                    <td style="border: 1px solid #000; padding: 8px;"><span t-field="i.patient_id"/></td>
+                                    <td style="border: 1px solid #000; padding: 8px;"><span t-field="i.sh_doctor_id"/></td>
+                                    <td style="border: 1px solid #000; padding: 8px;"><span t-field="i.sh_so_amount"/></td>
+                                    <td style="border: 1px solid #000; padding: 8px;"><span t-field="i.doctor_commission_type"/></td>
+                                    <td style="border: 1px solid #000; padding: 8px;"><span t-field="i.commission_rate"/></td>
+                                    <td style="border: 1px solid #000; padding: 8px;"><span t-field="i.dr_commission"/></td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+            </t>
+        </t>
+    </template>
+    
+
+    <record id="commission_export_pdf_report" model="ir.actions.report">
+        <field name="name">Doctor Commission Report</field>
+        <field name="model">sh.report.wizard</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">sh_pharmacy_mngt.sh_commission_wise_report</field>
+        <field name="report_file">sh_pharmacy_mngt.sh_commission_wise_report</field>
+        <field name="print_report_name">"Commission Report"</field>
+        <field name="binding_model_id" ref="model_sh_report_wizard"/>
+        <field name="binding_type">report</field>
+    </record>
+
+
+        <!-- Form view -->
+        <record id="sh_report_commission_inherit_pharmacy_report" model="ir.ui.view">
+            <field name="name">sh.commission.view.form.inherit</field>
+            <field name="model">sh.report.wizard</field>
+            <field name="inherit_id" ref="sh_pharmacy_mngt.report_wizard_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='patient_record_ids']" position="after">
+                    <sheet>
+                        <group>
+                            <field name="dr_id" invisible='not is_commission'/>
+                        
+                        </group>
+                        <field name="dr_commission_ids" invisible='not is_commission'>
+                            <list>
+                                <field name="date" />
+                                <field name="sh_so_id" />
+                                <field name="patient_id" />
+                                <field name="sh_so_amount"/>
+                                <field name="sh_doctor_id" />
+                                <field name="doctor_commission_type" />
+                                <field name="commission_rate" />
+                                <field name="dr_commission" />
+                                
+                            </list>
+                        </field>
+                       
+                    </sheet>
+                    <button name="load_commission_record" string="Load Commission" type="object"  invisible='not is_commission'/>
+                </xpath>
+    
+                <xpath expr="//button[@name='print_record_exel']" position="after">
+                    <button name="commission_export_exel" type="object" string="Exel comission" invisible='not is_commission'></button>
+                    <button name="%(commission_export_pdf_report)d" type="action" string="PDF commission" invisible='not is_commission'></button>
+                </xpath>
+            </field>
+        </record>
+
+
+    <!-- action -->
+    <record id="sh_commission_report_open_action" model="ir.actions.act_window">
+        <field name="name">Commission report</field>
+        <field name="res_model">sh.report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="context">{'default_is_commission':True}</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

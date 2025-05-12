@@ -12,3 +12,4 @@ from . import sh_pharmacy_vendor
 from . import sh_doctor_commission
 from . import sh_split_sale_order
 from . import sh_split_sale_order_data
+from . import sh_report_wizard

@@ -42,21 +42,35 @@
                 <menuitem
                     id="pharmacy_report_patient_menu"
                     name="Patient Wise"
-                    action="sh_specialization_category_action"
+                    action="report_wizard_action"
                     parent="sh_pharmacy_mngt.pharmacy_report_menu"
                     sequence="10"/>
 
                 <menuitem
                     id="pharmacy_report_doctor_menu"
                     name="Doctor Wise"
-                    action="sh_specialization_category_action"
+                    action="sh_doctor_wise_report_open_action"
+                    parent="sh_pharmacy_mngt.pharmacy_report_menu"
+                    sequence="10"/>
+
+                <menuitem
+                    id="pharmacy_report_expiry_menu"
+                    name="Expiry Wise"
+                    action="sh_expiry_wise_report_open_action"
+                    parent="sh_pharmacy_mngt.pharmacy_report_menu"
+                    sequence="10"/>
+
+                <menuitem
+                    id="pharmacy_report_commission_menu"
+                    name="commission report"
+                    action="sh_commission_report_open_action"
                     parent="sh_pharmacy_mngt.pharmacy_report_menu"
                     sequence="10"/>
                     
                 <menuitem
                     id="pharmacy_report_medicine_menu"
                     name="Medicine Wise"
-                    action="sh_specialization_category_action"
+                    action="sh_medicine_report_open_action"
                     parent="sh_pharmacy_mngt.pharmacy_report_menu"
                     sequence="10"/>
                     

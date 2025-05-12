@@ -17,42 +17,19 @@ class ShPharmacySale(models.Model):
     
     sh_customer_allergy_ids=fields.Many2many('sh.allergy',string="Customer Allergies")
 
-    
-    # def default_get(self, fields):
-
-    #     active_ids = self.env.context.get('active_ids')
-    #     active_model = self.env.context.get('active_model')
-
-    #     # print(f"\n\n\n\t--------------> 26 active_model",active_model)
-    #     # records = self.env[active_model].browse(active_ids)
-    #     # print(f"\n\n\n\t--------------> 29 records",records)
-    #         # Debug print
-    #     if self.is_splitted:
-    #         print("\n\n\n\t--------------> 28 ", "splitted sale order")
-    #         # print(f"\n\n\n\t--------------> 33 self.env.context",self.env.context)
-
-    #         # self.partner_id=records.partner_id.id
-
-    #     res = super().default_get(fields)
-    #     return res
-        
-    
-    
     def action_confirm(self):
+        res= super().action_confirm()
         if self.sh_doctor_id:
             if self.sh_doctor_id.doctor_commission_type=='by_patient':
-            
-            # if self.sh_doctor_id.commission_type_id.name=='By Patient':
-                
                 vals={
                     'date':datetime.today(),
                     'sh_so_id':self.id,
                     'patient_id':self.partner_id.id,
+                    'sh_doctor_id':self.sh_doctor_id.id,
                     'sh_so_amount':self.amount_untaxed,
                     'doctor_commission_type':self.sh_doctor_id.doctor_commission_type,
                     'commission_rate':self.sh_doctor_id.commission_percent,
-                    'dr_commission':self.sh_doctor_id.sh_amount
-                    
+                    'dr_commission':self.sh_doctor_id.sh_amount    
                 }
             if self.sh_doctor_id.doctor_commission_type=='by_amount':
                 ans=(self.sh_doctor_id.commission_percent/100)*self.amount_untaxed
@@ -61,90 +38,30 @@ class ShPharmacySale(models.Model):
                     'date':datetime.today(),
                     'sh_so_id':self.id,
                     'patient_id':self.partner_id.id,
+                    'sh_doctor_id':self.sh_doctor_id.id,
                     'sh_so_amount':self.amount_untaxed,
                     'doctor_commission_type':self.sh_doctor_id.doctor_commission_type,
                     'commission_rate':self.sh_doctor_id.commission_percent,
-                    'dr_commission':ans
-                    
+                    'dr_commission':ans    
                 }
             
             self.sh_doctor_id.dr_commission_ids=[(0,0,vals)]
-        return super().action_confirm()
+        print(f"\n\n\n\t--------------> 75 self.picking_ids.move_ids.lot_ids",self.picking_ids.move_ids.lot_ids)
+        self.order_line.lot_ids = self.picking_ids.move_ids.lot_ids.ids
+        return res
     
 
     def action_cancel(self):
-
-        
         answer=self.env['sh.doctor.commission'].search([('sh_so_id','=',self.id)])
         print(f"\n\n\n\t--------------> 59 answer",answer)
         
         for record in answer:
             self.sh_doctor_id.dr_commission_ids=[(2,record.id)]
-
         return super().action_cancel()
 
 
     
-    
-    # def split_sale_order(self):
-    #     print(f"\n\n\n\t--------------> 13 ","Split function called")
-    #     print(f"\n\n\n\t--------------> 69 self.order_line",self.order_line.read())
-
-    #     order_lines_data = []
-    #     for record in self.order_line:
-    #         if record.is_selected:
-    #             order_lines_data.append((0, 0, {
-    #                 'product_id': record.product_id.id,
-    #                 'product_uom_qty': record.product_uom_qty,
-    #                 'product_uom': record.product_uom.id, 
-    #                 'price_unit': record.price_unit,
-    #                 'name': record.name,
-    #                 # 'tax_id': [(6, 0, record.tax_id.ids)]
-    #             }))
-                
-    #             order_lines_data.append(record.product_id.id)
-            
-    #         print(f"\n\n\n\t--------------> 85 record.product_id.id",record.product_id.id)
-    #     print(f"\n\n\n\t--------------> 26 order_lines_data",order_lines_data)
-    #     return {
-    #             'type': 'ir.actions.act_window',
-    #             'name': 'Split Sale Order',
-    #             'view_mode': 'form',
-    #             'res_model': 'sale.order',
-    #             'target': 'new',
-    #             'context': {
-    #                 'default_partner_id': self.partner_id.id,
-    #                 # 'default_order_line.ids':[(4,0,order_lines_data)],
-
-    #                 'default_order_line':order_lines_data
-                    
-                    
-                    
-    #                 # 'default_order_line': [{'product_id':record.product_id.id,'product_uom_qty': record.product_uom_qty,
-    #                 # 'product_uom': record.product_uom.id, 
-    #                 # 'price_unit': record.price_unit,
-       
-    #                 # }],
-    #             #     # 'default_state': 'draft',
-    #             #     # 'default_origin': self.name,
-    #             }
-    #         }
-    
-    
-    
-    
-    
     def split_sale_order(self):
-        # print(f"\n\n\n\t--------------> 13 ","Split function called")
-        # print(f"\n\n\n\t--------------> 69 self.order_line",self.order_line.read())
-
-        # order_lines_data = []
-        # for record in self.order_line:
-        #     if record.is_selected:
-        #         order_lines_data.append(record.product_id.id)
-            
-        #         print(f"\n\n\n\t--------------> 85 record.product_id.id",record.product_id.id)
-        # print(f"\n\n\n\t--------------> 26 order_lines_data",order_lines_data)
         self.is_splitted=True
         return {
                 'type': 'ir.actions.act_window',
@@ -153,28 +70,11 @@ class ShPharmacySale(models.Model):
                 'res_model': 'sale.order',
                 'target': 'new',
                 'context': {
-                    # 'default_partner_id': self.partner_id.id,
-                    # 'default_is_splitted':True,
-                    # 'default_order_line':order_lines_data
-
+                 
                 }
             }
     
-    
-    
-    
-    
 
-            
-    
-
-
-    
-    
-    
-    
-    
-        
     @api.onchange('order_line')
     def check_narco(self):
         for record in self.order_line:
@@ -183,10 +83,7 @@ class ShPharmacySale(models.Model):
                 self.is_narcotics=True
             else:
                 self.is_narcotics=False
-            
-            # record.sh_lot_no=self.order_line.move_ids.order_line.lot_id.name
-            
-        
+          
     @api.onchange('partner_id')
     def customer_allergies(self):
         if self.partner_id:
@@ -195,51 +92,45 @@ class ShPharmacySale(models.Model):
             self.sh_customer_allergy_ids=[(6,0,self.partner_id.sh_allergies_ids.ids)]
 
 
+    @api.onchange("order_line")
+    def find_lot_sn(self):
+        for rec in self:
+            for i in rec.order_line:
+                rec_lot = self.env['stock.quant'].search([('product_id.id','=',i.product_id.id)])
+                print(f"\n\n\n\t--------------> 29 rec_lot",rec_lot)
+                lots_list =[]
+                current_product_qty = i.product_uom_qty
+                for j in rec_lot:
+                    if j.available_quantity > 0 :
+                        lots_list.append(j.lot_id.id)
+                        current_product_qty = j.available_quantity - abs(current_product_qty)
+                        if current_product_qty >= 0:
+                            print(f"\n\n\n\t--------------> 41 lots_list",lots_list)
+                            i.lot_ids = lots_list
+                            break 
         
         
 class ShPharmacyOrderLine(models.Model):
     _inherit="sale.order.line"
     
     is_selected=fields.Boolean()
-    # data=fields.Char()
     sh_lot_no=fields.Char(string="Lot No")
     sh_expiration_date=fields.Datetime()
-    # lot_id = fields.Many2one('stock.production.lot', string='Lot/Serial Number', readonly=True)
     split_id=fields.Many2one('sh.split.sale.order')
     lot_ids=fields.Many2many('stock.lot')
-    
-    # @api.onchange('product_id')
-    # def check_lot(self):
-    #     for record in self:
-    #         print(f"\n\n\n\t--------------> 125 ",record.product_id.name)
-    #         lot = self.env['stock.move.line'].search([
-    #                 ('product_id', '=', record.product_id.id),
-                   
-    #             ],limit=1)
-    #         print(f"\n\n\n\t--------------> 149 lot",lot)
-    #         self.sh_lot_no=lot.lot_name
-    #         self.sh_expiration_date=lot.expiration_date
-    #         # self.lot_id=lot.id
-    
-    
-    
-    @api.onchange('product_id')
-    def _onchange_product_id_set_lot_ids(self):
-        for record in self:
-            record.lot_ids = [(5, 0, 0)]  # Clear current selection
 
-            if record.product_id:
 
-                lots = self.env['stock.quant'].search([
-                    ('product_id', '=', record.product_id.id),
-                    ('lot_id', '!=', False),
-                    ('quantity', '>', 0) 
-                ])
+class ShStockLot(models.Model):
+    _inherit = 'stock.lot'
 
-             
-                lot_set = lots.mapped('lot_id')
-                record.lot_ids = [(6, 0, lot_set.ids)]
-                # line.sh_expiration_date=
+    @api.depends('name')
+    def _compute_display_name(self):
+        for template in self:
+            template.display_name = False if not template.name else (
+                '{}{}'.format(
+                     template.name ,'[%s] ' % template.expiration_date if template.expiration_date else ''
+                ))
+    
 
 
 

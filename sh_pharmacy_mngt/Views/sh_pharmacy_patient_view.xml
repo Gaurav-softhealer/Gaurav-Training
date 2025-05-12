@@ -7,8 +7,6 @@
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="base.view_partner_form" />
         <field name="arch" type="xml">
-
-
             <xpath expr="//field[@name='vat']" position="after">
 
                 <field name="sh_aadhar_no" invisible="is_patient==False "/>
@@ -24,8 +22,6 @@
 
     <!-- list view -->
 
-
-
         <record id="sh_pharmacy_patient_list_view" model="ir.ui.view">
             <field name="name">Patient</field>
             <field name="model">res.partner</field>
@@ -39,6 +35,7 @@
         </record>
 
 
+        <!-- kanban view -->
 
         <record id="sh_pharmacy_patient_kanban_view" model="ir.ui.view">
             <field name="name">Doctor</field>

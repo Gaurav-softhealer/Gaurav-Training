@@ -3,10 +3,6 @@ from odoo import fields,models,api
 class PharmacyDoctor(models.Model):
     _inherit="res.partner"
     
-    # company_type=fields.Selection(
-    #     selection_add=[('person', 'Patient'),('doctor', 'Doctor')],
-    # )
-    
     dr_commission_ids=fields.One2many('sh.doctor.commission','doctor_id')
     
     gender=fields.Selection([
@@ -42,30 +38,5 @@ class PharmacyDoctor(models.Model):
                 total+=i.dr_commission
             record.commission_total=total
     
-    
-    # @api.onchange('company_type')
-    # def check_doctor_patient(self):
-    #     if self.company_type=='doctor':
-    #         self.is_doctor=True
-    #     elif self.company_type=='person':
-    #         self.is_doctor=False
-    
-    # def _write_company_type(self):
-    #     for partner in self:
-    #         partner.is_company = partner.company_type == 'company'
-    #         partner.is_doctor=partner.company_type=='doctor'
-
-            
-    # @api.depends('is_company')
-    # def _compute_company_type(self):
-    #     for partner in self:
-    #         if partner.is_company:
-    #             partner.company_type = 'company'
-    #         elif partner.is_doctor:
-    #             partner.company_type='doctor'
-    #         else:
-    #             partner.company_type='person'
-            
-
     
 

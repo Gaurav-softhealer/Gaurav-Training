@@ -12,14 +12,7 @@ class ShDoctorCommission(models.Model):
     doctor_commission_type=fields.Char(string="Commission Type")
     commission_rate=fields.Float(string="Commission Rate (%)")
     dr_commission=fields.Integer()
-    # commission_total=fields.Float(compute="cal_total_commission")
+    
     
     doctor_id=fields.Many2one('res.partner')
-    
-    # @api.depends('dr_commission')
-    # def cal_total_commission(self):
-    #     total=0
-    #     for record in self:
-    #         for i in record.dr_commission:
-    #             total+=i
-    #         self.commission_total=total
+    sh_doctor_id=fields.Many2one('res.partner')

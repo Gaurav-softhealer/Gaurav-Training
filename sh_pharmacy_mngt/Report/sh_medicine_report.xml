@@ -1,0 +1,95 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+
+    <template id="sh_medicine_report">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <div style="margin: 20px;">
+                    <h2 style="text-align: center; margin-bottom: 20px;">Medicine Report</h2>
+                    <table style="width: 100%; border-collapse: collapse; font-size: 14px; border: 1px solid #000;">
+                        <thead>
+                            <tr style="background-color: #f2f2f2; text-align: left;">
+                                <th style="border: 1px solid #000; padding: 8px;">Product</th>
+                                <th style="border: 1px solid #000; padding: 8px;">Category</th>
+                                <th style="border: 1px solid #000; padding: 8px;">Sold Qty</th>
+                                <th style="border: 1px solid #000; padding: 8px;">Unit Price</th>
+                                <th style="border: 1px solid #000; padding: 8px;">Total Sale</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="o.medicine_ids" t-as="i">
+                                <tr>
+                                    <td style="border: 1px solid #000; padding: 8px;">
+                                        <span t-field="i.product_id"/>
+                                    </td>
+                                    <td style="border: 1px solid #000; padding: 8px;">
+                                        <span t-field="i.category_id"/>
+                                    </td>
+                                    <td style="border: 1px solid #000; padding: 8px;">
+                                        <span t-field="i.sold_qty"/>
+                                    </td>
+                                    <td style="border: 1px solid #000; padding: 8px;">
+                                        <span t-field="i.unit_price"/>
+                                    </td>
+                                    <td style="border: 1px solid #000; padding: 8px;">
+                                        <span t-field="i.total_sale"/>
+                                    </td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+            </t>
+        </t>
+    </template>
+
+    <record id="action_sh_pharmacy_medicine_report" model="ir.actions.report">
+        <field name="name">Medicine Report</field>
+        <field name="model">sh.report.wizard</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">sh_pharmacy_mngt.sh_medicine_report</field>
+        <field name="report_file">sh_pharmacy_mngt.sh_medicine_report</field>
+        <field name="print_report_name">"Medicine Report"</field>
+        <field name="binding_model_id" ref="model_sh_report_wizard"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <!-- Form view -->
+    <record id="sh_report_medicine_inherit_pharmacy_report" model="ir.ui.view">
+        <field name="name">sh.medicine.wise.view.form.inherit</field>
+        <field name="model">sh.report.wizard</field>
+        <field name="inherit_id" ref="sh_pharmacy_mngt.report_wizard_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='patient_record_ids']" position="after">
+                <group >
+                <field name="category_id_domain" invisible="1"></field>
+                    <field name="category_id" 
+                    invisible='not is_medicine_report'
+                    ></field>
+                    <field name="product_id" invisible='not is_medicine_report' domain="category_id_domain"></field>
+                </group>
+                <field name="medicine_ids" invisible='not is_medicine_report'>
+                    <list editable="bottom">
+                        <field name="product_id"></field>
+                        <field name="category_id"></field>
+                        <field name="sold_qty"></field>
+                        <field name="unit_price"></field>
+                        <field name="total_sale"></field>
+                    </list>
+                </field>
+                <button name="fetch_medicine_records" string="Load" type="object" invisible='not is_medicine_report'/>
+                <footer>
+                    <button string="Export as Xslx" class="btn-primary" type="object" name="export_medicine_xslx" invisible='not is_medicine_report'/>
+                    <button string="Export as Pdf" class="btn-primary" type="action" name="%(action_sh_pharmacy_medicine_report)d" invisible='not is_medicine_report'/>
+                </footer>
+            </xpath>
+        </field>
+    </record>
+    <record id="sh_medicine_report_open_action" model="ir.actions.act_window">
+        <field name="name">medicine report</field>
+        <field name="res_model">sh.report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="context">{'default_is_medicine_report':True}</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

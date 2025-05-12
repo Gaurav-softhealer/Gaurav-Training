@@ -9,7 +9,7 @@ class PharmacyProduct(models.Model):
     
     @api.onchange('categ_id')
     def require_product_form(self):
-        # if self.categ_id.name=='Narcotics' or self.categ_id.name=='Medicine':
+
         if self.categ_id.is_medicine==True:
             self.is_medicine_narcotics=True
         else:
@@ -42,8 +42,26 @@ class PharmacyProduct(models.Model):
                 vals['name']= f"{self.name} ({form_record.name})"
 
         return super().write(vals)
-    
-    
+ 
+    @api.model
+    def name_search(self, name='', args=None, operator='ilike', limit=100):
+        args = args or []
+        if name:
+            new_domain = [
+                '|',
+                ('name', operator, name),
+                 ('sh_ingredients_id.name', operator, name),
+            ]
+            domain = new_domain + args
+        else:
+            domain = args
+        records = self.search_fetch(domain, ['display_name'], limit=limit)
+        list_product =  [(record.id, record.display_name) for record in records.sudo()]
+        res = super().name_search(
+            name=name, args=domain, operator=operator, limit=limit)
+        res+=list_product
+        return res
+
 
 class ShProductCategory(models.Model):
     _inherit="product.category"

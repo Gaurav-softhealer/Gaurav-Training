@@ -1,0 +1,111 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+
+    <template id="sh_expiry_wise_report">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <div style="margin: 20px;">
+
+                    <h2 style="text-align: center; margin-bottom: 20px;">Expiry Wise Report</h2>
+                    
+                    
+                    <table style="width: 100%; border-collapse: collapse; font-size: 14px; border: 1px solid #000;">
+                        <thead>
+                            <tr style="background-color: #f2f2f2; text-align: left;">
+                                <th style="border: 1px solid #000; padding: 8px;">Product</th>
+                                <th style="border: 1px solid #000; padding: 8px;">Lot</th>
+                                <th style="border: 1px solid #000; padding: 8px;">Expiration Date</th>
+                                <th style="border: 1px solid #000; padding: 8px;">Remaining days</th>
+                                <th style="border: 1px solid #000; padding: 8px;">Quantity</th>
+                                <th style="border: 1px solid #000; padding: 8px;">Category</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="o.expiration_record_ids" t-as="i"> 
+                                <!-- <t-set="remaining_days" t-value="(i.alert_date.date() - datetime.date.today()).days"></t-set> -->
+                                <tr>
+                                    <td style="border: 1px solid #000; padding: 8px;"><span t-field="i.product_id"/></td>
+                                    <td style="border: 1px solid #000; padding: 8px;"><span t-field="i.lot_id"/></td>
+                                    <td style="border: 1px solid #000; padding: 8px;"><span t-field="i.expiration_date"/></td>
+                                    <td style="border: 1px solid #000; padding: 8px;">     <t t-set="remaining_days" t-value="(i.alert_date - datetime.datetime.today()).days"/>
+                                        <span><t t-esc="remaining_days"/></span>
+                                         </td>
+                                    <td style="border: 1px solid #000; padding: 8px;"><span t-field="i.product_qty"/></td>
+                                    <td style="border: 1px solid #000; padding: 8px;"><span t-field="i.category_id"/></td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+            </t>
+        </t>
+    </template>
+    
+
+    <record id="expiry_export_pdf_report" model="ir.actions.report">
+        <field name="name">Expiry Product Report</field>
+        <field name="model">sh.report.wizard</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">sh_pharmacy_mngt.sh_expiry_wise_report</field>
+        <field name="report_file">sh_pharmacy_mngt.sh_expiry_wise_report</field>
+        <field name="print_report_name">"ExpiryReport"</field>
+        <field name="binding_model_id" ref="model_sh_report_wizard"/>
+        <field name="binding_type">report</field>
+    </record>
+
+
+
+    <!-- Form view -->
+    <record id="sh_report_expiry_wise_inherit_pharmacy_report" model="ir.ui.view">
+        <field name="name">sh.expiry.wise.view.form.inherit</field>
+        <field name="model">sh.report.wizard</field>
+        <field name="inherit_id" ref="sh_pharmacy_mngt.report_wizard_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='patient_record_ids']" position="before">
+                <sheet>
+                    <group>
+                        <field name="category_id_domain" invisible="1"/>
+                        <field name="lot_domain" invisible="1"/>
+                        <field name="category_id" invisible='not is_expiry_wise' />
+                        <field name="product_id" invisible='not is_expiry_wise' domain="category_id_domain"/>
+                        <field name="lot_no" invisible='not is_expiry_wise' domain="lot_domain"/>
+                    </group>
+                    <field name="expiration_record_ids" invisible='not is_expiry_wise'>
+                        <list>
+                            <field name="product_id" />
+                            <field name="lot_id" />
+                            <field name="expiration_date" />
+                            <field name="alert_date" widget="remaining_days"/>
+                            <field name="product_qty" />
+                            <field name="category_id" />
+                            <!-- <field name="remaining_days" /> -->
+                        </list>
+                    </field>
+                   
+                </sheet>
+                <button name="load_expiry_record" string="Load Expiry" type="object"  invisible='not is_expiry_wise'/>
+            </xpath>
+
+            <xpath expr="//button[@name='print_record_exel']" position="after">
+                <button name="expiry_export_exel" type="object" string="Exel Expiry" invisible='not is_expiry_wise'></button>
+                <button name="%(expiry_export_pdf_report)d" type="action" string="PDF Expiry" invisible='not is_expiry_wise'></button>
+            </xpath>
+        </field>
+    </record>
+
+
+
+    <!-- action -->
+    <record id="sh_expiry_wise_report_open_action" model="ir.actions.act_window">
+        <field name="name">Expiry wise report</field>
+        <field name="res_model">sh.report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="context">{'default_is_expiry_wise':True}</field>
+        <field name="target">new</field>
+    </record>
+
+
+
+
+    
+</odoo>

@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <!-- Form view -->
+    <record id="sh_report_doctor_wise_inherit_pharmacy_report" model="ir.ui.view">
+        <field name="name">sh.doctor.wise.view.form.inherit</field>
+        <field name="model">sh.report.wizard</field>
+        <field name="inherit_id" ref="sh_pharmacy_mngt.report_wizard_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='patient_id']" position="after">
+                <field name="doctor_id" invisible='not is_doctor_wise'></field>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- action -->
+    <record id="sh_doctor_wise_report_open_action" model="ir.actions.act_window">
+        <field name="name">Doctor wise report</field>
+        <field name="res_model">sh.report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="context">{'default_is_doctor_wise':True}</field>
+        <field name="target">new</field>
+    </record>
+</odoo>
