@@ -14,6 +14,7 @@ class FsnReportData(models.Model):
     product_id=fields.Many2one('product.product')
     category_id=fields.Many2one('product.category')
     stock_qty=fields.Float()
+    forcast_qty=fields.Float()
     qty_sold=fields.Float()
     sale_rate=fields.Selection([
         ('slow','Slow'),
@@ -30,6 +31,7 @@ class FsnReport(models.TransientModel):
 
     def load_fsn_record(self):
         print(f"\n\n\n\t--------------> 32 ", "fsn record called")
+        self.fsn_records_ids=[(5,0,0)]
 
         fsn_record=self.env['sale.report'].search([('date','>=',self.start),('date','<=',self.stop)])
 
@@ -45,6 +47,8 @@ class FsnReport(models.TransientModel):
                 'product_id': record.product_id.id,
                 'category_id': record.product_id.categ_id.id,
                 'qty_sold': record.product_uom_qty,
+                'stock_qty':record.product_id.qty_available,
+                'forcast_qty':record.product_id.virtual_available,
                 'sale_rate': status,
             }
 
@@ -83,7 +87,7 @@ class FsnReport(models.TransientModel):
         }))
 
         header = [
-            'Product', 'Category', 'Quantity Sold','Sale Rate',
+            'Product', 'Category', 'Quantity Sold','Onhand quantity','Forcast Quantity','Sale Rate',
         ]
         header_format = workbook.add_format({'bold': True, 'bg_color': '#D3D3D3'})
         for col, title in enumerate(header):
@@ -115,6 +119,8 @@ class FsnReport(models.TransientModel):
                 rec.product_id.name if rec.product_id else '',
                 rec.category_id.name if rec.category_id else '',
                 rec.qty_sold if rec.qty_sold is not None else '',
+                rec.stock_qty if rec.stock_qty is not None else '',
+                rec.forcast_qty if rec.forcast_qty is not None else '',
                 rec.sale_rate if rec.sale_rate is not None else '',
 
 

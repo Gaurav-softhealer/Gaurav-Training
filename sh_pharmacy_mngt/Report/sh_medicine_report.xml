@@ -63,9 +63,7 @@
             <xpath expr="//field[@name='patient_record_ids']" position="after">
                 <group >
                 <field name="category_id_domain" invisible="1"></field>
-                    <field name="category_id" 
-                    invisible='not is_medicine_report'
-                    ></field>
+                    <field name="category_id" invisible='not is_medicine_report'></field>
                     <field name="product_id" invisible='not is_medicine_report' domain="category_id_domain"></field>
                 </group>
                 <field name="medicine_ids" invisible='not is_medicine_report'>

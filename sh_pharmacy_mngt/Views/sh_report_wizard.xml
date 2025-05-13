@@ -9,12 +9,14 @@
             <form string="">
                 <sheet>
                     <group>
+                        <field name="patient_domain" invisible="1" />
                         <field name="stop_date" invisible="1"/>
                         <field name="stop" invisible="1"/>
                         <field name="start" widget="daterange" options="{'end_date_field': 'stop'}" invisible="is_medicine_report" required="1"/>
-                        <field name="age" invisible='not is_patient_wise'/>
+                        <!-- <field name="age" invisible='not is_patient_wise'/> -->
+                        <field name="age_selection" invisible='not is_patient_wise'/>
                         <field name="sh_gender" invisible='not is_patient_wise' />
-                        <field name="patient_id" invisible='not is_patient_wise' domain="[('gender', '=', sh_gender)]"/>
+                        <field name="patient_id" invisible='not is_patient_wise' domain="patient_domain"/>
                     </group>
                     <field name="patient_record_ids" invisible="not is_patient_wise and not is_doctor_wise">
                         <list>

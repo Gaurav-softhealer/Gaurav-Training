@@ -14,7 +14,7 @@ class ReportWizard(models.TransientModel):
     
 
     
-    
+    patient_domain = fields.Char()
     start = fields.Datetime(
         'Start',  tracking=True,
         help="Start date of an event, without time for full days events")
@@ -40,17 +40,33 @@ class ReportWizard(models.TransientModel):
     ],string="Gender")
     
     age=fields.Integer()
+    age_selection=fields.Selection([
+        ("child","1-12"),
+        ('youth',"13-18"),
+        ('Adult',"19-40"),
+        ('Senior',"41-200")
+    ])
 
     def load_data(self,record_ids):
         print(f"\n\n\n\t--------------> 36 ","load data")
         if self.is_patient_wise:
-            if self.age:
-                patient_record=self.env['sale.order'].search([('partner_id.sh_age','=',self.age),('date_order','>=',self.start),('date_order','<=',self.stop)])
+            # if self.age:
+            #     patient_record=self.env['sale.order'].search([('partner_id.sh_age','=',self.age),('date_order','>=',self.start),('date_order','<=',self.stop)])
+            if self.age_selection:
+                if self.age_selection == 'child':
+                    patient_record=self.env['sale.order'].search([('partner_id.sh_age','>=',1),('partner_id.sh_age','<=',13),('date_order','>=',self.start),('date_order','<=',self.stop)])
+                elif self.age_selection == 'youth':
+                    patient_record=self.env['sale.order'].search([('partner_id.sh_age','>=',14),('partner_id.sh_age','<=',18),('date_order','>=',self.start),('date_order','<=',self.stop)])  
+                elif self.age_selection == 'Adult':
+                    patient_record=self.env['sale.order'].search([('partner_id.sh_age','>=',19),('partner_id.sh_age','<=',40),('date_order','>=',self.start),('date_order','<=',self.stop)])
+                elif self.age_selection == 'Senior':
+                    patient_record=self.env['sale.order'].search([('partner_id.sh_age','>=',41),('partner_id.sh_age','<=',200),('date_order','>=',self.start),('date_order','<=',self.stop)])
+
             if self.sh_gender:
                 patient_record=self.env['sale.order'].search([('partner_id.gender','=',self.sh_gender),('date_order','>=',self.start),('date_order','<=',self.stop)])
             if self.patient_id:
                 patient_record=self.env['sale.order'].search([('partner_id','=',self.patient_id.id),('date_order','>=',self.start),('date_order','<=',self.stop)])
-            if not self.patient_id and not self.sh_gender and not self.age:
+            if not self.patient_id and not self.sh_gender and not self.age_selection:
                 patient_record=self.env['sale.order'].search([('date_order','>=',self.start),('date_order','<=',self.stop)])
                 
             print(f"\n\n\n\t--------------> 38 patient_record",patient_record)
@@ -67,14 +83,24 @@ class ReportWizard(models.TransientModel):
     
     @api.onchange('patient_id')
     def change_patient(self):
-        self.sh_gender=self.patient_id.gender
+        if self.patient_id.gender:
+            self.sh_gender=self.patient_id.gender
+        if self.patient_id.sh_age>=0 and self.patient_id.sh_age<=12:
+            self.age_selection='child'
+        if self.patient_id.sh_age>=13 and self.patient_id.sh_age<=18:
+            self.age_selection='Adult'
+        if self.patient_id.sh_age>=19 and self.patient_id.sh_age<=40:
+            self.age_selection='youth'
+        if self.patient_id.sh_age>=41 and self.patient_id.sh_age<=200:
+            self.age_selection='Senior'
         
-    # @api.onchange('sh_gender')
-    # def change_gender(self):
-    #     if self.sh_gender:
-    #         self.patient_domain="[('gender','=',"+str(self.sh_gender)+")]"
-    #     else:
-    #         self.patient_domain = "[(1,'=',1)]"
+    @api.onchange('sh_gender')
+    def change_gender(self):
+        print(f"\n\n\n\t--------------> 99 ","gender onchange called")
+        # if self.sh_gender:
+        #     self.patient_domain="[('gender','=',"+str(self.sh_gender)+")]"
+        # else:
+        #     self.patient_domain = "[(1,'=',1)]"
     
        
     def print_record_exel(self):

@@ -1,39 +1,38 @@
 <?xml version='1.0' encoding='utf-8'?>
 <odoo>
 
-    <template id="sh_commission_wise_report">
+    <template id="sh_cash_drawer_report">
         <t t-call="web.html_container">
             <t t-foreach="docs" t-as="o">
                 <div style="margin: 20px;">
 
-                    <h2 style="text-align: center; margin-bottom: 20px;">Commission Wise Report</h2>
+                    <h2 style="text-align: center; margin-bottom: 20px;">Cash Drawer Report</h2>
                     
                     
                     <table style="width: 100%; border-collapse: collapse; font-size: 14px; border: 1px solid #000;">
                         <thead>
                             <tr style="background-color: #f2f2f2; text-align: left;">
                                 <th style="border: 1px solid #000; padding: 8px;">Date</th>
-                                <th style="border: 1px solid #000; padding: 8px;">Order No</th>
-                                <th style="border: 1px solid #000; padding: 8px;">Patient</th>
-                                <th style="border: 1px solid #000; padding: 8px;">Doctor</th>
-                                <th style="border: 1px solid #000; padding: 8px;">Amount</th>
-                                <th style="border: 1px solid #000; padding: 8px;">Commission Type</th>
-                                <th style="border: 1px solid #000; padding: 8px;">Commission Rate</th>
-                                <th style="border: 1px solid #000; padding: 8px;">Commission Amount</th>
+                                <th style="border: 1px solid #000; padding: 8px;">Cashier</th>
+                                <th style="border: 1px solid #000; padding: 8px;">Opening Balance</th>
+                                <th style="border: 1px solid #000; padding: 8px;">Closing Balance</th>
+                                <th style="border: 1px solid #000; padding: 8px;">Cash Amount</th>
+                                <th style="border: 1px solid #000; padding: 8px;">Card Amount</th>
+                                <th style="border: 1px solid #000; padding: 8px;">UPI Amount</th>
+
                             </tr>
                         </thead>
                         <tbody>
-                            <t t-foreach="o.dr_commission_ids" t-as="i"> 
+                            <t t-foreach="o.cash_drawer_records_ids" t-as="i"> 
                                 <!-- <t-set="remaining_days" t-value="(i.alert_date.date() - datetime.date.today()).days"></t-set> -->
                                 <tr>
                                     <td style="border: 1px solid #000; padding: 8px;"><span t-field="i.date"/></td>
-                                    <td style="border: 1px solid #000; padding: 8px;"><span t-field="i.sh_so_id"/></td>
-                                    <td style="border: 1px solid #000; padding: 8px;"><span t-field="i.patient_id"/></td>
-                                    <td style="border: 1px solid #000; padding: 8px;"><span t-field="i.sh_doctor_id"/></td>
-                                    <td style="border: 1px solid #000; padding: 8px;"><span t-field="i.sh_so_amount"/></td>
-                                    <td style="border: 1px solid #000; padding: 8px;"><span t-field="i.doctor_commission_type"/></td>
-                                    <td style="border: 1px solid #000; padding: 8px;"><span t-field="i.commission_rate"/></td>
-                                    <td style="border: 1px solid #000; padding: 8px;"><span t-field="i.dr_commission"/></td>
+                                    <td style="border: 1px solid #000; padding: 8px;"><span t-field="i.cashier_id"/></td>
+                                    <td style="border: 1px solid #000; padding: 8px;"><span t-field="i.opening_bal"/></td>
+                                    <td style="border: 1px solid #000; padding: 8px;"><span t-field="i.closing_bal"/></td>
+                                    <td style="border: 1px solid #000; padding: 8px;"><span t-field="i.cash_amount"/></td>
+                                    <td style="border: 1px solid #000; padding: 8px;"><span t-field="i.card_amount"/></td>
+                                    <td style="border: 1px solid #000; padding: 8px;"><span t-field="i.upi_amount"/></td>
                                 </tr>
                             </t>
                         </tbody>
@@ -44,13 +43,13 @@
     </template>
     
 
-    <record id="commission_export_pdf_report" model="ir.actions.report">
-        <field name="name">Doctor Commission Report</field>
+    <record id="cash_drawer_export_pdf_report" model="ir.actions.report">
+        <field name="name">Cash drawer Report</field>
         <field name="model">sh.report.wizard</field>
         <field name="report_type">qweb-pdf</field>
-        <field name="report_name">sh_pharmacy_mngt.sh_commission_wise_report</field>
-        <field name="report_file">sh_pharmacy_mngt.sh_commission_wise_report</field>
-        <field name="print_report_name">"Commission Report"</field>
+        <field name="report_name">sh_pharmacy_mngt.sh_cash_drawer_report</field>
+        <field name="report_file">sh_pharmacy_mngt.sh_cash_drawer_report</field>
+        <field name="print_report_name">"Cash drawer Report"</field>
         <field name="binding_model_id" ref="model_sh_report_wizard"/>
         <field name="binding_type">report</field>
     </record>
@@ -74,8 +73,9 @@
                                 <field name="cashier_id" />
                                 <field name="opening_bal" />
                                 <field name="closing_bal"/>
-                                <field name="payment_method" />
-                                <field name="total" />
+                                <field name="cash_amount" />
+                                <field name="card_amount" />
+                                <field name="upi_amount" />
 
                                 
                             </list>
@@ -87,7 +87,7 @@
     
                 <xpath expr="//button[@name='print_record_exel']" position="after">
                     <button name="cash_drawer_export_exel" type="object" string="Exel Cash Drawer" invisible='not is_cash_drawer'></button>
-                    <!-- <button name="%(commission_export_pdf_report)d" type="action" string="PDF Cash Drawer" invisible='not is_cash_drawer'></button> -->
+                    <button name="%(cash_drawer_export_pdf_report)d" type="action" string="PDF Cash Drawer" invisible='not is_cash_drawer'></button>
                 </xpath>
             </field>
         </record>

@@ -15,6 +15,7 @@ class CommissionReport(models.TransientModel):
     
     def load_commission_record(self):
         print(f"\n\n\n\t--------------> 11 ","load commission button called")
+        self.expiration_record_ids=[(5,0,0)]
         if self.dr_id:
             commission_record=self.env['sh.doctor.commission'].search([('date','>=',self.start),('date','<=',self.stop),('sh_doctor_id','=',self.dr_id.id)])
         else:

@@ -3,7 +3,6 @@ import io
 import base64
 from odoo.exceptions import UserError
 import xlsxwriter
-# import xlwt
 from datetime import datetime,date
 
 class ExpiryReport(models.TransientModel):
@@ -15,37 +14,36 @@ class ExpiryReport(models.TransientModel):
     lot_id=fields.Char()
     lot_no=fields.Many2one('stock.lot')
     category_id_domain=fields.Char()
-    lot_domain=fields.Char()
+    lot_domain=fields.Char(default="[(1,'=',1)]")
     expiration_record_ids=fields.Many2many('sh.expiry.report')
     
     def load_expiry_record(self):
         print(f"\n\n\n\t--------------> 10 ","expiry load called")
         self.expiration_record_ids=[(5,0,0)]
-        # print(f"\n\n\n\t--------------> 12 ",expiry_record)
-        # record_ids=self.expiration_record_ids.ids
-        # self.expiration_record_ids=[(6,0,record_ids)]
+
         if self.category_id:
-            expiry_record=self.env['stock.lot'].search([('expiration_date','>=',self.start),('expiration_date','<=',self.stop),('product_id.categ_id','=',self.category_id.id)])
+            expiry_records=self.env['stock.quant'].search([('expiration_date','>=',self.start),('expiration_date','<=',self.stop),('product_id.categ_id','=',self.category_id.id),('location_id.usage', '=', 'internal')
+])
         if self.product_id:
-            expiry_record=self.env['stock.lot'].search([('expiration_date','>=',self.start),('expiration_date','<=',self.stop),('product_id','=',self.product_id.id),])
+            expiry_records=self.env['stock.quant'].search([('expiration_date','>=',self.start),('expiration_date','<=',self.stop),('product_id','=',self.product_id.id),('location_id.usage', '=', 'internal')
+])
         if self.lot_no:
-            expiry_record=self.env['stock.lot'].search([('expiration_date','>=',self.start),('expiration_date','<=',self.stop),('name','=',self.lot_no.name)])
+            expiry_records=self.env['stock.quant'].search([('expiration_date','>=',self.start),('expiration_date','<=',self.stop),('lot_id','=',self.lot_no.name),('location_id.usage', '=', 'internal')
+])
         if not self.product_id  and not self.lot_no and not self.category_id:
-            expiry_record=self.env['stock.lot'].search([('expiration_date','>=',self.start),('expiration_date','<=',self.stop)])
+            expiry_records=self.env['stock.quant'].search([('expiration_date','>=',self.start),('expiration_date','<=',self.stop),('location_id.usage', '=', 'internal')
+])
         
-        for record in expiry_record:
-            # quantity_record=self.env['stock.quant'].search([('product_id', '=', record.product_id.id),('lot_id', '=', record.id),])
-            # print(f"\n\n\n\t--------------> 38 quantity_record",quantity_record)
-            # for i in quantity_record:
+        for record in expiry_records:
+
                 vals={
                     'product_id':record.product_id.id,
-                    'lot_id':record.name,
+                    'expiry_lot_id':record.lot_id.id,
                     'expiration_date':record.expiration_date,
-                    'alert_date':record.alert_date,
-                    # 'product_qty':i.available_quantity,
-                    'product_qty':record.product_qty,
+                    'alert_days':(record.expiration_date - datetime.today()).days,
+                    'product_qty':record.available_quantity,
                     'category_id':record.product_id.categ_id.id,
-                    # 'remaining_days':record.alert_date,
+
                 }
             
                 self.expiration_record_ids=[(0,0,vals)]
@@ -60,8 +58,9 @@ class ExpiryReport(models.TransientModel):
         }
     
     @api.onchange('product_id')
-    def change_product(self):
+    def change_product2(self):
         self.category_id=self.product_id.categ_id.id
+        print(f"\n\n\n\t--------------> 65 nnnnnn",)
         if self.product_id:
             self.lot_domain="[('product_id','=',"+str(self.product_id.id)+")]"
         else:
@@ -70,7 +69,7 @@ class ExpiryReport(models.TransientModel):
     
     
     @api.onchange('category_id')
-    def change_category(self):
+    def change_category2(self):
         if self.category_id:
             self.category_id_domain = "[('categ_id','=',"+str(self.category_id.id)+")]"
         else:
@@ -78,12 +77,13 @@ class ExpiryReport(models.TransientModel):
      
      
     @api.onchange('lot_no')
-    def change_lot(self):
-        self.product_id=self.lot_no.product_id.id
+    def change_lot2(self):
+        if self.lot_no:
+            self.product_id=self.lot_no.product_id.id
 
      
     def expiry_export_exel(self):
-        # workbook = xlwt.Workbook(encoding='utf-8')
+
 
         
         output = io.BytesIO()
@@ -118,33 +118,17 @@ class ExpiryReport(models.TransientModel):
         
         total_amount =0
         for rec in self.expiration_record_ids:
-            if not rec.product_id or not rec.lot_id or not rec.expiration_date or not rec.alert_date or not rec.product_qty or not rec.category_id :
-                continue
 
-
-            # if rec.state == 'cancel':
-            #     values = [
-            #         str(count),
-            #         rec.name,
-            #         '', '', '', '', '',
-            #         '-',
-            #         'CANCELLED ',
-            #         '', '', '', '', '', '', '', '-', ''
-            #     ]
-            # else:
-                
 
             values = [
                 rec.product_id.name if rec.product_id else '',
-                rec.lot_id or '',
+                rec.expiry_lot_id.name or '',
                 rec.expiration_date.strftime("%d/%m/%Y") if rec.expiration_date else '',
-                (rec.alert_date-datetime.today() ).days if rec.expiration_date else '',
+                (rec.expiration_date-datetime.today() ).days if rec.expiration_date else '',
                 rec.product_qty if rec.product_qty is not None else '',
                 rec.category_id.name if rec.category_id else '',
             ]
-                # total_amount +=rec.amount_total
 
-            # Write values and update column widths
             for col, val in enumerate(values):
                 worksheet.write(row, col, val)
                 col_widths[col] = max(col_widths[col], len(str(val)))
@@ -153,11 +137,6 @@ class ExpiryReport(models.TransientModel):
             row += 1
             count += 1
 
-        # worksheet.write(row, 3, 'TOTAL', bold_style)
-        # worksheet.write(row, 4, total_amount, num_format)
- 
-
-        # Apply final column widths
         for col, width in enumerate(col_widths):
             worksheet.set_column(col, col, width + 2)  # +2 for padding
 
@@ -192,4 +171,7 @@ class ExpiryReport(models.TransientModel):
                 'target': 'new'}
         
         
+
+
+
 

@@ -9,6 +9,7 @@ class ExpiryWise(models.Model):
     lot_id=fields.Char()
     expiration_date=fields.Datetime()
     alert_date=fields.Datetime()
+    alert_days=fields.Integer()
     product_qty=fields.Float()
     category_id=fields.Many2one('product.category')
     remaining_days=fields.Char()

@@ -25,9 +25,9 @@
                                 <!-- <t-set="remaining_days" t-value="(i.alert_date.date() - datetime.date.today()).days"></t-set> -->
                                 <tr>
                                     <td style="border: 1px solid #000; padding: 8px;"><span t-field="i.product_id"/></td>
-                                    <td style="border: 1px solid #000; padding: 8px;"><span t-field="i.lot_id"/></td>
+                                    <td style="border: 1px solid #000; padding: 8px;"><span t-field="i.expiry_lot_id"/></td>
                                     <td style="border: 1px solid #000; padding: 8px;"><span t-field="i.expiration_date"/></td>
-                                    <td style="border: 1px solid #000; padding: 8px;">     <t t-set="remaining_days" t-value="(i.alert_date - datetime.datetime.today()).days"/>
+                                    <td style="border: 1px solid #000; padding: 8px;">     <t t-set="remaining_days" t-value="(i.expiration_date - datetime.datetime.today()).days"/>
                                         <span><t t-esc="remaining_days"/></span>
                                          </td>
                                     <td style="border: 1px solid #000; padding: 8px;"><span t-field="i.product_qty"/></td>
@@ -73,9 +73,9 @@
                     <field name="expiration_record_ids" invisible='not is_expiry_wise'>
                         <list>
                             <field name="product_id" />
-                            <field name="lot_id" />
+                            <field name="expiry_lot_id" />
                             <field name="expiration_date" />
-                            <field name="alert_date" widget="remaining_days"/>
+                            <field name="alert_days" />
                             <field name="product_qty" />
                             <field name="category_id" />
                             <!-- <field name="remaining_days" /> -->
