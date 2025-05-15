@@ -62,7 +62,7 @@
             <field name="model">sh.report.wizard</field>
             <field name="inherit_id" ref="sh_pharmacy_mngt.report_wizard_view_form"/>
             <field name="arch" type="xml">
-                <xpath expr="//field[@name='patient_record_ids']" position="after">
+                <xpath expr="//field[@name='patient_record_ids']" position="before">
                     <sheet>
                         <group>
                             <field name="dr_id" invisible='not is_commission'/>

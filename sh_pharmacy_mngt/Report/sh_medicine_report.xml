@@ -60,11 +60,11 @@
         <field name="model">sh.report.wizard</field>
         <field name="inherit_id" ref="sh_pharmacy_mngt.report_wizard_view_form"/>
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='patient_record_ids']" position="after">
+            <xpath expr="//field[@name='patient_record_ids']" position="before">
                 <group >
                 <field name="category_id_domain" invisible="1"></field>
-                    <field name="category_id" invisible='not is_medicine_report'></field>
-                    <field name="product_id" invisible='not is_medicine_report' domain="category_id_domain"></field>
+                    <field name="category_id" invisible='not is_medicine_report and not is_fsn_report'></field>
+                    <field name="product_id" invisible='not is_medicine_report and not is_fsn_report' domain="category_id_domain"></field>
                 </group>
                 <field name="medicine_ids" invisible='not is_medicine_report'>
                     <list editable="bottom">

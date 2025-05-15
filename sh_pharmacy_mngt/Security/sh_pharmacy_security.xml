@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data noupdate="1">
+    
+        <record id="sh_pharmacy_security" model="res.groups">
+            <field name="name">Pharmacy Management</field>
+        </record>
+
+    
+    </data>
+    
+</odoo>

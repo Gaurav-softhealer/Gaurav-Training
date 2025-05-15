@@ -25,6 +25,7 @@
     },
     
     'data': [
+        'Security/sh_pharmacy_security.xml',
         'Security/ir.model.access.csv',
         'Views/sh_allergy_type_view.xml',
         'Views/sh_allergy_view.xml',

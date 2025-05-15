@@ -9,7 +9,7 @@ class PharmacyProduct(models.Model):
     
     @api.onchange('categ_id')
     def require_product_form(self):
-
+        print(f"\n\n\n\t--------------> 12 ","product category changed")
         if self.categ_id.is_medicine==True:
             self.is_medicine_narcotics=True
         else:
@@ -19,6 +19,7 @@ class PharmacyProduct(models.Model):
     @api.model_create_multi
     def create(self, vals_list):
         for vals in vals_list:
+            
             if 'sh_product_form_id' in vals:
                 if vals['sh_product_form_id']:
                 
@@ -33,6 +34,7 @@ class PharmacyProduct(models.Model):
 
 
     def write(self, vals):
+
         if 'sh_product_form_id' in vals:
             form_record = self.env['sh.medicine.form'].browse(vals['sh_product_form_id']) 
             if 'name' in vals:

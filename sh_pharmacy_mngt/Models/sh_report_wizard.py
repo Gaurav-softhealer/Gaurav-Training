@@ -13,7 +13,7 @@ class ReportWizard(models.TransientModel):
     patient_id=fields.Many2one('res.partner',string="Patient Name",domain=[('is_patient','=',True)])
     
 
-    
+    age_domain=fields.Char()
     patient_domain = fields.Char()
     start = fields.Datetime(
         'Start',  tracking=True,
@@ -36,7 +36,8 @@ class ReportWizard(models.TransientModel):
     
     sh_gender=fields.Selection([
         ('male','Male'),
-        ('female','Female')
+        ('female','Female'),
+
     ],string="Gender")
     
     age=fields.Integer()
@@ -64,9 +65,17 @@ class ReportWizard(models.TransientModel):
 
             if self.sh_gender:
                 patient_record=self.env['sale.order'].search([('partner_id.gender','=',self.sh_gender),('date_order','>=',self.start),('date_order','<=',self.stop)])
+                
             if self.patient_id:
                 patient_record=self.env['sale.order'].search([('partner_id','=',self.patient_id.id),('date_order','>=',self.start),('date_order','<=',self.stop)])
-            if not self.patient_id and not self.sh_gender and not self.age_selection:
+                
+            if self.doctor_id:
+                if self.patient_id:
+                    patient_record=self.env['sale.order'].search([('sh_doctor_id','=',self.doctor_id.id),('partner_id','=',self.patient_id.id),('date_order','>=',self.start),('date_order','<=',self.stop)])
+                else:
+                    patient_record=self.env['sale.order'].search([('sh_doctor_id','=',self.doctor_id.id),('date_order','>=',self.start),('date_order','<=',self.stop)])
+                
+            if not self.patient_id and not self.sh_gender and not self.age_selection and not self.doctor_id:
                 patient_record=self.env['sale.order'].search([('date_order','>=',self.start),('date_order','<=',self.stop)])
                 
             print(f"\n\n\n\t--------------> 38 patient_record",patient_record)
@@ -85,7 +94,7 @@ class ReportWizard(models.TransientModel):
     def change_patient(self):
         if self.patient_id.gender:
             self.sh_gender=self.patient_id.gender
-        if self.patient_id.sh_age>=0 and self.patient_id.sh_age<=12:
+        if self.patient_id.sh_age>0 and self.patient_id.sh_age<=12:
             self.age_selection='child'
         if self.patient_id.sh_age>=13 and self.patient_id.sh_age<=18:
             self.age_selection='Adult'
@@ -94,13 +103,55 @@ class ReportWizard(models.TransientModel):
         if self.patient_id.sh_age>=41 and self.patient_id.sh_age<=200:
             self.age_selection='Senior'
         
-    @api.onchange('sh_gender')
-    def change_gender(self):
-        print(f"\n\n\n\t--------------> 99 ","gender onchange called")
-        # if self.sh_gender:
-        #     self.patient_domain="[('gender','=',"+str(self.sh_gender)+")]"
-        # else:
-        #     self.patient_domain = "[(1,'=',1)]"
+    # @api.onchange('sh_gender')
+    # def change_gender(self):
+    #     print(f"\n\n\n\t--------------> 99 ","gender onchange called")
+    #     if self.sh_gender=='male':
+    #         self.patient_domain="[('gender','=','male'),('is_patient','=',True)]"
+    #     if self.sh_gender=='female':
+    #         self.patient_domain="[('gender','=','female'),('is_patient','=',True)]"
+    #     if not self.sh_gender:
+    #         self.patient_domain = "[('is_patient','=',True)]"
+            
+    # @api.onchange('age_selection')
+    # def change_age(self):
+    #     print(f"\n\n\n\t--------------> 109 ",'age onchange called')
+    #     if self.age_selection=='child':
+    #         self.age_domain="[('sh_age','>',0),('sh_age','<=',12),('is_patient','=',True)]"
+    #     if self.age_selection=='youth':
+    #         self.age_domain="[('sh_age','>=',13),('sh_age','<=',18),('is_patient','=',True)]"
+    #     if self.age_selection=='Adult':
+    #         self.age_domain="[('sh_age','>=',19),('sh_age','<=',40),('is_patient','=',True)]"
+    #     if self.age_selection=='Senior':
+    #         self.age_domain="[('sh_age','>=',41),('sh_age','<=',200),('is_patient','=',True)]"
+    #     if not self.age_selection:
+    #         self.age_domain="[('is_patient','=',True)]"
+    
+    
+    
+    @api.onchange('sh_gender', 'age_selection')
+    def _onchange_patient_filters(self):
+        print(f"\n\n\n\t--------------> gender/age onchange called")
+        domain = [('is_patient', '=', True)]
+
+        if self.sh_gender == 'male':
+            domain.append(('gender', '=', 'male'))
+        if self.sh_gender == 'female':
+            domain.append(('gender', '=', 'female'))
+        if self.sh_gender=='all':
+            domain.append(('is_patient', '=', True))
+
+        if self.age_selection == 'child':
+            domain += [('sh_age', '>', 0), ('sh_age', '<=', 12)]
+        if self.age_selection == 'youth':
+            domain += [('sh_age', '>=', 13), ('sh_age', '<=', 18)]
+        if self.age_selection == 'Adult':
+            domain += [('sh_age', '>=', 19), ('sh_age', '<=', 40)]
+        if self.age_selection == 'Senior':
+            domain += [('sh_age', '>=', 41), ('sh_age', '<=', 200)]
+
+        self.patient_domain = str(domain)
+
     
        
     def print_record_exel(self):

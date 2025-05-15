@@ -3,7 +3,8 @@
     <menuitem
         id="sh_pharmacy_menu"
         name="Pharmacy Manage"
-        sequence="10"/>
+        sequence="10"
+        groups="sh_pharmacy_security"/>
 
         <!-- Doctor -->
 
@@ -88,12 +89,7 @@
                     parent="sh_pharmacy_mngt.pharmacy_report_menu"
                     sequence="10"/>
                     
-                <menuitem
-                    id="pharmacy_report_age_menu"
-                    name="Age Wise"
-                    action="sh_specialization_category_action"
-                    parent="sh_pharmacy_mngt.pharmacy_report_menu"
-                    sequence="10"/>
+
 
         <!-- Configuration -->
         <menuitem

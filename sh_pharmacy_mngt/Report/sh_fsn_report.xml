@@ -60,9 +60,11 @@
             <field name="model">sh.report.wizard</field>
             <field name="inherit_id" ref="sh_pharmacy_mngt.report_wizard_view_form"/>
             <field name="arch" type="xml">
-                <xpath expr="//field[@name='patient_record_ids']" position="after">
+                <xpath expr="//field[@name='patient_record_ids']" position="before">
                     <sheet>
                         <group>
+                            <!-- <field name="fsn_category_id" invisible='not is_fsn_report'/>
+                            <field name="fsn_product_id" invisible='not is_fsn_report'/> -->
                             <field name="min_qty" invisible='not is_fsn_report'/>
                         </group>
                         <field name="fsn_records_ids" invisible='not is_fsn_report'>

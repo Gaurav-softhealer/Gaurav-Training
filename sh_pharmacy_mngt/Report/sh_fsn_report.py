@@ -27,14 +27,20 @@ class FsnReport(models.TransientModel):
     
     is_fsn_report=fields.Boolean()
     fsn_records_ids = fields.Many2many('fsn.report.data')
+    fsn_product_id=fields.Many2one('product.product')
+    fsn_category_id=fields.Many2one('product.category')
     min_qty=fields.Float()
 
     def load_fsn_record(self):
         print(f"\n\n\n\t--------------> 32 ", "fsn record called")
         self.fsn_records_ids=[(5,0,0)]
 
-        fsn_record=self.env['sale.report'].search([('date','>=',self.start),('date','<=',self.stop)])
-
+        if self.category_id:
+            fsn_record=self.env['sale.report'].search([('product_id.categ_id','=',self.category_id.id),('date','>=',self.start),('date','<=',self.stop)])
+        if self.product_id:
+            fsn_record=self.env['sale.report'].search([('product_id','=',self.product_id.id),('date','>=',self.start),('date','<=',self.stop)])
+        if not self.product_id and not self.category_id:
+            fsn_record=self.env['sale.report'].search([('date','>=',self.start),('date','<=',self.stop)])
         vals_list = []
 
         for record in fsn_record:
