@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <template id="web_form_login_template" name="Web Form Template Login">
+        <t t-call="web.basic_layout">
+        <div id="wrap" class="oe_structure">
+            <section class="s_website_form">
+                <div class="container " >
+                    <div class="row">
+                        <div class="col-md-4 d-inline ">
+                            <form action="/login" enctype="multipart/form-data" method="post" class="o_mark_required d-inline" data-mark="*" data-model_name="" data-success-page="">
+                                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                                <div class="row">
+                                    <div class="form-group col-12">
+                                        <label>Username *</label>
+                                        <input id="name" type="text" class="form-control" name="name" required="1"/>
+                                    </div>
+                                    <div class="form-group col-12">
+                                        <label>Password *</label>
+                                        <input id="phone" type="password" class="form-control" name="password" required="1"/>
+                                    </div>
+                                
+                                    <div class="form-group col-12 mt-2">
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </div>
+                                    <p>if don't have account <a href="/signup">signup</a></p>
+                                </div>
+                            </form>
+                        </div>
+                        
+                    </div>
+                </div>
+            </section>
+        </div>
+        </t>
+    </template>
+
+
+    <record id="web_form_login_page" model="website.page">
+        <field name="url">/login</field>
+        <field name="is_published">True</field>
+        <field name="view_id" ref="sh_custom_web_form.web_form_login_template"/>
+        <field name="track">True</field>
+        <field name="website_meta_description">This is the contact us page of the website</field>
+    </record>
+
+    <!-- Menu SECOND -->
+    <record id="menu_web_form_login" model="website.menu">
+        <field name="name">Login</field>
+        <field name="url">/login</field>
+        <field name="page_id" ref="sh_custom_web_form.web_form_login_page"/>
+        <field name="parent_id" ref="website.main_menu"/>
+        <field name="sequence" type="int">60</field>
+    </record>
+</odoo>

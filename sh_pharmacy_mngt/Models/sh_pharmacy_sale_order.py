@@ -76,7 +76,7 @@ class ShPharmacySale(models.Model):
     
 
     @api.onchange('order_line')
-    def check_narco(self):
+    def _check_narco(self):
         for record in self.order_line:
             print(f"\n\n\n\t--------------> 97 record.product_id.categ_id",record.product_id.categ_id.name)
             if record.product_id.categ_id.is_narcotics:
@@ -85,7 +85,7 @@ class ShPharmacySale(models.Model):
                 self.is_narcotics=False
           
     @api.onchange('partner_id')
-    def customer_allergies(self):
+    def _customer_allergies(self):
         if self.partner_id:
             self.sh_aadhar_card=self.partner_id.sh_aadhar_no
             self.sh_mobile_no=self.partner_id.phone
@@ -93,7 +93,7 @@ class ShPharmacySale(models.Model):
 
 
     @api.onchange("order_line")
-    def find_lot_sn(self):
+    def _find_lot_sn(self):
         for rec in self:
             for i in rec.order_line:
                 rec_lot = self.env['stock.quant'].search([('product_id.id','=',i.product_id.id)])
@@ -110,27 +110,9 @@ class ShPharmacySale(models.Model):
                             break 
         
         
-class ShPharmacyOrderLine(models.Model):
-    _inherit="sale.order.line"
-    
-    is_selected=fields.Boolean()
-    sh_lot_no=fields.Char(string="Lot No")
-    sh_expiration_date=fields.Datetime()
-    split_id=fields.Many2one('sh.split.sale.order')
-    lot_ids=fields.Many2many('stock.lot')
 
 
-class ShStockLot(models.Model):
-    _inherit = 'stock.lot'
 
-    @api.depends('name')
-    def _compute_display_name(self):
-        for template in self:
-            template.display_name = False if not template.name else (
-                '{}{}'.format(
-                     template.name ,'[%s] ' % template.expiration_date if template.expiration_date else ''
-                ))
-    
 
 
 

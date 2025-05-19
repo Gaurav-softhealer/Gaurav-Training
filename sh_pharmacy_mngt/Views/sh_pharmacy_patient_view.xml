@@ -30,6 +30,7 @@
                 <xpath expr="//field[@name='user_id']" position="after">
                     <field name="gender" />
                     <field name="sh_blood" invisible="is_patient==False "/>
+                        
                 </xpath>
             </field>
         </record>

@@ -21,8 +21,8 @@ class PharmacyDoctor(models.Model):
                                  default=lambda
                                  self: self.env.user.company_id.currency_id.id)
     commission_percent=fields.Float(string="Commission Rate")
-    
-    commission_total=fields.Float(compute="cal_total_commission")
+
+    commission_total=fields.Float(compute="_cal_total_commission")
     
     doctor_commission_type=fields.Selection([
         ('by_patient','By Patient'),
@@ -31,7 +31,7 @@ class PharmacyDoctor(models.Model):
     ],string="Commission Type")
     
     @api.depends('dr_commission_ids')
-    def cal_total_commission(self):
+    def _cal_total_commission(self):
         total=0
         for record in self:
             for i in record.dr_commission_ids:

@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="custom_web_form_action" model="ir.actions.act_window">
+        <field name="name">Custom Web Form View</field>
+        <field name="res_model">custom.web.form.user</field>
+        <field name="view_mode">list,form</field>
+
+    </record>
+
+    <menuitem
+        id="custom_web_form_menu"
+        name="Custom Web Form"
+        action="custom_web_form_action"
+        sequence="10"/>
+</odoo>

@@ -1,0 +1,111 @@
+<odoo>
+    <!-- Web Form Template -->
+    <template id="web_form_template" name="Web Form Template">
+        <!-- <t t-if="session"> -->
+            
+            <t t-call="web.basic_layout">
+            <div id="wrap" class="oe_structure">
+                <section class="s_website_form">
+                    <div class="container " >
+                        
+                        <div class="row">
+                            <div class="col-md-4 d-inline ">
+                                <form action="/webform/submit" enctype="multipart/form-data" method="post" class="o_mark_required d-inline" data-mark="*" data-model_name="" data-success-page="">
+                                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                                    <div class="row">
+                                        <div class="form-group col-12">
+                                            <label>Name *</label>
+                                            <input id="name" type="text" class="form-control" name="name" required="1"/>
+                                        </div>
+                                        <div class="form-group col-12">
+                                            <label>Phone *</label>
+                                            <input id="phone" type="text" class="form-control" name="phone" required="1"/>
+                                        </div>
+                                        <div class="form-group col-12">
+                                            <label>Email *</label>
+                                            <input id="email" type="email" class="form-control" name="email" required="1"/>
+                                        </div>
+                                        <div class="form-group col-12 mt-2">
+                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                        </div>
+                                          <div class="form-group col-12 mt-2">
+                                        </div>
+                                    </div>
+                                </form>
+                                <a href="/logout"><button class="btn btn-primary">Logout</button></a>
+                            </div>
+                            <div class="col-md-7">
+                                <h3>Partners</h3>
+                                <table class="table table-bordered table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th><b>Name</b></th>
+                                            <th><b>Phone</b></th>
+                                            <th><b>Email</b></th>
+                                            <th><b>Actions</b></th>
+                                           
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <t t-foreach="partners" t-as="partner">
+                                            <tr>
+                                                <td>
+                                                    <t t-esc="partner.name"/>
+                                                </td>
+                                                <td>
+                                                    <t t-esc="partner.phone"/>
+                                                </td>
+                                                <td>
+                                                    <t t-esc="partner.email"/>
+                                                </td>
+                                                <td>
+                                                    <a t-att-href="'/update/%s' % partner.id"><button>Edit</button></a>
+                                                    <a t-att-href="'/delete/%s' % partner.id"><button>Delete</button></a>
+                                                </td>
+                                            </tr>
+                                        </t>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            </t>
+        <!-- </t> -->
+      
+        <!-- <t t-else="not session">
+            <p> you have not access</p>
+        </t> -->
+        
+    </template>
+
+    <!-- Thank You Template -->
+    <template id="thank_you_template" name="Thank You Template">
+        <div id="wrap" class="oe_structure">
+            <section class="s_website_form">
+                <div class="container">
+                    <h1>Thank you for creating Partner</h1>
+                </div>
+            </section>
+        </div>
+    </template>
+
+    <!-- Website Page FIRST -->
+    <record id="web_form_page" model="website.page">
+        <field name="url">/webform</field>
+        <field name="is_published">True</field>
+        <field name="view_id" ref="sh_custom_web_form.web_form_template"/>
+        <field name="track">True</field>
+        <field name="website_meta_description">This is the contact us page of the website</field>
+    </record>
+
+    <!-- Menu SECOND -->
+    <record id="menu_web_form" model="website.menu">
+        <field name="name">Web form</field>
+        <field name="url">/webform</field>
+        <field name="page_id" ref="sh_custom_web_form.web_form_page"/>
+        <field name="parent_id" ref="website.main_menu"/>
+        <field name="sequence" type="int">60</field>
+    </record>
+</odoo>

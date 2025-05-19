@@ -20,6 +20,8 @@
         'web.assets_backend': {
             '/sh_pharmacy_mngt/static/src/js/systray.js',
             '/sh_pharmacy_mngt/static/src/xml/systray.xml',
+            '/sh_pharmacy_mngt/static/src/components/systray_dropdown.xml',
+            '/sh_pharmacy_mngt/static/src/components/systray_dropdown.js',
         },
         
     },

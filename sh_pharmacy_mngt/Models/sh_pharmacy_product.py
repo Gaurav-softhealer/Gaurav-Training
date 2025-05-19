@@ -8,7 +8,7 @@ class PharmacyProduct(models.Model):
     is_medicine_narcotics=fields.Boolean()
     
     @api.onchange('categ_id')
-    def require_product_form(self):
+    def _require_product_form(self):
         print(f"\n\n\n\t--------------> 12 ","product category changed")
         if self.categ_id.is_medicine==True:
             self.is_medicine_narcotics=True
@@ -65,8 +65,3 @@ class PharmacyProduct(models.Model):
         return res
 
 
-class ShProductCategory(models.Model):
-    _inherit="product.category"
-    
-    is_medicine=fields.Boolean()
-    is_narcotics=fields.Boolean()

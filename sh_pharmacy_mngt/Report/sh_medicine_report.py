@@ -5,15 +5,7 @@ import base64, xlrd, xlsxwriter, xlwt
 from odoo.exceptions import UserError, ValidationError
 
 
-class ShMedicineReport(models.Model):
-    _name = "sh.medicine.report"
-    _description = "Medicine Report"
 
-    product_id = fields.Many2one("product.product")
-    category_id = fields.Many2one("product.category")
-    sold_qty = fields.Float()
-    unit_price = fields.Float()
-    total_sale = fields.Float()
 
 
 class ShPharmacyMedicine(models.TransientModel):
@@ -26,11 +18,11 @@ class ShPharmacyMedicine(models.TransientModel):
     medicine_ids = fields.Many2many("sh.medicine.report")
 
     @api.onchange("product_id")
-    def change_category(self):
+    def _change_category(self):
         self.category_id = self.product_id.categ_id.id
 
     @api.onchange("category_id")
-    def change_product(self):
+    def _change_product(self):
         if self.category_id:
             self.category_id_domain = (
                 "[('categ_id','='," + str(self.category_id.id) + ")]"

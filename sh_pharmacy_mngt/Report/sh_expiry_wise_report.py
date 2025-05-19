@@ -58,7 +58,7 @@ class ExpiryReport(models.TransientModel):
         }
     
     @api.onchange('product_id')
-    def change_product2(self):
+    def _change_product2(self):
         self.category_id=self.product_id.categ_id.id
         print(f"\n\n\n\t--------------> 65 nnnnnn",)
         if self.product_id:
@@ -69,7 +69,7 @@ class ExpiryReport(models.TransientModel):
     
     
     @api.onchange('category_id')
-    def change_category2(self):
+    def _change_category2(self):
         if self.category_id:
             self.category_id_domain = "[('categ_id','=',"+str(self.category_id.id)+")]"
         else:
@@ -77,7 +77,7 @@ class ExpiryReport(models.TransientModel):
      
      
     @api.onchange('lot_no')
-    def change_lot2(self):
+    def _change_lot2(self):
         if self.lot_no:
             self.product_id=self.lot_no.product_id.id
 

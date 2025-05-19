@@ -14,7 +14,7 @@
                 </xpath>
 
             <xpath expr="//field[@name='category_id']" position="after">
-                <field name="gender" invisible="is_company==True"/>
+                <field name="gender" invisible="is_company==True" widget="radio" options="{'horizontal': True}"/>
                 <field name="specialization_ids" widget="many2many_tags" invisible="is_doctor==False or is_company==True "/>
             </xpath>
 

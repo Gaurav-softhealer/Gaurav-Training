@@ -22,7 +22,7 @@
     'assets':{
         'web.assets_backend':[
             'sh_widgets/static/src/js/custom_slider_widget.js',
-            'sh_widgets/static/src/xml/custom_slider_widget.xml',
+            'sh_widgets/static/src/xml/custom_slider_widgeACt.xml',
         ]
     },
     

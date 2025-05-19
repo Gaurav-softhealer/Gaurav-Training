@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <template id="web_update_form_template" name="Web Update Form Template">
+        <t t-call="web.basic_layout">
+        <div id="wrap" class="oe_structure">
+            <section class="s_website_form">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <form action="/update" enctype="multipart/form-data" method="post" class="o_mark_required d-inline" data-mark="*" data-model_name="" data-success-page="">
+                                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                                <input type="hidden" name="myid" t-att-value="myid"/>
+                                <div class="row">
+                                    <div class="form-group col-12">
+                                        <label>Name *</label>
+                                        <input id="name" type="text" class="form-control" name="name" t-att-value="partner.name" required="1"/>
+                                    </div>
+                                    <div class="form-group col-12">
+                                        <label>Phone *</label>
+                                        <input id="phone" type="text" class="form-control" name="phone" t-att-value="partner.phone" required="1"/>
+                                    </div>
+                                    <div class="form-group col-12">
+                                        <label>Email *</label>
+                                        <input id="email" type="email" class="form-control" name="email" t-att-value="partner.email" required="1"/>
+                                    </div>
+                                    <div class="form-group col-12 mt-2">
+                                        <button type="submit" class="btn btn-primary">Update</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        
+                    </div>
+                </div>
+            </section>
+        </div>
+        </t>
+    </template>
+</odoo>

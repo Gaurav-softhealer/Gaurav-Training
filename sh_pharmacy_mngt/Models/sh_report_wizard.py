@@ -91,7 +91,7 @@ class ReportWizard(models.TransientModel):
         }  
     
     @api.onchange('patient_id')
-    def change_patient(self):
+    def _change_patient(self):
         if self.patient_id.gender:
             self.sh_gender=self.patient_id.gender
         if self.patient_id.sh_age>0 and self.patient_id.sh_age<=12:
