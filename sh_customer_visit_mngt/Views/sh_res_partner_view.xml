@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="sh_res_partner_form_view" model="ir.ui.view">
+        <field name="name">sh.res.partner.form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button class="oe_customer_visit_button" 
+                         type="object" 
+                         icon="fa-user"                         
+                         name="action_customer_visit">
+                    <field name="sh_visit_count" string="Sale Visit" widget="statinfo"/>
+                </button>
+            </xpath>
+
+            <xpath expr="//notebook//page//field[@name='user_id']" position="after">
+                <field name="sh_sale_team" />
+            </xpath>
+
+            <xpath expr="//notebook//page[@name='internal_notes']" position="after">
+                <page name='customer_visit' string="Customer Visit">
+                    <group>
+                        <field name="sh_first_visit"/>
+                        <field name="sh_next_visit"/>
+                        <field name="scheduled_date"/>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

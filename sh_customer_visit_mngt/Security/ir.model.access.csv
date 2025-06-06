@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+sh_customer_visit_mngt.access_sh_sale_visit,access_sh_sale_visit,sh_customer_visit_mngt.model_sh_sale_visit,base.group_user,1,1,0,1
+sh_customer_visit_mngt.access_sh_cancel_reason,access_sh_cancel_reason,sh_customer_visit_mngt.model_sh_cancel_reason,base.group_user,1,1,1,1
+sh_customer_visit_mngt.access_sh_cancel_reason_wizard,access_sh_cancel_reason_wizard,sh_customer_visit_mngt.model_sh_cancel_reason_wizard,base.group_user,1,1,1,1
