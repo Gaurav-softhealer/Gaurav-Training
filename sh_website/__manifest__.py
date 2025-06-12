@@ -1,14 +1,13 @@
 # Copyright (C) Softhealer Technologies.
 # Part of Softhealer Technologies.
-
 {
-    'name': 'Purchase Routes',
+    'name': 'My Website',
     'version': '1.0',
     'sequence': 10,
-    'depends': ['base','web','purchase','stock',],
-    'author':'Softhealer Technologies',
+    'depends': ['base','web','website'],
+    'author' : 'Softhealer Technologies',
     'data': [
-        'Views/sh_purchase_view.xml',
+        'Views/sh_website_menu.xml',
     ],
     'installable': True,
     'application': True,

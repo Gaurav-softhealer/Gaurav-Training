@@ -1,0 +1,8 @@
+<!-- <?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <template id="assets_frontend" inherit_id="web.assets_frontend" name="Local Video JS">
+    <xpath expr="." position="inside">
+      <script type="module" src="/sh_website_elearning_video/static/src/js/sh_local_slide.js"/>
+    </xpath>
+  </template>
+</odoo> -->

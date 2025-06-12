@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="website_slides_fullscreen_video_local" name="Video: Local File">
+    <t t-name="website.slides.fullscreen.video.local">
+        <div class="player ratio ratio-16x9 embed-responsive-item h-100">
+            <video controls="autoplay" class="w-100 h-100">
+                <source t-att-src="'/web/content/slide.slide/%s/sh_attachment?filename_field=sh_attachment_name' % widget.slide.id" type="video/mp4"/>
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </t>
+    </template>
+
+
+    <!-- <template id="inject_local_video_js" inherit_id="website.layout">
+        <xpath expr="//head" position="inside">
+            <script type="text/javascript" src="/sh_website_elearning_video/static/src/js/sh_local_slide.js"></script>
+        </xpath>
+    </template>  -->
+
+
+
+
+</odoo>
+
+
+
+
+
+
+
+
+
+<!-- <?xml version='1.0' encoding='utf-8'?>
+<odoo> -->
+    <!-- <template id="my_template1" inherit_id="website_slides.slide_fullscreen_sidebar_category">
+        <xpath expr="//li[@class='o_wslides_fs_sidebar_section py-2 px-3']" position="inside">
+            <p>hello world</p>
+        </xpath>
+
+        <xpath expr="//a[@class='d-block']//div[@class='d-flex']" position="inside">
+            <p>hello world</p>
+            <t t-esc="slide.sh_attachment_name"/>
+        </xpath>
+
+
+        
+    </template>
+
+    <template id="template_id" inherit_id="website_slides.course_slides_list">
+        <xpath expr="//span" position="after">
+            <p>hello world</p>
+            <t t-esc="slide.test"/>
+
+        </xpath>
+    </template>
+
+    <template id="template_id" inherit_id="website_slides.course_slides_list_slide">
+        <xpath expr="//span" position="after">
+            <p>hello world</p>
+            <p> <strong t-out="slide.sh_attachment_name"/></p>
+                <t t-esc="slide.sh_attachment_name"/>
+            <t t-if="slide.sh_document_type=='file'">
+                
+                <t t-esc="slide.test"/>
+
+            </t>
+        </xpath>
+    </template> -->
+
+
+    <!-- <template id="local_video1" name="Local Video Player" inherit_id="website_slides.embed_slide">
+        <xpath expr="//div[@id='PDFSlideViewer']" position="inside">
+            <t t-if="slide.slide_category == 'video' and slide.sh_document_type == 'file'">
+                <video controls="autoplay">
+                <source t-att-src="'/web/content/slide.slide/42/sh_attachment?filename_field=sh_attachment_name'" type="video/mp4"/>
+                Your browser does not support the video tag....
+                </video>
+            </t>
+            </xpath>
+    </template> -->
+
+        <!-- <template id="template_id12" name="template_name" inherit_id="website_slides.slide_fullscreen">
+            <xpath expr="//div[@class='o_wslides_fs_sidebar_content d-flex flex-column px-3 pt-3 h-100']" position="after">
+
+                <div t-if="slide.slide_category == 'video' and slide.sh_document_type=='file'" class="ratio ratio-16x9 embed-responsive-item mb8">
+                    <t t-out="slide.embed_code"/>
+                </div>
+                
+            </xpath>
+        </template> -->
+
+
+<!-- this is working code -->
+
+<!-- <template id="slide_fullscreen_local_video" inherit_id="website_slides.slide_fullscreen">
+    <xpath expr="//div[@class='o_wslides_fs_content align-items-stretch justify-content-center d-flex flex-grow-1 order-2']" position="inside">
+        <t t-if="slide.sh_document_type == 'file' and slide.sh_attachment">
+            <video controls="autoplay" style="max-width: 100%; height: auto; z-index:10" >
+                <source t-att-src="'/web/content/slide.slide/%s/sh_attachment?filename_field=sh_attachment_name' % slide.id" type="video/mp4"/>
+                Your browser does not support the video tag.
+            </video>
+        </t>
+    </xpath>
+</template> -->
+
+
+<!-- <template id="template_id5555" name="template_name555" inherit_id="website_slides.embed_slide">
+    <xpath expr="//body" position="inside">
+                <t t-if="slide.slide_category == 'video' and slide.sh_document_type == 'file' and slide.sh_attachment">
+            <div class="o_wslides_fs_video_container d-flex align-items-center justify-content-center w-100">
+                <video controls="autoplay" style="max-height: 100%; max-width: 100%;">
+                    <source t-att-src="'/web/content/%s/%s/%s?download=true' % (slide._name, slide.id, 'sh_attachment')" type="video/mp4"/>
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </t>
+    </xpath>
+</template> -->
+
+
+
+    <!-- <template id="video_embed_override" inherit_id="website_slides.slide_fullscreen">
+        <xpath expr="//div[@class='o_wslides_fs_content align-items-stretch justify-content-center d-flex flex-grow-1 order-2']" position="inside">
+            <t t-if="slide.slide_category == 'video' and slide.source_type == 'local' and slide.sh_document_type == 'file'">
+                <video controls="autoplay" style="width: 100%; max-height: 90vh;">
+                    <source t-att-src="'/web/content/slide.slide/%s/sh_attachment?filename_field=sh_attachment_name' % slide.id" type="video/mp4"/>
+                    Your browser does not support the video tag.
+                </video>
+            </t>
+        </xpath>
+</template> -->
+
+
+<!-- this code display in small screen -->
+
+<!-- <template id="template_id123" name="template_name123" inherit_id="website_slides.slide_content_detailed">
+    <xpath expr="//div[@class='ratio ratio-4x3 embed-responsive-item mb8']" position="inside">
+        <div t-if="slide.slide_category == 'video' and slide.sh_document_type=='file'" class="ratio ratio-16x9 embed-responsive-item mb8">
+            <t t-out="slide.embed_code"/>
+        </div>
+    </xpath>
+</template> -->
+
+<!-- <template id="slide_fullscreen" inherit_id="website_slides.slide_fullscreen" name="Fullscreen - Custom Video">
+    <xpath expr="//div[hasclass('o_wslides_fs_content')]" position="inside">
+        <div t-if="slide.sh_document_type == 'file'" class="o_wslides_fs_content_video_wrapper h-100 w-100 d-flex align-items-center justify-content-center">
+            <t t-out="slide.embed_code"/>
+        </div>
+    </xpath>
+</template> -->
+
+
+<!-- <template id="sh_slide_fullscreen_inherit" inherit_id="website_slides.slide_fullscreen">
+    <xpath expr="//div[contains(@class, 'o_wslides_fs_content')]" position="replace">
+        <div class="o_wslides_fs_content align-items-stretch justify-content-center d-flex flex-grow-1 order-2">
+            <t t-if="slide.slide_category == 'video' and slide.sh_document_type == 'file' and slide.sh_attachment">
+                <video controls="autoplay" style="width:100%; max-height:90vh;">
+                    <source t-att-src="'/web/content/slide.slide/%s/sh_attachment?filename_field=sh_attachment_name' % slide.id" type="video/mp4"/>
+                    Your browser does not support the video tag.
+                </video>
+            </t>
+            
+        </div>
+    </xpath>
+</template> -->
+
+<!-- <templates id="template" xml:space="preserve">
+    
+    
+    
+    <t t-name="website.slides.fullscreen.video.local">
+        <div class="player ratio ratio-16x9 embed-responsive-item h-100">
+            <video controls="autoplay" class="w-100 h-100">
+                <source t-att-src="'/web/content/slide.slide/%s/sh_attachment?filename_field=sh_attachment_name' % widget.slide.id" type="video/mp4"/>
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </t>
+    
+</templates>
+</odoo> -->

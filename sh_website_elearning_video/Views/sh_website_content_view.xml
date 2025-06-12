@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="sh_website_content_form_view" model="ir.ui.view">
+        <field name="name">sh_website_content_form_view</field>
+        <field name="model">slide.slide</field>
+        <field name="inherit_id" ref="website_slides.view_slide_slide_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='document']//field[@name='slide_category']" position="after">
+                <field name="sh_document_type" invisible="not slide_category=='video'"/>
+                <field name="sh_attachment" filename="sh_attachment_name" invisible="not slide_category=='video' or not sh_document_type=='file'"/>
+                <field name="sh_attachment_name" />
+                <field name="test" />
+            </xpath>
+
+            <xpath expr="//page[@name='document']//field[@name='video_url']" position="attributes">
+                <attribute name="invisible">not sh_document_type=='url'</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>

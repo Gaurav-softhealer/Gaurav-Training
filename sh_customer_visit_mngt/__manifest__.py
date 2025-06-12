@@ -5,6 +5,7 @@
     'version': '1.0',
     'sequence': 10,
     'depends': ['base','web','crm','contacts'],
+    'author' : 'Softhealer Technologies',
     'data': [
         'Security/ir.model.access.csv',
         'Views/sh_sales_visit_view.xml',
