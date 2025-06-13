@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+
+    <menuitem
+        id="sh_partner_ledger_menu_new"
+        name="Partner Ledger"
+        action="sh_partner_ledger_wizard_action"
+        parent="account.account_reports_partners_reports_menu"
+        sequence="10"/>
+</odoo>
