@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="view_country_selection_wizard" model="ir.ui.view">
+        <field name="name">country.selection.wizard.form</field>
+        <field name="model">sh.country.selection.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Select Your Country">
+                <group>
+                    <field name="sh_flag_url" widget="image_url" readonly="1"/>
+                    <field name="country_id"/>
+                </group>
+                <footer>
+                    <button name="action_apply_country" type="object" string="Apply" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_country_selection_wizard" model="ir.actions.act_window">
+        <field name="name">Select Country</field>
+        <field name="res_model">sh.country.selection.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="menu_select_country"
+          name="Select Country"
+          action="action_country_selection_wizard"
+          parent="website.menu_website_global_configuration"
+          sequence="1"/>
+
+</odoo>

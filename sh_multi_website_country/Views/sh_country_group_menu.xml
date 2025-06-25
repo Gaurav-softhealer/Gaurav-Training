@@ -1,0 +1,3 @@
+<odoo>
+    <menuitem id="sh_country_group_menu" name="Country Group" parent="website.menu_website_global_configuration" action="sh_multi_website_country.sh_country_group" sequence="10"/>
+</odoo>
