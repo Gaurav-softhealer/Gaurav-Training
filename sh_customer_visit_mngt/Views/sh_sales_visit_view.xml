@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="sh_customer_visits_form_view" model="ir.ui.view">
+        <field name="name">customer.visit.form</field>
+        <field name="model">sh.sale.visit</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="cancel_customer_visit" type="object" string="Cancel" invisible="not sh_status=='draft' and not sh_status=='process'"/>
+                    <button name="start_customer_visit" type="object" string="Start" invisible="not sh_status=='draft'"/>
+                    <button name="done_customer_visit" type="object" string="Done" invisible="not sh_status=='process'"/>
+                    <button name="new_quotation" type="object" string="New Quotation" invisible="not (is_buy and sh_status=='done')"/>
+                    <field name="sh_status" widget="statusbar" />
+                </header>
+                <sheet>
+                    <div class="sh_oe_button_box" name="button_box">
+                        <button class="oe_sale_order_button" 
+                            type="object" 
+                            icon="fa-user"                         
+                            name="action_sale_order">
+                        <field name="sh_order_count" string="sale order" widget="statinfo" />
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="sh_customer_id" />
+                            <field name="sh_location" />
+                            <field name="sh_phone" />
+                            <field name="sh_mobile" />
+                            <field name="sh_salesperson_id"/>
+                        </group>
+
+                        <group>
+                            <field name="is_buy" />
+                            <field name="sh_visit_date" />
+                            <field name="sh_start_date" />
+                            <field name="sh_end_date" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="cancel_reason_page" string="Cancel Reason">
+                            <group>
+                                <field name="sh_cancel_reason"/>
+                                <field name="sh_notes"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="sh_sale_visit_action" model="ir.actions.act_window">
+        <field name="name">Sale Visit</field>
+        <field name="res_model">sh.sale.visit</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem
+    id="sh_sales_visit_menu"
+    name="Sales Visits"
+    action="sh_sale_visit_action"
+    parent="crm.crm_menu_root"
+    sequence="1"/>
+</odoo>
