@@ -1,0 +1,83 @@
+<odoo>
+    <template id="print_partner_ledger_report">
+        <t t-call="web.html_container">
+            <div style="margin: 20px;">
+                <h2 style="text-align: center; margin-bottom: 20px;">Partner Ledger Report</h2>
+
+                <t t-foreach="partners" t-as="partner">
+                    <t t-if="partner">
+                        <div style="page-break-after: always;">
+                            <h3>Partner: <t t-esc="partner.name"/></h3>
+                            <p><strong>From:</strong> <t t-esc="sh_start_date"/></p>
+                            <p><strong>To:</strong> <t t-esc="sh_end_date"/></p>
+                            <p><strong>Company:</strong> <t t-esc="company.name"/></p>
+                            <p><strong>Targeted Moves:</strong> <span t-field="docs.sh_target_moves"/></p>
+                            <table style="width: 100%; border-collapse: collapse; font-size: 14px; border: 1px solid #000;">
+                                <thead>
+                                    <tr>
+                                        <th style="border: 1px solid #000; padding: 8px;">Date</th>
+                                        <th style="border: 1px solid #000; padding: 8px;">Journal</th>
+                                        <th style="border: 1px solid #000; padding: 8px;">Account</th>
+                                        <th style="border: 1px solid #000; padding: 8px;">Ref</th>
+                                        <th style="border: 1px solid #000; padding: 8px;">Credit</th>
+                                        <th style="border: 1px solid #000; padding: 8px;">Debit</th>
+                                        <th style="border: 1px solid #000; padding: 8px;">Balance</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                        
+                                    <!-- Initial Balance -->
+                                     <t t-if="docs.sh_initial_balance">
+                                         <t t-set="init_bal" t-value="initial_balances.get(partner.id, {'credit': 0.0, 'debit': 0.0, 'balance': 0.0})"/>
+                                         <tr>
+                                             <td colspan="4" style="border: 1px solid #000; padding: 8px;"><strong>Opening Balance</strong></td>
+                                             <td style="border: 1px solid #000; padding: 8px;"><t t-esc="init_bal['credit']"/></td>
+                                             <td style="border: 1px solid #000; padding: 8px;"><t t-esc="init_bal['debit']"/></td>
+                                             <td style="border: 1px solid #000; padding: 8px;"><t t-esc="init_bal['balance']"/></td>
+                                         </tr>
+                                     </t>
+
+                                    <!-- Entry -->
+                                    <t t-foreach="grouped_records.get(partner.id)" t-as="line">
+                                        <tr>
+                                            <td style="border: 1px solid #000; padding: 8px;"><t t-esc="line.date"/></td>
+                                            <td style="border: 1px solid #000; padding: 8px;"><t t-esc="line.journal_id.name"/></td>
+                                            <td style="border: 1px solid #000; padding: 8px;"><t t-esc="line.account_id.name"/></td>
+                                            <td style="border: 1px solid #000; padding: 8px;"><t t-esc="line.ref"/></td>
+                                            <td style="border: 1px solid #000; padding: 8px;"><t t-esc="line.credit"/></td>
+                                            <td style="border: 1px solid #000; padding: 8px;"><t t-esc="line.debit"/></td>
+                                            <td style="border: 1px solid #000; padding: 8px;"><t t-esc="line.balance"/></td>
+                                        </tr>
+                                    </t>
+
+                                    <!-- Closing Balance -->
+                                    <t t-if="docs.sh_closing_balance">
+                                         <t t-set="closing" t-value="closing_balances.get(partner.id, {'credit': 0.0, 'debit': 0.0, 'balance': 0.0})"/>
+                                         <tr>
+                                             <td colspan="4" style="border: 1px solid #000; padding: 8px;"><strong>closing Balance</strong></td>
+                                             <td style="border: 1px solid #000; padding: 8px;"><t t-esc="closing['credit']"/></td>
+                                             <td style="border: 1px solid #000; padding: 8px;"><t t-esc="closing['debit']"/></td>
+                                             <td style="border: 1px solid #000; padding: 8px;"><t t-esc="closing['balance']"/></td>
+                                         </tr>
+                                     </t>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </t>
+                </t>
+            </div>
+        </t>
+    </template>
+
+    <record id="print_partner_ledger_report_action" model="ir.actions.report">
+        <field name="name">Partner Ledger Report</field>
+        <field name="model">sh.partner.ledger.wizard</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">sh_partner_ledger_balance.print_partner_ledger_report</field>
+        <field name="report_file">sh_partner_ledger_balance.print_partner_ledger_report</field>
+        <field name="print_report_name">"Partner Ledger Report"</field>
+        <field name="binding_model_id" ref="model_sh_partner_ledger_wizard"/>
+        <field name="binding_type">report</field>
+    </record>
+</odoo>

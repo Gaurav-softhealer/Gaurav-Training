@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+sh_partner_ledger_balance.access_sh_partner_ledger_wizard,access_sh_partner_ledger_wizard,sh_partner_ledger_balance.model_sh_partner_ledger_wizard,base.group_user,1,1,1,1

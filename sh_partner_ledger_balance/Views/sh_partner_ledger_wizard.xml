@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="sh_partner_ledger_wizard_form_view" model="ir.ui.view">
+        <field name="name">Partner Ledger</field>
+        <field name="model">sh.partner.ledger.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="sh_target_moves" widget="radio"/>
+                        <field name="sh_payable_type" />
+                        <field name="sh_initial_balance" />
+                        <field name="sh_closing_balance" />
+                        <field name="sh_reconsile_entry" />
+                        <field name="sh_start_date" required="sh_initial_balance"/>
+                        <field name="sh_end_date" />
+                        <field name="sh_partner_ids" widget="many2many_tags"/>
+                        <field name="sh_journals_ids" widget="many2many_tags"/>
+                    </group>
+                </sheet>
+                <footer>
+                    <button string="Print" name="partner_ledger_print" type="object" class="btn-secondary" />
+                    <button string="Discard" class="btn-secondary" special="cancel" data-hotkey="x"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="sh_partner_ledger_wizard_action" model="ir.actions.act_window">
+        <field name="name">Partner Ledger</field>
+        <field name="res_model">sh.partner.ledger.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field> 
+    </record>
+</odoo>

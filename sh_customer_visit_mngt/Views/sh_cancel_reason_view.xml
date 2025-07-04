@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="sh_cancel_reason_form_view" model="ir.ui.view">
+        <field name="name">cancel.reason.form</field>
+        <field name="model">sh.cancel.reason</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="sh_cancel_reason_action" model="ir.actions.act_window">
+        <field name="name">Cancel Reason</field>
+        <field name="res_model">sh.cancel.reason</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem
+        id="sh_cancel_reason_menu"
+        name="Sales Visit"
+        parent="crm.crm_menu_config"
+        sequence="1"/>
+
+    <menuitem
+        id="sh_cancel_reason_menu_original"
+        name="Cancel Reason"
+        action="sh_cancel_reason_action"
+        parent="sh_cancel_reason_menu"
+        sequence="1"/>
+</odoo>

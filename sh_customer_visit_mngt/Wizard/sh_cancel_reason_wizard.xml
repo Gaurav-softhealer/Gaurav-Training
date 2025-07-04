@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="sh_cancel_reason_wizard_form_view" model="ir.ui.view">
+        <field name="name">cancel.reason.wizard.form</field>
+        <field name="model">sh.cancel.reason.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name" />
+                        <field name="sh_notes"/>
+                    </group>
+                </sheet>
+                <footer>
+                    <button string="Confirm" name="confirm_cancel_reason" type="object" class="btn-secondary" />
+                    <button string="Discard" class="btn-secondary" special="cancel" data-hotkey="x"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="sh_cancel_reason_wizard_action" model="ir.actions.act_window">
+        <field name="name">Cancel Reason wizard</field>
+        <field name="res_model">sh.cancel.reason.wizard</field>
+        <field name="view_mode">form</field>   
+    </record>
+    
+
+</odoo>
