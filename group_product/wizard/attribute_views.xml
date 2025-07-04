@@ -1,0 +1,35 @@
+<odoo>
+	<data>
+
+		 <record id="attribute_wizard_form" model="ir.ui.view">
+            <field name="name">attribute.wizard.form</field>
+            <field name="model">attribute.product</field>
+            <field name="arch" type="xml">
+                <form string="Test">
+                    <group>
+                        <group>
+                            <field name="variant_product"/>
+                            <field name="attribute"/>
+                            <field name="values"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="make_product_as_variant" type="object" string="Create"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+	<record id="attribute_wizard_action" model="ir.actions.act_window">
+            <field name="name">Attribute Product Selection</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">attribute.product</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="attribute_wizard_form"/>
+            <field name="target">new</field>
+   </record>
+
+
+    </data>
+    
+</odoo>

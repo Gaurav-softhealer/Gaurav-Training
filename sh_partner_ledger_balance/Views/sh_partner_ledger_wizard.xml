@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-
     <record id="sh_partner_ledger_wizard_form_view" model="ir.ui.view">
         <field name="name">Partner Ledger</field>
         <field name="model">sh.partner.ledger.wizard</field>
@@ -13,7 +12,7 @@
                         <field name="sh_initial_balance" />
                         <field name="sh_closing_balance" />
                         <field name="sh_reconsile_entry" />
-                        <field name="sh_start_date" />
+                        <field name="sh_start_date" required="sh_initial_balance"/>
                         <field name="sh_end_date" />
                         <field name="sh_partner_ids" widget="many2many_tags"/>
                         <field name="sh_journals_ids" widget="many2many_tags"/>
