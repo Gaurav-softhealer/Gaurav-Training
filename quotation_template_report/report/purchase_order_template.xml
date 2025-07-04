@@ -1,0 +1,21 @@
+<odoo>
+	<template id="purchase_order_report"  inherit_id="purchase.report_purchaseorder_document">
+		<xpath expr="//t[2]" position="replace">
+         <div>
+            <div t-field="o.partner_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;, &quot;phone&quot;,&quot;vat&quot;], &quot;no_marker&quot;: True, &quot;phone_icons&quot;: True}" style="float:right"/>
+           <div>
+            <h4>Shipping Address</h4>
+            <div t-field="o.freight_forwarder.name" />
+            <div t-field="o.freight_forwarder.street" />
+            <div t-field="o.freight_forwarder.street2" />
+            <div t-field="o.freight_forwarder.city" />
+            <div t-field="o.freight_forwarder.zip_id" />
+            <div t-field="o.freight_forwarder.state_id" />
+            <div t-field="o.freight_forwarder.country_id" />
+            <div t-field="o.freight_forwarder.phone_no" />
+         </div>
+      </div>
+      <br></br>
+   </xpath>
+	</template>
+</odoo>
